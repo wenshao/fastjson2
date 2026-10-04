@@ -1,0 +1,212 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index ba10fb420..0a84ad30b 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -171,6 +171,11 @@ public class JSONObject
+         return valueClass.cast(value);
+     }
+ 
++    static final BigDecimal BIG_DECIMAL_INT_MIN = BigDecimal.valueOf(Integer.MIN_VALUE);
++    static final BigDecimal BIG_DECIMAL_INT_MAX = BigDecimal.valueOf(Integer.MAX_VALUE);
++    static final BigDecimal BIG_DECIMAL_LONG_MIN = BigDecimal.valueOf(Long.MIN_VALUE);
++    static final BigDecimal BIG_DECIMAL_LONG_MAX = BigDecimal.valueOf(Long.MAX_VALUE);
++
+     /**
+      * Checks whether the value associated with the specified key is a number that can be
+      * converted to a 32-bit int without overflow, following jackson
+@@ -201,7 +206,8 @@ public class JSONObject
+                     && v >= -2147483648.0 && v <= 2147483647.0;
+         }
+         if (value instanceof BigDecimal) {
+-            return ((BigDecimal) value).toBigInteger().bitLength() <= 31;
++            BigDecimal v = (BigDecimal) value;
++            return v.compareTo(BIG_DECIMAL_INT_MIN) >= 0 && v.compareTo(BIG_DECIMAL_INT_MAX) <= 0;
+         }
+         return false;
+     }
+@@ -232,7 +238,8 @@ public class JSONObject
+                     && v >= -9.223372036854776E18 && v <= 9.223372036854776E18;
+         }
+         if (value instanceof BigDecimal) {
+-            return ((BigDecimal) value).toBigInteger().bitLength() <= 63;
++            BigDecimal v = (BigDecimal) value;
++            return v.compareTo(BIG_DECIMAL_LONG_MIN) >= 0 && v.compareTo(BIG_DECIMAL_LONG_MAX) <= 0;
+         }
+         return false;
+     }
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+index 53adf53b9..27ac8284d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+@@ -97,10 +97,11 @@ public class FieldWriterList<T>
+         if ((jsonWriter.getFeatures() & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0) {
+             // sorted writers must never be stored in itemObjectWriter,
+             // otherwise a writer resolved under one sort variant would be reused under the other
++            long lookupFeatures = jsonWriter.getFeatures() | (features & JSONWriter.Feature.BeanToArray.mask);
+             if (itemType == null || itemType == this.itemType) {
+-                return jsonWriter.getObjectWriter(this.itemType, itemClass);
++                return jsonWriter.context.provider.getObjectWriter(this.itemType, itemClass, lookupFeatures);
+             }
+-            return jsonWriter.getObjectWriter(itemType, TypeUtils.getClass(itemType));
++            return jsonWriter.context.provider.getObjectWriter(itemType, TypeUtils.getClass(itemType), lookupFeatures);
+         }
+ 
+         if (itemType == null || itemType == this.itemType) {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 92a276739..27ed2f09d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -78,8 +78,10 @@ public class FieldWriterObject<T>
+         if (format == null
+                 && (jsonWriter.getFeatures() & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0) {
+             // sorted writers must never be stored in initValueClass/initObjectWriter,
+-            // otherwise a writer resolved under one sort variant would be reused under the other
+-            return jsonWriter.getObjectWriter(valueClass);
++            // otherwise a writer resolved under one sort variant would be reused under the other;
++            // a BeanToArray field is positional and resolves the unsorted variant
++            return jsonWriter.context.provider.getObjectWriter(valueClass, valueClass,
++                    jsonWriter.getFeatures() | (features & JSONWriter.Feature.BeanToArray.mask));
+         }
+ 
+         final Class initValueClass = this.initValueClass;
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
+index 55d5d1859..e5beefe62 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
+@@ -45,7 +45,8 @@ public class FieldWriterObjectFinal<T>
+         if (format == null
+                 && (jsonWriter.getFeatures() & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0) {
+             // sorted writers must not be stored in objectWriter (see FieldWriterObject#getObjectWriter)
+-            return jsonWriter.getObjectWriter(valueClass);
++            return jsonWriter.context.provider.getObjectWriter(valueClass, valueClass,
++                    jsonWriter.getFeatures() | (features & JSONWriter.Feature.BeanToArray.mask));
+         }
+ 
+         if (objectWriter != null) {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplList.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplList.java
+index d94556b95..dae3f8038 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplList.java
+@@ -80,7 +80,9 @@ final class ObjectWriterImplList
+             if (itemClass == previousClass) {
+                 itemObjectWriter = previousObjectWriter;
+             } else {
+-                itemObjectWriter = jsonWriter.getObjectWriter(itemClass);
++                // positional output, never the sorted writer variant
++                itemObjectWriter = jsonWriter.context.provider.getObjectWriter(itemClass, itemClass,
++                        jsonWriter.getFeatures() | JSONWriter.Feature.BeanToArray.mask);
+                 previousClass = itemClass;
+                 previousObjectWriter = itemObjectWriter;
+             }
+diff --git a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+index fe572fc19..e2617334e 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
+ 
+ import java.math.BigDecimal;
+ import java.math.BigInteger;
++import java.time.Duration;
+ import java.util.Date;
+ import java.util.HashMap;
+ import java.util.Map;
+@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
+ import static org.junit.jupiter.api.Assertions.assertNotSame;
+ import static org.junit.jupiter.api.Assertions.assertSame;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
++import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+ import static org.junit.jupiter.api.Assertions.assertTrue;
+ 
+ @Tag("features")
+@@ -173,6 +175,32 @@ public class TreeModelTest {
+         assertFalse(object.canConvertToLong("hugeDec"));
+     }
+ 
++    @Test
++    public void decimalRangeBoundaries() {
++        JSONObject object = JSON.parseObject("{\"a\":2147483647.5,\"b\":-2147483648.5,\"c\":2147483647.0,"
++                + "\"d\":9223372036854775807.5,\"e\":-9223372036854775808.0}");
++        // jackson DecimalNode: range check on the value itself, not on the truncated value
++        assertFalse(object.canConvertToInt("a"));
++        assertTrue(object.canConvertToLong("a"));
++        assertFalse(object.canConvertToInt("b"));
++        assertTrue(object.canConvertToInt("c"));
++        assertFalse(object.canConvertToLong("d"));
++        assertTrue(object.canConvertToLong("e"));
++    }
++
++    @Test
++    public void decimalExtremeExponentIsCheap() {
++        JSONObject object = JSONB.parseObject(JSONB.toBytes(JSONObject.of(
++                "big", new BigDecimal(BigInteger.ONE, -100_000_000),
++                "tiny", new BigDecimal(BigInteger.ONE, 100_000_000))));
++        assertTimeoutPreemptively(Duration.ofSeconds(1), () -> {
++            assertFalse(object.canConvertToInt("big"));
++            assertFalse(object.canConvertToLong("big"));
++            assertTrue(object.canConvertToInt("tiny"));
++            assertTrue(object.canConvertToLong("tiny"));
++        });
++    }
++
+     @Test
+     public void integerTypesConvertable() {
+         Map<String, Object> map = new HashMap<>();
+diff --git a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesBeanToArrayFieldTest.java b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesBeanToArrayFieldTest.java
+new file mode 100644
+index 000000000..cd208b0b2
+--- /dev/null
++++ b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesBeanToArrayFieldTest.java
+@@ -0,0 +1,53 @@
++package com.alibaba.fastjson2.features;
++
++import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONB;
++import com.alibaba.fastjson2.JSONWriter;
++import com.alibaba.fastjson2.annotation.JSONField;
++import com.alibaba.fastjson2.annotation.JSONType;
++import com.alibaba.fastjson2.writer.ObjectWriterCreator;
++import com.alibaba.fastjson2.writer.ObjectWriterProvider;
++import org.junit.jupiter.api.Tag;
++import org.junit.jupiter.api.Test;
++
++import java.util.ArrayList;
++import java.util.Collections;
++import java.util.List;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++@Tag("features")
++public class SortFieldNamesBeanToArrayFieldTest {
++    @JSONType(alphabetic = false)
++    public static class Transfer {
++        public long to = 1001;
++        public long from = 2002;
++        public long amount = 300;
++    }
++
++    public static class Holder {
++        @JSONField(serializeFeatures = JSONWriter.Feature.BeanToArray)
++        public Transfer transfer = new Transfer();
++        @JSONField(serializeFeatures = JSONWriter.Feature.BeanToArray)
++        public List<Transfer> transfers = new ArrayList<>(Collections.singletonList(new Transfer()));
++    }
++
++    static ObjectWriterProvider provider(boolean asm) {
++        return asm ? new ObjectWriterProvider() : new ObjectWriterProvider(ObjectWriterCreator.INSTANCE);
++    }
++
++    @Test
++    public void fieldBeanToArrayKeptPositional() {
++        for (boolean asm : new boolean[]{true, false}) {
++            String sorted = JSON.toJSONString(new Holder(),
++                    new JSONWriter.Context(provider(asm), JSONWriter.Feature.SortFieldNamesAlphabetically));
++            assertEquals("[1001,2002,300]", JSON.parseObject(sorted).getJSONArray("transfer").toJSONString(), sorted);
++
++            byte[] jsonb = JSONB.toBytes(new Holder(),
++                    new JSONWriter.Context(provider(asm), JSONWriter.Feature.SortFieldNamesAlphabetically));
++            String json = JSONB.toJSONString(jsonb);
++            assertEquals("[1001,2002,300]", JSON.parseObject(json).getJSONArray("transfer").toJSONString(), json);
++            assertEquals("[[1001,2002,300]]", JSON.parseObject(json).getJSONArray("transfers").toJSONString(), json);
++        }
++    }
++}

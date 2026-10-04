@@ -1,0 +1,62 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v2.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[A] JSONReader.Feature.ErrorOnDuplicateKeys
+  DIFF A.dup    POJO target (StrictBean) | simple duplicate    fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | first occurrence null fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | escaped duplicate (\u0069d == id) fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  -> duplicate-key differential vs jackson STRICT_DUPLICATE_DETECTION: 110/113 agree
+  INFO A.dup    differential agreement                         110/113 combinations agree with jackson
+  INFO A.dup    with IgnoreNullPropertyValue {a:null,a:1}      ok (null skipped before detection)
+  DIFF A.dup    JSONB input {a:1,a:2} + ErrorOnDuplicateKeys   -> ok  (JSONB reader is outside the feature's scope; DuplicateKeyValueAsArray is ignored there too: ok:{"a":2})
+
+[B1] SortFieldNamesAlphabetically: shape x creator x base-features x sequence x channel matrix
+  -> 1224 scenarios, 4896 serializations, 0 wrong-order outputs
+
+[B2] SortFieldNamesAlphabetically semantics
+
+[B3] BeanToArray positional output must never be reordered
+  FAIL B3       asm: @JSONField(BeanToArray) field + feature, JSON {"list":[{"to":1001,"from":2002,"amount":300}],"t":[1001,2002,300]} vs {"list":[{"amount":300,"from":2002,"to":1001}],"t":[300,2002,1001]}
+  FAIL B3       asm: @JSONField(BeanToArray) field + feature, JSONB {"list":[[1001,2002,300]],"t":[1001,2002,300]} vs {"list":[[300,2002,1001]],"t":[300,2002,1001]}
+  DIFF B3       asm: @JSONType(BeanToArray) parent, nested + feature, JSONB {"t":[1001,2002,300]} vs {"t":[300,2002,1001]}  (pre-existing ASM/reflect JSONB divergence on main)
+  FAIL B3       reflect: @JSONField(BeanToArray) field + feature, JSON {"list":[[1001,2002,300]],"t":[1001,2002,300]} vs {"list":[[300,2002,1001]],"t":[1001,2002,300]}
+  FAIL B3       reflect: @JSONField(BeanToArray) field + feature, JSONB {"list":[[1001,2002,300]],"t":[1001,2002,300]} vs {"list":[[300,2002,1001]],"t":[1001,2002,300]}
+
+[B4] ObjectWriterProvider maintenance APIs vs the new sorted caches
+
+[B5] cleanup(ClassLoader) releases a hot-reloaded class loader
+
+[B6] concurrent mixed sorted/unsorted writes on one provider
+
+[B7] canonical JSON / digest parity with jackson
+  INFO B7       default output (for contrast)                  {"zId":"o-1","amount":100,"items":[{"z":1,"a":"x","m":true},{"z":1,"a":"x","m":true}],"meta":{"zeta":1,"alpha":{"y":2,"b":3}},"inner":{"z":1,"a":"x","m":true},"currency":"CNY"}
+  INFO B7       canonical output                               {"amount":100,"currency":"CNY","inner":{"a":"x","m":true,"z":1},"items":[{"a":"x","m":true,"z":1},{"a":"x","m":true,"z":1}],"meta":{"alpha":{"b":3,"y":2},"zeta":1},"zId":"o-1"}  sha256=6500a713bea3e2fb686ecc335ec4139fe559cd093ccac158ff2f9dc6c42a779e
+
+[C] JSONObject/JSONArray helpers
+  INFO C.deep   non-JSONObject Map value (HashMap) is shared, not copied same instance=true (documented)
+  INFO C.deep   self-referencing object                        fastjson2=error:StackOverflowError jackson=error:StackOverflowError (same behavior)
+  INFO C.req    required("id", Long.class) on {"id":1}         error:required value not of type java.lang.Long : id  (no numeric widening; {"big":12345678901} as Long -> ok; getLong/getObject would convert)
+  INFO C.req    jackson required(): explicit null / missing    null -> ok:NULL, missing -> error:IllegalArgumentException (fastjson2 rejects explicit null; stricter, documented)
+  FAIL C.conv   canConvertTo*(2147483647.4)                    fastjson2 BigDecimal -> true/true, jackson DecimalNode -> false/true
+  FAIL C.conv   canConvertTo*(2147483647.5)                    fastjson2 BigDecimal -> true/true, jackson DecimalNode -> false/true
+  FAIL C.conv   canConvertTo*(2147483647.9999999)              fastjson2 BigDecimal -> true/true, jackson DecimalNode -> false/true
+  FAIL C.conv   canConvertTo*(-2147483648.5)                   fastjson2 BigDecimal -> true/true, jackson DecimalNode -> false/true
+  FAIL C.conv   canConvertTo*(-2147483648.9999999)             fastjson2 BigDecimal -> true/true, jackson DecimalNode -> false/true
+  FAIL C.conv   canConvertTo*(9223372036854775807.5)           fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/false
+  FAIL C.conv   canConvertTo*(-9223372036854775808.5)          fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/false
+  FAIL C.conv   canConvertTo*(put BigDecimal 2147483647.5)     fastjson2 true/true, jackson DecimalNode false/true
+  FAIL C.conv   canConvertTo*(put BigDecimal -2147483648.5)    fastjson2 true/true, jackson DecimalNode false/true
+  FAIL C.conv   canConvertTo*(put BigDecimal 9223372036854775807.5) fastjson2 false/true, jackson DecimalNode false/false
+  DIFF C.conv   canConvertTo*(put Float 2.1474836E9)           fastjson2 false/true, jackson FloatNode true/true (jackson float rounding quirk)
+  FAIL C.conv   canConvertTo*(BigDecimal 1E+10000000 from 11-byte JSONB) cost 4452.0 ms, result false (jackson DecimalNode: compareTo, ~0.01 ms)
+
+[D] native any-setter (@JSONField(unwrapped=true) on (String,Object) method)
+  INFO D        any-setter bean + ErrorOnUnknownProperties     ok:{"x":1}
+
+[E] feature mask uniqueness
+
+
+SUMMARY  PASS=245  FAIL=15  DIFF=6  INFO=9  (java 21.0.12)
