@@ -1,0 +1,97 @@
+== PR #7880 independent verification harness ==
+java.version   : 26 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-pr7880.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[A] JSONReader.Feature.ErrorOnDuplicateKeys
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.alibaba.fastjson2.util.JDKUtils (file:lib/fastjson2-pr7880.jar)
+WARNING: Please consider reporting this to the maintainers of class com.alibaba.fastjson2.util.JDKUtils
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+  DIFF A.dup    POJO target (StrictBean) | simple duplicate    fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | first occurrence null fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | escaped duplicate (\u0069d == id) fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  -> duplicate-key differential vs jackson STRICT_DUPLICATE_DETECTION: 110/113 agree
+  INFO A.dup    differential agreement                         110/113 combinations agree with jackson
+  INFO A.dup    with IgnoreNullPropertyValue {a:null,a:1}      ok (null skipped before detection)
+  DIFF A.dup    JSONB input {a:1,a:2} + ErrorOnDuplicateKeys   -> ok  (JSONB reader is outside the feature's scope; DuplicateKeyValueAsArray is ignored there too: ok:{"a":2})
+
+[B1] SortFieldNamesAlphabetically: shape x creator x base-features x sequence x channel matrix
+  -> 1224 scenarios, 4896 serializations, 0 wrong-order outputs
+
+[B2] SortFieldNamesAlphabetically semantics
+
+[B3] BeanToArray positional output must never be reordered
+  FAIL B3       asm: per-call BeanToArray + feature (fresh provider) [0,[1,"x",true]] vs [["x",true,1],0]
+  FAIL B3       asm: per-call BeanToArray + feature (sorted cache warm) [0,[1,"x",true]] vs [["x",true,1],0]
+  FAIL B3       asm: JSONB BeanToArray + feature               [
+	0,
+	[
+		1,
+		"x",
+		true
+	]
+] vs [
+	[
+		"x",
+		true,
+		1
+	],
+	0
+]
+  FAIL B3       reflect: per-call BeanToArray + feature (fresh provider) [0,[1,"x",true]] vs [["x",true,1],0]
+  FAIL B3       reflect: per-call BeanToArray + feature (sorted cache warm) [0,[1,"x",true]] vs [["x",true,1],0]
+  FAIL B3       reflect: JSONB BeanToArray + feature           [
+	0,
+	[
+		1,
+		"x",
+		true
+	]
+] vs [
+	[
+		"x",
+		true,
+		1
+	],
+	0
+]
+
+[B4] ObjectWriterProvider maintenance APIs vs the new sorted caches
+  FAIL B4       register(Money) honored WITH feature (root)    {"cents":123}
+  FAIL B4       register(Money) honored WITH feature (as bean field) unsorted={"zz":0,"price":"$1.23"} sorted={"price":{"cents":123},"zz":0}
+  FAIL B4       register(Money) honored WITH feature (JSONB field) {"price":{"cents":123},"zz":0}
+  FAIL B4       JSON.register(Money) honored WITH feature (global) {"cents":123}
+  FAIL B4       register() after warm-up: visible WITH feature {"cents":123}
+  FAIL B4       mixIn() after warm-up: applied WITH feature    {"a":2,"z":1}
+  FAIL B4       cleanup(Class) evicts sorted cache             cacheFieldNamesSorted still holds [class verify.Verify7880$Inner]
+  FAIL B4       clear() empties sorted caches                  2 sorted writers survive clear()
+
+[B5] cleanup(ClassLoader) releases a hot-reloaded class loader
+  FAIL B5       asm + SortFieldNamesAlphabetically             loader still strongly reachable after cleanup(loader) -> leak
+  FAIL B5       reflect + SortFieldNamesAlphabetically         loader still strongly reachable after cleanup(loader) -> leak
+
+[B6] concurrent mixed sorted/unsorted writes on one provider
+
+[B7] canonical JSON / digest parity with jackson
+  INFO B7       default output (for contrast)                  {"zId":"o-1","amount":100,"items":[{"z":1,"a":"x","m":true},{"z":1,"a":"x","m":true}],"meta":{"zeta":1,"alpha":{"y":2,"b":3}},"inner":{"z":1,"a":"x","m":true},"currency":"CNY"}
+  INFO B7       canonical output                               {"amount":100,"currency":"CNY","inner":{"a":"x","m":true,"z":1},"items":[{"a":"x","m":true,"z":1},{"a":"x","m":true,"z":1}],"meta":{"alpha":{"b":3,"y":2},"zeta":1},"zId":"o-1"}  sha256=6500a713bea3e2fb686ecc335ec4139fe559cd093ccac158ff2f9dc6c42a779e
+
+[C] JSONObject/JSONArray helpers
+  INFO C.deep   non-JSONObject Map value (HashMap) is shared, not copied same instance=true (documented)
+  INFO C.deep   self-referencing object                        fastjson2=error:StackOverflowError jackson=error:StackOverflowError (same behavior)
+  INFO C.req    required("id", Long.class) on {"id":1}         error:required value not of type java.lang.Long : id  (no numeric widening; {"big":12345678901} as Long -> ok; getLong/getObject would convert)
+  INFO C.req    jackson required(): explicit null / missing    null -> ok:NULL, missing -> error:IllegalArgumentException (fastjson2 rejects explicit null; stricter, documented)
+  DIFF C.conv   canConvertTo*(d1)                              value=1.0 (BigDecimal)                 fastjson2 int/long=false/false  jackson=true/true  jackson+exactIntegral=true/true
+  DIFF C.conv   canConvertTo*(d2)                              value=1.5 (BigDecimal)                 fastjson2 int/long=false/false  jackson=true/true  jackson+exactIntegral=false/false
+  DIFF C.conv   canConvertTo*(d3)                              value=100.0 (Double)                   fastjson2 int/long=false/false  jackson=true/true  jackson+exactIntegral=true/true
+  DIFF C.conv   canConvertTo*(d4)                              value=3.0E10 (Double)                  fastjson2 int/long=false/false  jackson=false/true  jackson+exactIntegral=false/true
+
+[D] native any-setter (@JSONField(unwrapped=true) on (String,Object) method)
+  INFO D        any-setter bean + ErrorOnUnknownProperties     ok:{"x":1}
+
+[E] feature mask uniqueness
+
+
+SUMMARY  PASS=197  FAIL=16  DIFF=8  INFO=9  (java 26)

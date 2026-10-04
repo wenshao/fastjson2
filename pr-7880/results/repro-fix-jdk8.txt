@@ -1,0 +1,18 @@
+PR #7880 repro | java 1.8.0_504 | fastjson2-fix.jar
+
+1) custom ObjectWriter registered via JSON.register() is bypassed under SortFieldNamesAlphabetically
+   JSON.toJSONString(money)                     expected "$1.23"                        actual "$1.23"                        OK
+   JSON.toJSONString(money, Sort...)            expected "$1.23"                        actual "$1.23"                        OK
+
+2) per-call BeanToArray + SortFieldNamesAlphabetically reorders the positional array
+   toJSONString(t, BeanToArray)                 expected [1001,2002,300]                actual [1001,2002,300]                OK
+   toJSONString(t, BeanToArray, Sort...)        expected [1001,2002,300]                actual [1001,2002,300]                OK
+   JSONB.toBytes(t, BeanToArray, Sort...)       expected [1001,2002,300]                actual [1001,2002,300]                OK
+
+3) mixIn() after warm-up is not applied to the sorted writer cache
+   after mixIn, natural                         expected {"z":1,"renamed":2}            actual {"z":1,"renamed":2}            OK
+   after mixIn, Sort...                         expected {"renamed":2,"z":1}            actual {"renamed":2,"z":1}            OK
+
+4) cleanup(ClassLoader) does not purge sorted writers -> class loader leak
+   loader collected? (natural)                  expected true                           actual true                           OK
+   loader collected? (Sort...)                  expected true                           actual true                           OK
