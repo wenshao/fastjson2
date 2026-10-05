@@ -1,0 +1,309 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:<maven>/lib/jansi-2.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:<maven>/lib/guava-33.2.1-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 1 modules
+[INFO] Installing Central Publishing features
+[INFO] 
+[INFO] ------------------< com.alibaba.fastjson2:fastjson2 >-------------------
+[INFO] Building fastjson2 2.0.66-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- checkstyle:3.6.0:check (checkstyle) @ fastjson2 ---
+[INFO] You have 0 Checkstyle violations.
+[INFO] 
+[INFO] --- enforcer:3.6.1:enforce (enforce-maven) @ fastjson2 ---
+[WARNING] ruleName compound with implementation com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforceruses the deprecated Maven Enforcer Plugin API. This will not be supported in a future version of the plugin. Please contact the rule maintainer to upgrade the rule implementation to the current API.
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] Rule 2: com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer(compound) passed
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fastjson2 ---
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- kotlin:2.1.20:compile (compile) @ fastjson2 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (java-compile) @ fastjson2 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 468 source files with javac [debug target 8] to target/classes
+[WARNING] bootstrap class path is not set in conjunction with -source 8
+  not setting the bootstrap class path may lead to class files that cannot run on JDK 8
+    --release 8 is recommended instead of -source 8 -target 8 because it sets the bootstrap class path automatically
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[4,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[4,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[4,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[4,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[4,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java:[7,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[19,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[19,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[19,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[19,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[19,25] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[72,9] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[74,36] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[76,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[77,44] arrayBaseOffset(java.lang.Class<?>) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[78,44] arrayBaseOffset(java.lang.Class<?>) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[156,41] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[174,46] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[187,45] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[203,41] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[215,37] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[239,42] staticFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[240,79] staticFieldBase(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[240,62] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[384,46] staticFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[385,45] getBoolean(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/JDKUtils.java:[481,39] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/TypeUtils.java:[1965,39] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/TypeUtils.java:[1975,39] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/TypeUtils.java:[2003,41] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriter.java:[142,33] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/reader/FieldReader.java:[126,33] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[124,33] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[501,28] getChar(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[578,31] getChar(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[957,56] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1209,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1229,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1235,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1249,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1264,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1265,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1649,22] getByte(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1662,22] getChar(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1675,22] getChar(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1679,15] putByte(java.lang.Object,long,byte) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1683,15] putChar(java.lang.Object,long,char) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1696,15] putShort(java.lang.Object,long,short) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1709,15] putShort(java.lang.Object,long,short) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1725,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1741,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1757,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1770,15] putShort(java.lang.Object,long,short) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1783,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1796,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1809,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1822,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1835,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1848,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1861,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1877,19] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1880,19] putByte(java.lang.Object,long,byte) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1881,19] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1899,19] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1902,19] putChar(java.lang.Object,long,char) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1903,19] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1917,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1929,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1965,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1977,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[1989,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2001,22] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2037,15] putInt(java.lang.Object,long,int) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2049,15] putLong(java.lang.Object,long,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2196,23] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2217,25] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2238,23] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2265,23] getChar(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2278,23] getByte(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2320,52] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2362,52] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2404,52] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2446,52] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2600,22] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2614,23] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2628,23] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2655,23] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2672,23] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2689,23] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2706,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2719,22] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java:[2732,24] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[INFO] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONFactory.java: Some input files use or override a deprecated API.
+[INFO] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONFactory.java: Recompile with -Xlint:deprecation for details.
+[INFO] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/util/IOUtils.java: Some input files additionally use or override a deprecated API that is marked for removal.
+[INFO] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONFactory.java: Some input files use unchecked or unsafe operations.
+[INFO] <work>/wt-v5/core/src/main/java/com/alibaba/fastjson2/JSONFactory.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ fastjson2 ---
+[INFO] Copying 141 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- kotlin:2.1.20:test-compile (test-compile) @ fastjson2 ---
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (java-test-compile) @ fastjson2 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2291 source files with javac [debug target 8] to target/test-classes
+[WARNING] bootstrap class path is not set in conjunction with -source 8
+  not setting the bootstrap class path may lead to class files that cannot run on JDK 8
+    --release 8 is recommended instead of -source 8 -target 8 because it sets the bootstrap class path automatically
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/FastJson2Reader.java:[18,21] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/Issue3601.java:[18,13] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/Issue3601.java:[21,13] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/MyArrayList.java:[63,13] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/MyArrayList.java:[75,18] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/MyArrayList.java:[84,18] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/MyArrayList.java:[92,18] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues_3600/issue3601/MyArrayList.java:[118,13] as of release 10, 'var' is a restricted type name and cannot be used for type declarations or as the element type of an array
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/util/XxHash64.java:[13,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues/Issue474.java:[52,5] Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/codec/StackTest.java:[27,5] Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/issues/Issue251.java:[33,5] Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '@EqualsAndHashCode(callSuper=false)' to your type.
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/util/XxHash64.java:[13,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/util/XxHash64.java:[13,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/util/XxHash64.java:[13,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/util/XxHash64.java:[13,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[27,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[46,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[65,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[66,31] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[84,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[85,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[103,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[104,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[123,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[124,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[143,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[144,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[162,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[163,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[181,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[182,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[203,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[204,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[224,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[225,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[226,31] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[246,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[247,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[248,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[268,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[269,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[270,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[290,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[291,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[292,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[313,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[314,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[315,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[335,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[336,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[337,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[357,31] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[358,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[359,32] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[380,35] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[406,41] getShort(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[409,41] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[412,41] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[419,41] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[422,41] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderJSONBTest2.java:[425,41] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1949,35] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1950,32] objectFieldOffset(java.lang.reflect.Field) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1965,36] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1966,44] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1984,36] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java:[1985,44] getObject(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[242,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[267,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[292,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[317,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[343,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[368,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[393,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[418,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[444,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[445,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[470,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[471,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[505,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[506,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[540,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[541,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[576,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[577,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[611,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[612,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[646,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[647,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[681,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[682,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[717,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[718,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[719,27] getInt(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[WARNING] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java:[753,28] getLong(java.lang.Object,long) in sun.misc.Unsafe has been deprecated and marked for removal
+[INFO] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/jsonpath/JSONPathTypedMultiTest3.java: Some input files use or override a deprecated API.
+[INFO] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/jsonpath/JSONPathTypedMultiTest3.java: Recompile with -Xlint:deprecation for details.
+[INFO] <work>/wt-v5/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest2.java: Some input files additionally use or override a deprecated API that is marked for removal.
+[INFO] <work>/wt-v5/core/src/test/java/com/alibaba/Hessian2Test.java: Some input files use unchecked or unsafe operations.
+[INFO] <work>/wt-v5/core/src/test/java/com/alibaba/Hessian2Test.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ fastjson2 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by nonapi.io.github.classgraph.utils.FileUtils (file:~/.m2/repository/io/github/classgraph/classgraph/4.8.83/classgraph-4.8.83.jar)
+WARNING: Please consider reporting this to the maintainers of class nonapi.io.github.classgraph.utils.FileUtils
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+[INFO] Running com.alibaba.fastjson2.writer.TreeConversionLongFeaturesTest
+[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.108 s <<< FAILURE! -- in com.alibaba.fastjson2.writer.TreeConversionLongFeaturesTest
+[ERROR] com.alibaba.fastjson2.writer.TreeConversionLongFeaturesTest.mergedContextFeaturesHonored -- Time elapsed: 0.008 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: {"rank":1} ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.alibaba.fastjson2.writer.TreeConversionLongFeaturesTest.mergedContextFeaturesHonored(TreeConversionLongFeaturesTest.java:40)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   TreeConversionLongFeaturesTest.mergedContextFeaturesHonored:40 {"rank":1} ==> expected: <true> but was: <false>
+[INFO] 
+[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  26.554 s
+[INFO] Finished at: 2026-10-05T22:29:16+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.3:test (default-test) on project fastjson2: There are test failures.
+[ERROR] 
+[ERROR] See <work>/wt-v5/core/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

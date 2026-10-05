@@ -1,0 +1,32 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v4.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[H1] registered writers: natural and sorted variants share field writers (U-S-U-S, S-U-S-U; JSON, UTF-8, JSONB)
+  FAIL H1       registered reflective writer, List<Child>      json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9}
+  FAIL H1       registered reflective writer, ArrayList<Child> json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9}
+  FAIL H1       registered reflective writer, Child[]          json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} json:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} utf8:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} jsonb:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]}
+  FAIL H1       registered reflective writer, @contentAs List<Object> json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9}
+  FAIL H1       registered reflective writer, List<final FChild> json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:S={"f":[{"zebra":3,"apple":1}],"zulu":9}
+  FAIL H1       registered reflective writer, final FChild[]   json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} json:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} json:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} utf8:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} utf8:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:USUS:S={"f":[{"zebra":3,"apple":1}],"zulu":9} jsonb:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]} jsonb:SUSU:U={"zulu":9,"f":[{"apple":1,"zebra":3}]}
+  INFO H1       registered ASM writers under the feature       served as registered (field order not sorted), by design since round 2
+
+[H2] registered writer already in alphabetical order (same instance in both cells): a sorted write first
+  FAIL H2       AlphaArr: output without the feature after a sorted write expected {"apple":0,"f":[{"zebra":3,"apple":1}]} got {"apple":0,"f":[{"apple":1,"zebra":3}]}
+
+[H3] field-level @JSONField(serializeFeatures = BeanToArray) on a bean array, reflective creator
+  INFO H3       natural                                        {"arr":[[1001,2002,300]]}
+  FAIL H3       WITH feature, first write on the provider      {"arr":[[300,2002,1001]]}
+  FAIL H3       WITH feature, after a natural write            {"arr":[[300,2002,1001]]}
+  INFO H3       ASM creator, natural (field BeanToArray not applied to array items, as on main) {"arr":[{"to":1001,"from":2002,"amount":300}]}
+
+[H4] tree conversion with global defaults (JSON.config)
+  INFO H4       ObjectWriterAdapter.toJSON(Object, long)       not present
+
+[H5] API surface
+  FAIL H5       JSON.toJSON(Object, long) is not part of the public API still declared on the JSON interface (public)
+
+
+SUMMARY  PASS=19  FAIL=10  DIFF=0  INFO=4  (java 21.0.12)

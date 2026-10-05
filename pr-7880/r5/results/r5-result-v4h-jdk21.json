@@ -1,0 +1,207 @@
+{
+	"java":"21.0.12",
+	"pass":19,
+	"fail":10,
+	"diff":0,
+	"info":4,
+	"results":[
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, List<Child>",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9}"
+		},
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, ArrayList<Child>",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9}"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Set<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Collection<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, Child[]",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} json:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} utf8:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} jsonb:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Child",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Object=Child",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Optional<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<List<Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<Object>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<Map<String,Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,List<Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, @format List<Date>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, @contentAs List<Object>",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9}"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, final FChild",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, List<final FChild>",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9}"
+		},
+		{
+			"status":"FAIL",
+			"section":"H1",
+			"id":"registered reflective writer, final FChild[]",
+			"detail":"json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} json:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} json:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} utf8:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} utf8:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:USUS:S={\"f\":[{\"zebra\":3,\"apple\":1}],\"zulu\":9} jsonb:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]} jsonb:SUSU:U={\"zulu\":9,\"f\":[{\"apple\":1,\"zebra\":3}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,final FChild>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Set<final FChild>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered ASM writers: output without the feature unaffected by earlier sorted writes (20 shapes)",
+			"detail":"ok"
+		},
+		{
+			"status":"INFO",
+			"section":"H1",
+			"id":"registered ASM writers under the feature",
+			"detail":"served as registered (field order not sorted), by design since round 2"
+		},
+		{
+			"status":"FAIL",
+			"section":"H2",
+			"id":"AlphaArr: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]} got {\"apple\":0,\"f\":[{\"apple\":1,\"zebra\":3}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaList: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]} got {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaObj: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":{\"zebra\":3,\"apple\":1}} got {\"apple\":0,\"f\":{\"zebra\":3,\"apple\":1}}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaMap: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":{\"k\":{\"zebra\":3,\"apple\":1}}} got {\"apple\":0,\"f\":{\"k\":{\"zebra\":3,\"apple\":1}}}"
+		},
+		{
+			"status":"INFO",
+			"section":"H3",
+			"id":"natural",
+			"detail":"{\"arr\":[[1001,2002,300]]}"
+		},
+		{
+			"status":"FAIL",
+			"section":"H3",
+			"id":"WITH feature, first write on the provider",
+			"detail":"{\"arr\":[[300,2002,1001]]}"
+		},
+		{
+			"status":"FAIL",
+			"section":"H3",
+			"id":"WITH feature, after a natural write",
+			"detail":"{\"arr\":[[300,2002,1001]]}"
+		},
+		{
+			"status":"INFO",
+			"section":"H3",
+			"id":"ASM creator, natural (field BeanToArray not applied to array items, as on main)",
+			"detail":"{\"arr\":[{\"to\":1001,\"from\":2002,\"amount\":300}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H4",
+			"id":"JSONObject.from(obj) under global WriteNulls == main",
+			"detail":"{\"maps\":[{\"k\":null}],\"rows\":[{\"note\":null,\"rank\":1}],\"title\":null}"
+		},
+		{
+			"status":"INFO",
+			"section":"H4",
+			"id":"ObjectWriterAdapter.toJSON(Object, long)",
+			"detail":"not present"
+		},
+		{
+			"status":"FAIL",
+			"section":"H5",
+			"id":"JSON.toJSON(Object, long) is not part of the public API",
+			"detail":"still declared on the JSON interface (public)"
+		}
+	]
+}
