@@ -1,0 +1,103 @@
+== PR #7880 independent verification harness ==
+java.version   : 17.0.20.1 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v4.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[A] JSONReader.Feature.ErrorOnDuplicateKeys
+  DIFF A.dup    POJO target (StrictBean) | simple duplicate    fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | first occurrence null fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | escaped duplicate (\u0069d == id) fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  -> duplicate-key differential vs jackson STRICT_DUPLICATE_DETECTION: 110/113 agree
+  INFO A.dup    differential agreement                         110/113 combinations agree with jackson
+  INFO A.dup    with IgnoreNullPropertyValue {a:null,a:1}      dup-error (null skipped before detection)
+  DIFF A.dup    JSONB input {a:1,a:2} + ErrorOnDuplicateKeys   -> ok  (JSONB reader is outside the feature's scope; DuplicateKeyValueAsArray is ignored there too: ok:{"a":2})
+
+[B1] SortFieldNamesAlphabetically: shape x creator x base-features x sequence x channel matrix
+  -> 1224 scenarios, 4896 serializations, 0 wrong-order outputs
+
+[B2] SortFieldNamesAlphabetically semantics
+
+[B3] BeanToArray positional output must never be reordered
+  DIFF B3       asm: @JSONType(BeanToArray) parent, nested + feature, JSONB {"t":[1001,2002,300]} vs {"t":[300,2002,1001]}  (pre-existing ASM/reflect JSONB divergence on main)
+
+[B4] ObjectWriterProvider maintenance APIs vs the new sorted caches
+
+[B5] cleanup(ClassLoader) releases a hot-reloaded class loader
+
+[B6] concurrent mixed sorted/unsorted writes on one provider
+
+[B7] canonical JSON / digest parity with jackson
+  INFO B7       default output (for contrast)                  {"zId":"o-1","amount":100,"items":[{"z":1,"a":"x","m":true},{"z":1,"a":"x","m":true}],"meta":{"zeta":1,"alpha":{"y":2,"b":3}},"inner":{"z":1,"a":"x","m":true},"currency":"CNY"}
+  INFO B7       canonical output                               {"amount":100,"currency":"CNY","inner":{"a":"x","m":true,"z":1},"items":[{"a":"x","m":true,"z":1},{"a":"x","m":true,"z":1}],"meta":{"alpha":{"b":3,"y":2},"zeta":1},"zId":"o-1"}  sha256=6500a713bea3e2fb686ecc335ec4139fe559cd093ccac158ff2f9dc6c42a779e
+
+[C] JSONObject/JSONArray helpers
+  INFO C.deep   non-JSONObject Map value (HashMap) is shared, not copied same instance=true (documented)
+  INFO C.deep   self-referencing object                        fastjson2=ok jackson=error:StackOverflowError (same behavior)
+  INFO C.req    required("id", Long.class) on {"id":1}         error:required value not of type java.lang.Long : id  (no numeric widening; {"big":12345678901} as Long -> ok; getLong/getObject would convert)
+  INFO C.req    jackson required(): explicit null / missing    null -> ok:NULL, missing -> error:IllegalArgumentException (fastjson2 rejects explicit null; stricter, documented)
+  DIFF C.conv   canConvertTo*(put Float 2.14748365E9)          fastjson2 false/true, jackson FloatNode true/true (jackson float rounding quirk)
+
+[D] native any-setter (@JSONField(unwrapped=true) on (String,Object) method)
+  INFO D        any-setter bean + ErrorOnUnknownProperties     ok:{"x":1}
+
+[E] feature mask uniqueness
+
+[F1] writers registered via ObjectWriters.objectWriter(...) under the feature
+  INFO F1       omitting adapter WITH feature: key order       {"id":7,"name":"alice"}
+
+[F2] field-writer gates in the sorted path
+
+[F3] JSONReader#readObject(long)
+  INFO F3       readObject(long) is public                     public java.util.Map com.alibaba.fastjson2.JSONReader.readObject(long)
+
+[F4] ErrorOnDuplicateKeys: seen-set semantics and propagation
+  DIFF F4       @JSONField strict, object inside array: DObj {x:[..]} {"payload":{"x":[{"z":1,"z":2}]}} -> annotation accepted verify.Round3$DObj@6b9267b, per-call rejected
+  DIFF F4       @JSONField strict, object inside array: DMap {x:[..]} {"payload":{"x":[{"z":1,"z":2}]}} -> annotation accepted verify.Round3$DMap@408b35bf, per-call rejected
+  DIFF F4       @JSONField strict, object inside array: DJo {x:[..]} {"payload":{"x":[{"z":1,"z":2}]}} -> annotation accepted verify.Round3$DJo@29ad44e3, per-call rejected
+  DIFF F4       @JSONField strict, object inside array: DObj [..] {"payload":[{"z":1,"z":2}]} -> annotation accepted verify.Round3$DObj@15bcf458, per-call rejected
+  DIFF F4       @JSONField strict, object inside array: DList [..] {"payload":[{"z":1,"z":2}]} -> annotation accepted verify.Round3$DList@797501a, per-call rejected
+
+[F5] deepCopy on cyclic and shared trees
+  INFO F5       one instance referenced twice                  copy.l == copy.r: true, copy.l != source: true
+
+[F6] JSONObject.from / JSON.toJSON match toJSONString
+
+[F7] root-writer resolution in JSON.toJSONBytes overloads
+  INFO F7       toJSONBytes(charset, FieldBased) (feature off) toJSONString={"x":1} toJSONBytes(charset)={"x":1}
+
+[F8] cleanup(ClassLoader): sorted writers of a parent-loader holder
+  INFO F8       natural variant                                a parent-loader holder pins the child loader on main too (pre-existing, not checked here)
+
+[G1] writer filters under the feature
+  FAIL G1       JSON.register(Class, ValueFilter) WITH feature: toJSONString {"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       JSON.register(Class, ValueFilter) WITH feature: toJSONBytes {"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       JSON.register(Class, ValueFilter) WITH feature: nested field {"user":{"id":7,"name":"alice","password":"hunter2"}}
+  INFO G1       JSON.register(Class, ValueFilter): JSONB natural (pre-existing, filters not applied to JSONB) {"id":7,"name":"alice","password":"hunter2"}
+  INFO G1       GA2 written sorted before the filter           {"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       JSON.register(Class, PropertyFilter) after sorted warm-up: WITH feature {"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       JSON.register(Class, NameFilter): WITH feature renames like natural natural={"id":7,"name":"alice","secret":"hunter2"} sorted={"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       provider.getObjectWriter(T).setFilter: WITH feature {"id":7,"name":"alice","password":"hunter2"}
+  INFO G1       provider.getObjectWriter(T).setFilter: JSONB natural (pre-existing, filters not applied to JSONB) {"id":7,"name":"alice","password":"hunter2"}
+  FAIL G1       registered adapter with filter: WITH feature   {"name":"alice","password":"hunter2"}
+  FAIL G1       registerIfAbsent adapter with filter: WITH feature {"name":"alice","password":"hunter2"}
+  FAIL G1       adapter filter set after register: WITH feature {"name":"alice","password":"hunter2"}
+  FAIL G1       registered reflect writer with @JSONType filter: WITH feature {"id":7,"name":"alice","password":"hunter2"}
+
+[G2] JSONObject.from(obj, features): value-format features (as on main, not applied to the tree)
+  INFO G2       from(rec)                                      {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":[1,9007199254740993],"rows":[{"n":5}],"zero":0,"zeros":[0]}
+  FAIL G2       from(rec, WriteLongAsString) == from(rec)      {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":["1","9007199254740993"],"rows":[{"n":"5"}],"zero":0,"zeros":[0]}
+  FAIL G2       from(rec, WriteNonStringValueAsString) == from(rec) {"amount":1E+2,"amounts":["1E+2"],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":["1","9007199254740993"],"rows":[{"n":"5"}],"zero":0,"zeros":["0"]}
+  FAIL G2       from(rec, BrowserCompatible) == from(rec)      {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":[1,"9007199254740993"],"rows":[{"n":5}],"zero":0,"zeros":[0]}
+  FAIL G2       from(rec, WriteBigDecimalAsPlain) == from(rec) {"amount":1E+2,"amounts":[100],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":[1,9007199254740993],"rows":[{"n":5}],"zero":0,"zeros":[0]}
+  FAIL G2       from(rec, WriteEnumUsingToString) == from(rec) {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["red!"],"id":9007199254740993,"ids":[1,9007199254740993],"rows":[{"n":5}],"zero":0,"zeros":[0]}
+  FAIL G2       from(rec, WriteClassName) == from(rec)         {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":[1,9007199254740993],"rows":[{"@type":"java.util.Collections$SingletonMap","n":5}],"zero":0,"zeros":[0]}
+
+[G3] JSON.toJSON(Object, long) at the root vs the Feature... overload
+
+[G4] API surface
+  INFO G4       JSON.toJSON(Object, long) modifiers            public static (JSON is an interface: members without a modifier are public)
+  INFO G4       JSONReader.readObject(long) modifiers          public
+
+
+SUMMARY  PASS=333  FAIL=16  DIFF=11  INFO=20  (java 17.0.20.1)

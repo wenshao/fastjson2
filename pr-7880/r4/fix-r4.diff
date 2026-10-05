@@ -1,0 +1,281 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
+index 99786cbe1..b355cddb8 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
+@@ -25,6 +25,20 @@ public class ObjectWriterAdapter<T>
+     NameFilter nameFilter;
+     ValueFilter valueFilter;
+ 
++    /**
++     * The writer serving {@link JSONWriter.Feature#SortFieldNamesAlphabetically} for the same type, if it is
++     * a different instance; filters set on this writer are set on it too.
++     */
++    volatile ObjectWriterAdapter sortedVariant;
++
++    /**
++     * Caller features forwarded to nested tree conversions in {@link #toJSONObject(Object, long)}: the ones that
++     * select the writer variant or that the conversion applies itself. Value-format features are not applied to
++     * the tree at any depth.
++     */
++    static final long TREE_FEATURES = SortFieldNamesAlphabetically.mask | FieldBased.mask
++            | WriteNulls.mask | WriteEnumsUsingName.mask;
++
+     static final String TYPE = "@type";
+ 
+     final Class objectClass;
+@@ -141,6 +155,10 @@ public class ObjectWriterAdapter<T>
+         if (propertyFilter != null) {
+             hasFilter = true;
+         }
++        ObjectWriterAdapter sortedVariant = this.sortedVariant;
++        if (sortedVariant != null) {
++            sortedVariant.setPropertyFilter(propertyFilter);
++        }
+     }
+ 
+     public void setValueFilter(ValueFilter valueFilter) {
+@@ -148,6 +166,10 @@ public class ObjectWriterAdapter<T>
+         if (valueFilter != null) {
+             hasFilter = true;
+         }
++        ObjectWriterAdapter sortedVariant = this.sortedVariant;
++        if (sortedVariant != null) {
++            sortedVariant.setValueFilter(valueFilter);
++        }
+     }
+ 
+     public void setNameFilter(NameFilter nameFilter) {
+@@ -155,6 +177,10 @@ public class ObjectWriterAdapter<T>
+         if (nameFilter != null) {
+             hasFilter = true;
+         }
++        ObjectWriterAdapter sortedVariant = this.sortedVariant;
++        if (sortedVariant != null) {
++            sortedVariant.setNameFilter(nameFilter);
++        }
+     }
+ 
+     public void setPropertyPreFilter(PropertyPreFilter propertyPreFilter) {
+@@ -162,6 +188,33 @@ public class ObjectWriterAdapter<T>
+         if (propertyPreFilter != null) {
+             hasFilter = true;
+         }
++        ObjectWriterAdapter sortedVariant = this.sortedVariant;
++        if (sortedVariant != null) {
++            sortedVariant.setPropertyPreFilter(propertyPreFilter);
++        }
++    }
++
++    /**
++     * Makes {@code variant} the sorted field-names writer of this type: the filters set on this writer so far are
++     * copied to it, and later ones follow.
++     */
++    void linkSortedVariant(ObjectWriterAdapter variant) {
++        if (variant == this) {
++            return;
++        }
++        this.sortedVariant = variant;
++        if (propertyPreFilter != null) {
++            variant.setPropertyPreFilter(propertyPreFilter);
++        }
++        if (propertyFilter != null) {
++            variant.setPropertyFilter(propertyFilter);
++        }
++        if (nameFilter != null) {
++            variant.setNameFilter(nameFilter);
++        }
++        if (valueFilter != null) {
++            variant.setValueFilter(valueFilter);
++        }
+     }
+ 
+     @Override
+@@ -612,6 +665,7 @@ public class ObjectWriterAdapter<T>
+ 
+     public JSONObject toJSONObject(T object, long features) {
+         JSONObject jsonObject = new JSONObject();
++        long nestedFeatures = features & TREE_FEATURES;
+ 
+         for (int i = 0, size = fieldWriters.size(); i < size; i++) {
+             FieldWriter fieldWriter = fieldWriters.get(i);
+@@ -663,7 +717,7 @@ public class ObjectWriterAdapter<T>
+                     for (Object item : collection) {
+                         Object itemJSON = item == object
+                                 ? jsonObject
+-                                : JSON.toJSON(item, features);
++                                : JSON.toJSON(item, nestedFeatures);
+                         array.add(itemJSON);
+                     }
+                     fieldValue = array;
+@@ -704,15 +758,15 @@ public class ObjectWriterAdapter<T>
+                     // path and toJSONString produce, instead of leaving the raw Java object in the
+                     // JSONObject. See issue #7714.
+                     if (!(valueWriter instanceof ObjectWriterAdapter)) {
+-                        fieldValue = JSON.toJSON(fieldValue, features);
++                        fieldValue = JSON.toJSON(fieldValue, nestedFeatures);
+                     }
+                 }
+                 if (valueWriter instanceof ObjectWriterAdapter) {
+                     ObjectWriterAdapter objectWriterAdapter = (ObjectWriterAdapter) valueWriter;
+                     if (!objectWriterAdapter.getFieldWriters().isEmpty()) {
+-                        fieldValue = objectWriterAdapter.toJSONObject(fieldValue, features);
++                        fieldValue = objectWriterAdapter.toJSONObject(fieldValue, nestedFeatures);
+                     } else {
+-                        fieldValue = JSON.toJSON(fieldValue, features);
++                        fieldValue = JSON.toJSON(fieldValue, nestedFeatures);
+                     }
+                 }
+             }
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 8399dfef3..6ac42b64a 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -271,8 +271,8 @@ public class ObjectWriterProvider
+     /**
+      * Returns the writer to serve the sorted variant of a registered writer. A plain bean adapter
+      * (for example one built by {@code ObjectWriters.objectWriter(...)}) keeps the registered field
+-     * writers and only changes their order; any other writer, including adapter subclasses with
+-     * their own write logic and positional (BeanToArray) adapters, is honored as registered.
++     * writers and filters and only changes the field order; any other writer, including adapter
++     * subclasses with their own write logic and positional (BeanToArray) adapters, is honored as registered.
+      */
+     static ObjectWriter sortedVariantOf(ObjectWriter objectWriter) {
+         if (!(objectWriter instanceof ObjectWriterAdapter) || !PLAIN_ADAPTERS.contains(objectWriter.getClass())) {
+@@ -287,7 +287,9 @@ public class ObjectWriterProvider
+         if (sorted.equals(adapter.fieldWriters)) {
+             return objectWriter;
+         }
+-        return new ObjectWriterAdapter(adapter.objectClass, adapter.typeKey, adapter.typeName, adapter.features, sorted);
++        ObjectWriterAdapter variant = new ObjectWriterAdapter(adapter.objectClass, adapter.typeKey, adapter.typeName, adapter.features, sorted);
++        adapter.linkSortedVariant(variant);
++        return variant;
+     }
+ 
+     static final Set<Class<?>> PLAIN_ADAPTERS = new HashSet<>(Arrays.asList(
+@@ -827,11 +829,26 @@ public class ObjectWriterProvider
+ 
+             if (previous != null) {
+                 objectWriter = previous;
++            } else {
++                linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
+             }
+         }
+         return objectWriter;
+     }
+ 
++    /**
++     * Links a newly created bean writer with the other field-order variant of the same type, so a filter set on
++     * the natural writer (for example by {@code JSON.register(Class, Filter)}) also applies to the sorted one.
++     */
++    private void linkSortedVariant(Type objectType, boolean fieldBased, boolean fieldNamesSorted, ObjectWriter objectWriter) {
++        ObjectWriter other = cacheOf(fieldBased, !fieldNamesSorted).get(objectType);
++        ObjectWriter natural = fieldNamesSorted ? other : objectWriter;
++        ObjectWriter sorted = fieldNamesSorted ? objectWriter : other;
++        if (natural instanceof ObjectWriterAdapter && sorted instanceof ObjectWriterAdapter) {
++            ((ObjectWriterAdapter) natural).linkSortedVariant((ObjectWriterAdapter) sorted);
++        }
++    }
++
+     static final int ENUM = 0x00004000;
+     static final int[] PRIMITIVE_HASH_CODES;
+     static final int[] NOT_REFERENCES_TYPE_HASH_CODES;
+diff --git a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+index 845c0d35f..5beae6b7d 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+@@ -5,8 +5,11 @@ import org.junit.jupiter.api.Test;
+ 
+ import java.math.BigDecimal;
+ import java.math.BigInteger;
++import java.util.Arrays;
++import java.util.Collections;
+ import java.util.Date;
+ import java.util.HashMap;
++import java.util.List;
+ import java.util.Map;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
+@@ -274,4 +277,20 @@ public class TreeModelTest {
+         assertEquals("{\"indexBy\":[{\"k\":{\"apple\":1,\"zebra\":3}}],\"rows\":[[{\"apple\":1,\"zebra\":3}]]}",
+                 tree.toString());
+     }
++
++    public static class LongsHolder {
++        public long id = 9007199254740993L;
++        public List<Long> ids = Arrays.asList(1L, 9007199254740993L);
++        public List<Map<String, Object>> rows = Collections.singletonList(Collections.<String, Object>singletonMap("n", 5L));
++    }
++
++    @Test
++    public void fromKeepsValueFormatFeaturesOffNestedValues() {
++        // value-format features are not applied to tree values, nested or not
++        String plain = JSONObject.from(new LongsHolder()).toString();
++        assertEquals("{\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}]}", plain);
++        assertEquals(plain, JSONObject.from(new LongsHolder(), JSONWriter.Feature.WriteLongAsString).toString());
++        assertEquals(plain, JSONObject.from(new LongsHolder(), JSONWriter.Feature.WriteNonStringValueAsString).toString());
++        assertEquals(plain, JSONObject.from(new LongsHolder(), JSONWriter.Feature.WriteClassName).toString());
++    }
+ }
+diff --git a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+index 29402329a..b91fb79d1 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+@@ -5,6 +5,8 @@ import com.alibaba.fastjson2.JSONB;
+ import com.alibaba.fastjson2.JSONWriter;
+ import com.alibaba.fastjson2.annotation.JSONField;
+ import com.alibaba.fastjson2.annotation.JSONType;
++import com.alibaba.fastjson2.filter.PropertyFilter;
++import com.alibaba.fastjson2.filter.ValueFilter;
+ import com.alibaba.fastjson2.writer.ObjectWriter;
+ import com.alibaba.fastjson2.writer.ObjectWriterCreator;
+ import com.alibaba.fastjson2.writer.ObjectWriterProvider;
+@@ -337,4 +339,49 @@ public class SortFieldNamesRegistryTest {
+         assertTrue(proxyJSON.contains("hidden"), proxyJSON);
+         assertTrue(proxyJSON.contains("\"name\":\"n\""), proxyJSON);
+     }
++
++    public static class Filtered {
++        public long id = 7;
++        public String password = "hunter2";
++        public String name = "alice";
++    }
++
++    public static class FilteredWarm {
++        public long id = 7;
++        public String password = "hunter2";
++        public String name = "alice";
++    }
++
++    public static class FilteredRegistered {
++        public long id = 7;
++        public String password = "hunter2";
++        public String name = "alice";
++    }
++
++    @Test
++    public void typeFiltersApplyToSortedVariant() {
++        ValueFilter mask = (object, name, value) -> "password".equals(name) ? "***" : value;
++        PropertyFilter drop = (object, name, value) -> !"password".equals(name);
++
++        // a filter set on the writer the provider hands out (what JSON.register(Class, Filter) does)
++        ObjectWriterProvider provider = new ObjectWriterProvider();
++        JSONWriter.Context sorted = new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically);
++        provider.getObjectWriter(Filtered.class).setFilter(mask);
++        assertEquals("{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}", JSON.toJSONString(new Filtered(), sorted));
++
++        // the sorted variant already exists when the filter is set
++        assertTrue(JSON.toJSONString(new FilteredWarm(), sorted).contains("hunter2"));
++        provider.getObjectWriter(FilteredWarm.class).setFilter(drop);
++        assertEquals("{\"id\":7,\"name\":\"alice\"}", JSON.toJSONString(new FilteredWarm(), sorted));
++
++        // a registered adapter keeps its filters in the variant rebuilt for the feature, also ones set later
++        ObjectWriter writer = ObjectWriters.objectWriter(FilteredRegistered.class,
++                ObjectWriters.fieldWriter("password", String.class, (FilteredRegistered s) -> s.password),
++                ObjectWriters.fieldWriter("name", String.class, (FilteredRegistered s) -> s.name));
++        writer.setFilter(mask);
++        provider.register(FilteredRegistered.class, writer);
++        assertEquals("{\"name\":\"alice\",\"password\":\"***\"}", JSON.toJSONString(new FilteredRegistered(), sorted));
++        writer.setFilter(drop);
++        assertEquals("{\"name\":\"alice\"}", JSON.toJSONString(new FilteredRegistered(), sorted));
++    }
+ }
