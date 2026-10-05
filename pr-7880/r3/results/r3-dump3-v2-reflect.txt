@@ -1,0 +1,102 @@
+W FieldArr
+  json      {"ft":[1001,2002,300],"list":[[1001,2002,300]],"t":[1001,2002,300]}
+  utf8      {"ft":[1001,2002,300],"list":[[1001,2002,300]],"t":[1001,2002,300]}
+  utf8+cs   {"ft":[1001,2002,300],"list":[[1001,2002,300]],"t":[1001,2002,300]}
+  jsonb     a64b667497d3e9d7d2d12c4d6c6973749597d3e9d7d2d12c4a7497d3e9d7d2d12ca5
+  from      {"ft":{"to":1001,"from":2002,"amount":300},"list":[{"to":1001,"from":2002,"amount":300}],"t":{"to":1001,"from":2002,"amount":300}}
+  fromNulls {"ft":{"to":1001,"from":2002,"amount":300},"list":[{"to":1001,"from":2002,"amount":300}],"t":{"to":1001,"from":2002,"amount":300}}
+  toJSON+WN {"ft":{"to":1001,"from":2002,"amount":300},"list":[{"to":1001,"from":2002,"amount":300}],"t":{"to":1001,"from":2002,"amount":300}}
+  json+WN   {"ft":[1001,2002,300],"list":[[1001,2002,300]],"t":[1001,2002,300]}
+W Gates
+  json      {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01"],"secret":"MASKED"}
+  utf8      {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01"],"secret":"MASKED"}
+  utf8+cs   {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01"],"secret":"MASKED"}
+  jsonb     a650636f6e74656e7495a64b746fd3e94d66726f6dd7d24f616d6f756e74d12ca54e646174657395ac000000004f7365637265744f4d41534b4544a5
+  from      {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01 08:00:00"],"secret":{"value":"sensitive"}}
+  fromNulls {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01 08:00:00"],"secret":{"value":"sensitive"}}
+  toJSON+WN {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01 08:00:00"],"secret":{"value":"sensitive"}}
+  json+WN   {"content":[{"to":1001,"from":2002,"amount":300}],"dates":["1970-01-01"],"secret":"MASKED"}
+W NOuter
+  json      {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"b":2}}}
+  utf8      {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"b":2}}}
+  utf8+cs   {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"b":2}}}
+  jsonb     a64e696e6e6572a64a6202a54d6c69737495a64a6202a54c6d6170a64a6da64a6202a5a5a5
+  from      {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"a":null,"b":2}}}
+  fromNulls {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"a":null,"b":2}},"top":null}
+  toJSON+WN {"inner":{"b":2},"list":[{"b":2}],"map":{"m":{"a":null,"b":2}},"top":null}
+  json+WN   {"inner":{"a":null,"b":2},"list":[{"a":null,"b":2}],"map":{"m":{"a":null,"b":2}},"top":null}
+W NOuterAnn
+  json      {"list":[{"b":2}],"top":null}
+  utf8      {"list":[{"b":2}],"top":null}
+  utf8+cs   {"list":[{"b":2}],"top":null}
+  jsonb     a64d6c69737495a64a6202a54c746f70afa5
+  from      {"list":[{"b":2}],"top":null}
+  fromNulls {"list":[{"b":2}],"top":null}
+  toJSON+WN {"list":[{"b":2}],"top":null}
+  json+WN   {"list":[{"a":null,"b":2}],"top":null}
+W proxy+FieldBased
+  plainFirst {"hidden":42,"name":"n"} | {}
+  proxyFirst {} | {"hidden":42,"name":"n"}
+  proxyNatural {} | {}
+W toJSONBytes FieldBased
+  toJSONString(FB)            {"x":1}
+  toJSONBytes(FB)             {"x":1}
+  toJSONBytes(UTF8, FB)       {}
+  toJSONBytes(UTF8, ctx(FB))  {}
+  JSONFactory.getObjectWriter(FB|Pretty).write {"x":1}
+R MapArrayToBean {"m":{"k":[1,2]}}
+  EXC JSONException: read field 'verify.DefaultDump3$MapArrayToBean.m, offset 11, character [, line 1, column 11,  {"m":{"k":[1,2]}}
+  utf8 EXC JSONException: read field 'verify.DefaultDump3$MapArrayToBean.m, offset 11, character [, line 1, column 11,  {"m":{"k":[1,2]}}
+R MapSmartMatch {"m":{"k":{"A_ID":1,"b_id":2}}}
+  HashMap{k=Bean:{"aId":0,"bId":0},}
+  utf8 HashMap{k=Bean:{"aId":0,"bId":0},}
+R MapNative {"m":{"k":{"a":{"b":1}}}}
+  HashMap{k=HashMap{a=JSONObject{b=Integer:1,},},}
+  utf8 HashMap{k=HashMap{a=JSONObject{b=Integer:1,},},}
+R MapNativeObj {"m":{"k":{"a":{"b":1}}}}
+  HashMap{k=JSONObject{a=JSONObject{b=Integer:1,},},}
+  utf8 HashMap{k=JSONObject{a=JSONObject{b=Integer:1,},},}
+R MapAutoType {"m":{"k":{"@type":"verify.DefaultDump3$Pojo","v":1}}}
+  HashMap{k=JSONObject{@type=String:verify.DefaultDump3$Pojo,v=Integer:1,},}
+  utf8 HashMap{k=JSONObject{@type=String:verify.DefaultDump3$Pojo,v=Integer:1,},}
+R MapMapAutoType {"m":{"k":{"x":{"@type":"verify.DefaultDump3$Pojo","v":1}}}}
+  HashMap{k=HashMap{x=JSONObject{@type=String:verify.DefaultDump3$Pojo,v=Integer:1,},},}
+  utf8 HashMap{k=HashMap{x=JSONObject{@type=String:verify.DefaultDump3$Pojo,v=Integer:1,},},}
+R MapBigDec {"m":{"k":{"d":1.5}}}
+  HashMap{k=HashMap{d=BigDecimal:1.5,},}
+  utf8 HashMap{k=HashMap{d=BigDecimal:1.5,},}
+R MapIgnoreNull {"m":{"k":{"a":null,"b":1}}}
+  HashMap{k=HashMap{a=null,b=Integer:1,},}
+  utf8 HashMap{k=HashMap{a=null,b=Integer:1,},}
+U {"a":null,"a":1}
+  parseObject(IgnoreNull) JSONObject{a=Integer:1,}
+  LinkedHashMap           LinkedHashMap{a=Integer:1,}
+  Map<String,Map>         EXC JSONException: expect '{', but '1', offset 15, character 1, line 1, column 15,  {"a":null,"a":1}
+  dupAsArray              JSONObject{a=Integer:1,}
+U {"a":1,"a":null}
+  parseObject(IgnoreNull) JSONObject{a=Integer:1,}
+  LinkedHashMap           LinkedHashMap{a=null,}
+  Map<String,Map>         EXC JSONException: expect '{', but '1', offset 6, character 1, line 1, column 6,  {"a":1,"a":null}
+  dupAsArray              JSONObject{a=JSONArray[Integer:1,null,],}
+U {1:1,"1":2}
+  parseObject(IgnoreNull) JSONObject{1=Integer:1,1=Integer:2,}
+  LinkedHashMap           LinkedHashMap{1=Integer:1,1=Integer:2,}
+  Map<String,Map>         EXC JSONException: expect '{', but '1', offset 4, character 1, line 1, column 4,  {1:1,"1":2}
+  dupAsArray              JSONObject{1=Integer:1,1=Integer:2,}
+U {"a":1,"a":{"$ref":"$"}}
+  parseObject(IgnoreNull) EXC StackOverflowError: null
+  LinkedHashMap           EXC StackOverflowError: null
+  Map<String,Map>         EXC JSONException: expect '{', but '1', offset 6, character 1, line 1, column 6,  {"a":1,"a":{"$ref":"$"}}
+  dupAsArray              EXC StackOverflowError: null
+U {"x":{"y":{"z":1,"z":2}}}
+  parseObject(IgnoreNull) JSONObject{x=JSONObject{y=JSONObject{z=Integer:2,},},}
+  LinkedHashMap           LinkedHashMap{x=JSONObject{y=JSONObject{z=Integer:2,},},}
+  Map<String,Map>         HashMap{x=HashMap{y=JSONObject{z=Integer:2,},},}
+  dupAsArray              JSONObject{x=JSONObject{y=JSONObject{z=JSONArray[Integer:1,Integer:2,],},},}
+U {"x":[{"z":1,"z":2}]}
+  parseObject(IgnoreNull) JSONObject{x=JSONArray[JSONObject{z=Integer:2,},],}
+  LinkedHashMap           LinkedHashMap{x=JSONArray[JSONObject{z=Integer:2,},],}
+  Map<String,Map>         EXC JSONException: expect '{', but '[', offset 6, character [, line 1, column 6,  {"x":[{"z":1,"z":2}]}
+  dupAsArray              JSONObject{x=JSONArray[JSONObject{z=JSONArray[Integer:1,Integer:2,],},],}
+U read(preseeded)
+  {a=1, b=2}

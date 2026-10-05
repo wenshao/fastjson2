@@ -1,0 +1,45 @@
+PR #7880 repro | java 21.0.12 | fastjson2-v3.jar
+
+1) custom ObjectWriter registered via JSON.register() is bypassed under SortFieldNamesAlphabetically
+   JSON.toJSONString(money)                     expected "$1.23"                        actual "$1.23"                        OK
+   JSON.toJSONString(money, Sort...)            expected "$1.23"                        actual "$1.23"                        OK
+
+2) per-call BeanToArray + SortFieldNamesAlphabetically reorders the positional array
+   toJSONString(t, BeanToArray)                 expected [1001,2002,300]                actual [1001,2002,300]                OK
+   toJSONString(t, BeanToArray, Sort...)        expected [1001,2002,300]                actual [1001,2002,300]                OK
+   JSONB.toBytes(t, BeanToArray, Sort...)       expected [1001,2002,300]                actual [1001,2002,300]                OK
+
+3) mixIn() after warm-up is not applied to the sorted writer cache
+   after mixIn, natural                         expected {"z":1,"renamed":2}            actual {"z":1,"renamed":2}            OK
+   after mixIn, Sort...                         expected {"renamed":2,"z":1}            actual {"renamed":2,"z":1}            OK
+
+4) cleanup(ClassLoader) does not purge sorted writers -> class loader leak
+   loader collected? (natural)                  expected true                           actual true                           OK
+   loader collected? (Sort...)                  expected true                           actual true                           OK
+
+5) [round 2] field-level @JSONField(serializeFeatures = BeanToArray) + SortFieldNamesAlphabetically
+   asm JSON  field, Sort...                     expected {"transfer":[1001,2002,300],"transfers":[{"to":1001,"from":2002,"amount":300}]} actual {"transfer":[300,2002,1001],"transfers":[{"to":1001,"from":2002,"amount":300}]} <-- MISMATCH
+   asm JSONB field, Sort...                     expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+   reflect JSON  field, Sort...                 expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+   reflect JSONB field, Sort...                 expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+
+6) [round 2] canConvertToInt/Long on decimals just outside the range (jackson DecimalNode/DoubleNode: false)
+   canConvertToInt(2147483647.5)                expected false                          actual false                          OK
+   canConvertToInt(-2147483648.5)               expected false                          actual false                          OK
+   canConvertToLong(9223372036854775807.5)      expected false                          actual false                          OK
+
+7) [round 2] canConvertToInt cost on BigDecimal 1E+10000000 carried by an 11-byte JSONB payload
+   payload 11 bytes -> canConvertToInt = false in 1 ms OK
+
+8) [round 3] writer registered via ObjectWriters.objectWriter(...) is replaced under SortFieldNamesAlphabetically
+   toJSONString(credentials)                    expected {"name":"alice","password":"***"} actual {"name":"alice","password":"***"} OK
+   toJSONString(credentials, Sort...)           expected {"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"hunter2"} <-- MISMATCH
+   toJSONString(profile, Sort...)               expected {"login":{"name":"alice","password":"***"}} actual {"login":{"id":7,"name":"alice","password":"hunter2"}} <-- MISMATCH
+
+9) [round 3] new public JSONReader#readObject(long) on a JSONB reader
+   JSONReader.ofJSONB(bytes).readObject()       expected {"a":1}                        actual {"a":1}                        OK
+   JSONReader.ofJSONB(bytes).readObject(0L)     expected {"a":1}                        actual JSONException: illegal input , offset 3 <-- MISMATCH
+
+10) [round 3] JSONObject.from: an owner's @JSONType(serializeFeatures = WriteNulls) reaches its items
+   toJSONString(report)                         expected {"rows":[{"rank":1}],"title":null} actual {"rows":[{"rank":1}],"title":null} OK
+   JSONObject.from(report) (printed with WriteNulls) expected {"rows":[{"rank":1}],"title":null} actual {"rows":[{"note":null,"rank":1}],"title":null} <-- MISMATCH
