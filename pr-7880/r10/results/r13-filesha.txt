@@ -1,0 +1,10 @@
+same core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+same core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+same core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+same core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+same core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplList.java
+DIFF core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+same core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+same core/src/test/java/com/alibaba/fastjson2/features/ErrorOnDuplicateKeysTest.java
+same core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+same core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java

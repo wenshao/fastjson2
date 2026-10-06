@@ -1,0 +1,4 @@
+feature | input form | ASM | reflect
+ErrorOnDuplicateKeys | List<Map> f, array | ok | ok
+ErrorOnDuplicateKeys | List<Map> f, single object | ok | ok
+ErrorOnDuplicateKeys | Map f (control) | DUP | DUP

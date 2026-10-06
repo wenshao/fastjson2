@@ -1,0 +1,54 @@
+Picked up JAVA_TOOL_OPTIONS: 
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:<maven>/lib/jansi-2.4.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:<maven>/lib/guava-33.2.1-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+Picked up JAVA_TOOL_OPTIONS: 
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by nonapi.io.github.classgraph.utils.FileUtils (file:<m2>/repository/io/github/classgraph/classgraph/4.8.83/classgraph-4.8.83.jar)
+WARNING: Please consider reporting this to the maintainers of class nonapi.io.github.classgraph.utils.FileUtils
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+[ERROR] Tests run: 39, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.063 s <<< FAILURE! -- in com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest
+[ERROR] com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected com.alibaba.fastjson2.JSONException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+	at com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness(ErrorOnDuplicateKeysTest.java:415)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+[ERROR] com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator -- Time elapsed: 0.010 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: ObjectReaderCreatorASM {"array":[{"b":1,"b":2}]} ==> Expected com.alibaba.fastjson2.JSONException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:39)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3153)
+	at com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest.assertDuplicateKeyRejected(ErrorOnDuplicateKeysTest.java:581)
+	at com.alibaba.fastjson2.features.ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator(ErrorOnDuplicateKeysTest.java:568)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+[ERROR] Failures: 
+[ERROR]   ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator:568->assertDuplicateKeyRejected:581 ObjectReaderCreatorASM {"array":[{"b":1,"b":2}]} ==> Expected com.alibaba.fastjson2.JSONException to be thrown, but nothing was thrown.
+[ERROR]   ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness:415 Expected com.alibaba.fastjson2.JSONException to be thrown, but nothing was thrown.
+[ERROR] Tests run: 128, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.3:test (default-test) on project fastjson2: There are test failures.
+[ERROR] 
+[ERROR] See <work>/wt-mut13/core/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

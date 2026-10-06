@@ -1,0 +1,2 @@
+b2492207a forward only the strict reader feature to container items, pass the word to array map keys, honor runtime-map-class writers, and truncate fractions in tree number conversion
+7f8ba05da route a field-level sort through a sorted-items list writer variant, restoring byte-identical item loops

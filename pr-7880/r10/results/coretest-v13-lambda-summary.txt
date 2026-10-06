@@ -1,0 +1,8 @@
+[ERROR] Tests run: 8127, Failures: 3, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testClientSuperClass:408 expected: <ObjectReaderAdapter> but was: <ObjectReaderBean>
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testPartnerLe6:538 expected: <ObjectReader3> but was: <ObjectReaderAdapter>
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testSuperClassSelection:88 expected: <ObjectReader1> but was: <ObjectReaderAdapter>
+[INFO] BUILD FAILURE
+[INFO] Total time:  50.118 s
+rc=1

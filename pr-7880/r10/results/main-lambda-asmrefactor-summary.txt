@@ -1,0 +1,4 @@
+[ERROR] Tests run: 33, Failures: 3, Errors: 0, Skipped: 0
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testClientSuperClass:408 expected: <ObjectReaderAdapter> but was: <ObjectReaderBean>
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testPartnerLe6:538 expected: <ObjectReader3> but was: <ObjectReaderAdapter>
+[ERROR]   ObjectReaderCreatorASMRefactorTest.testSuperClassSelection:88 expected: <ObjectReader1> but was: <ObjectReaderAdapter>

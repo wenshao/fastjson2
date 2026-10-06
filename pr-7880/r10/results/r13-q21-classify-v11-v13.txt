@@ -1,0 +1,4 @@
+cells per build: 8400 (x3 columns)
+field-level ASM==reflect: old 3627/4200 new 3627/4200
+newly divergent (agree before, differ now): 0
+newly agreeing: 0

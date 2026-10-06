@@ -1,0 +1,16 @@
+# javap -c -p -constants ObjectWriterProvider.class: 575bd9fa2 + fix-r9.diff + fix-r9-u.diff (a) vs 7f8ba05da (b); constant-pool indexes and bytecode offsets normalized
+# jar entries: a=777 b=777; differing entries:
+Files a/com/alibaba/fastjson2/writer/ObjectWriterProvider.class and b/com/alibaba/fastjson2/writer/ObjectWriterProvider.class differ
+582,589d581
+<       ifeq          43
+<       aload_1
+<       ldc_w         #N                // String com.alibaba.fastjson2.writer.ObjectWriterException
+<       invokevirtual #N                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+<       ifne          43
+<       iconst_1
+<       goto          44
+<       iconst_0
+1005c997
+<   public com.alibaba.fastjson2.writer.ObjectWriter getObjectWriterFromCache(java.lang.reflect.Type, java.lang.Class, long);
+---
+>   com.alibaba.fastjson2.writer.ObjectWriter getObjectWriterFromCache(java.lang.reflect.Type, java.lang.Class, long);

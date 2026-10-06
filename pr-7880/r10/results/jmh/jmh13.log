@@ -1,0 +1,35 @@
+=== load before JMH: 3.50 3.76 3.23 1/560 675773
+=== r13u round 1 v10 04:07:30
+=== r13u round 1 v10copy 04:07:58
+=== r13u round 1 v12 04:08:26
+=== r13u round 1 v13 04:08:54
+=== r13u round 2 v10 04:09:21
+=== r13u round 2 v10copy 04:09:49
+=== r13u round 2 v12 04:10:17
+=== r13u round 2 v13 04:10:45
+=== r13u round 3 v10 04:11:12
+=== r13u round 3 v10copy 04:11:40
+=== r13u round 3 v12 04:12:08
+=== r13u round 3 v13 04:12:36
+=== r13u round 4 v10 04:13:04
+=== r13u round 4 v10copy 04:13:31
+=== r13u round 4 v12 04:13:59
+=== r13u round 4 v13 04:14:27
+=== r13u round 5 v10 04:14:55
+=== r13u round 5 v10copy 04:15:22
+=== r13u round 5 v12 04:15:50
+=== r13u round 5 v13 04:16:18
+=== r13u round 6 v10 04:16:46
+=== r13u round 6 v10copy 04:17:13
+=== r13u round 6 v12 04:17:41
+=== r13u round 6 v13 04:18:09
+=== r13u round 7 v10 04:18:37
+=== r13u round 7 v10copy 04:19:04
+=== r13u round 7 v12 04:19:32
+=== r13u round 7 v13 04:20:00
+=== r13u round 8 v10 04:20:28
+=== r13u round 8 v10copy 04:20:55
+=== r13u round 8 v12 04:21:23
+=== r13u round 8 v13 04:21:51
+=== r13u done 04:22:19
+=== jmh13 all done 04:22:19 load 1.11 1.22 1.88 1/564 682648

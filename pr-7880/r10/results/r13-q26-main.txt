@@ -1,0 +1,13 @@
+feature | input form | ASM | reflect
+ErrorOnUnknownProperties | List<B> f, array | b=1 userId=0 s=null | b=1 userId=0 s=null
+ErrorOnUnknownProperties | List<B> f, single object | b=1 userId=0 s=null | b=1 userId=0 s=null
+ErrorOnUnknownProperties | B f (control) | EXC JSONException: Unknown Property zz | b=1 userId=0 s=null   <-- differs
+SupportSmartMatch | List<B> f, array | b=0 userId=0 s=null | b=0 userId=0 s=null
+SupportSmartMatch | List<B> f, single object | b=0 userId=0 s=null | b=0 userId=7 s=null   <-- differs
+SupportSmartMatch | B f (control) | b=0 userId=7 s=null | b=0 userId=7 s=null
+TrimString | List<B> f, array | b=0 userId=0 s=' x ' | b=0 userId=0 s=' x '
+TrimString | List<B> f, single object | b=0 userId=0 s=' x ' | b=0 userId=0 s=' x '
+TrimString | B f (control) | b=0 userId=0 s=' x ' | b=0 userId=0 s=' x '
+InitStringFieldAsEmpty | List<B> f, array | b=1 userId=0 s=null | b=1 userId=0 s=null
+InitStringFieldAsEmpty | List<B> f, single object | b=1 userId=0 s=null | b=1 userId=0 s=''   <-- differs
+InitStringFieldAsEmpty | B f (control) | b=1 userId=0 s='' | b=1 userId=0 s=''
