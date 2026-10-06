@@ -1,0 +1,13 @@
+# 61e081039 vs the round-7 suggested patch (fix-r7.diff applied to 6bf404c01 in wt-fix9)
+$ git diff --stat 6bf404c01 61e081039
+  .../fastjson2/writer/ObjectWriterImplMap.java      |  2 +
+  .../fastjson2/writer/MapKeyContextTest.java        | 49 ++++++++++++++++++++++
+  2 files changed, 51 insertions(+)
+$ diff <(git diff 6bf404c01 61e081039) fix-r7.diff   # ignoring index lines
+  0 differing lines
+$ sha1sum <file in patched tree> <file at 61e081039>
+  009dcaf55d0b 009dcaf55d0b same  ObjectWriterImplMap.java
+  004cc13607d4 004cc13607d4 same  MapKeyContextTest.java
+$ git diff 61e081039 -- . (patched worktree): 0 files differ
+$ unzip both core jars; diff -r   # mvn -pl core package, same JDK 25 / Maven
+  entries: 777 (770 classes); differing: 0

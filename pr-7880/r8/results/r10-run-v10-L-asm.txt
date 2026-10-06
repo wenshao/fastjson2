@@ -1,0 +1,15 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v10.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[L1] field-level sorted container map keys: nested beans sorted as with the sort on the context
+  FAIL L1       ASM, no filter: 8 key shapes                   8 differ: [List<B> {"m":{"[{\"z\":1,\"a\":2}]":"v"}}, Set<B> {"m":{"[{\"z\":1,\"a\":2}]":"v"}}, B[] {"m":{"[{\"z\":1,\"a\":2}]":"v"}}, Object[]{B} {"m":{"[{\"z\":1,\"a\":2},1]":"v"}}, Map{k:B} {"m":{"{\"k\":{\"z\":1,\"a\":2}}":"v"}}, JSONObject{k:B} {"m":{"{\"k\":{\"z\":1,\"a\":2}}":"v"}}, Optional<B> {"m":{"{\"z\":1,\"a\":2}":"v"}}, Map{k:List<B>} {"m":{"{\"k\":[{\"z\":1,\"a\":2}]}":"v"}}]
+
+[L2] (INFO) shapes where a field-level sort does not reach the nested beans (key / value)
+  INFO L2       ASM: 12 shapes, Object-typed field             keys [List<B>, Set<B>, B[], Object[]{B}, Map{k:B}, JSONObject{k:B}, Optional<B>, Map{k:List<B>}, List<List<B>>, AtomicReference<B>, Optional<List<B>>]  values [List<List<B>>, AtomicReference<B>, Optional<List<B>>]
+  INFO L2       reflect: 12 shapes, Object-typed field         keys []  values []
+
+
+SUMMARY  PASS=3  FAIL=1  DIFF=0  INFO=2  (java 21.0.12)

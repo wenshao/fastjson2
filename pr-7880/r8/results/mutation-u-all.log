@@ -1,0 +1,20 @@
+=== mutation: none (mvn rc=0)
+  tests=30 failed=0
+=== mutation: list-text (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM ArrayList ==&gt; expected: &lt;{&quot;value&quot;:[[{&quot;apple&quot;:1,&quot;zebra&quot;:3}]]}&gt; but was: &lt;{&quot;value&quot;:[[{&]
+=== mutation: list-jsonb (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM ArrayList JSONB ==&gt; expected: &lt;{&quot;value&quot;:[[{&quot;apple&quot;:1,&quot;zebra&quot;:3}]]}&gt; but was: &lt;{&quot;value&quot]
+=== mutation: optional (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM Optional ==&gt; expected: &lt;{&quot;value&quot;:[{&quot;apple&quot;:1,&quot;zebra&quot;:3}]}&gt; but was: &lt;{&quot;value&quot;:[{&quot]
+=== mutation: atomic-text (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM AtomicReference ==&gt; expected: &lt;{&quot;value&quot;:{&quot;apple&quot;:1,&quot;zebra&quot;:3}}&gt; but was: &lt;{&quot;value&quot;:{&]
+=== mutation: atomic-jsonb (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM AtomicReference JSONB ==&gt; expected: &lt;{&quot;value&quot;:{&quot;apple&quot;:1,&quot;zebra&quot;:3}}&gt; but was: &lt;{&quot;value&qu]
+=== mutation: array-jsonb (mvn rc=1)
+  tests=30 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator  [ObjectWriterCreatorASM Object[] JSONB ==&gt; expected: &lt;{&quot;value&quot;:[[{&quot;apple&quot;:1,&quot;zebra&quot;:3}]]}&gt; but was: &lt;{&quot;value&quot;]

@@ -1,0 +1,56 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 376743eac..c63245e9e 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -427,7 +427,9 @@ public final class ObjectWriterImplMap
+             try (JSONWriter keyWriter = JSONWriter.of(context)) {
+                 // the key is the root of its own document, as in JSON.toJSONString(key, context)
+                 keyWriter.setRootObject(key);
+-                keyObjectWriter.write(keyWriter, key, null, null, 0);
++                // the sort request also travels in the feature word, so the beans inside list, map and Optional keys
++                // resolve their sorted variants as they do in field-level sorted values
++                keyObjectWriter.write(keyWriter, key, null, null, JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
+                 str = keyWriter.toString();
+             }
+         }
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+index cde611dac..2541a46eb 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+@@ -9,8 +9,10 @@ import com.alibaba.fastjson2.filter.ValueFilter;
+ import org.junit.jupiter.api.Test;
+ 
+ import java.time.LocalDate;
++import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.LinkedHashMap;
++import java.util.List;
+ import java.util.Map;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
+@@ -88,6 +90,25 @@ public class MapKeyContextTest {
+                 JSON.toJSONString(new SortedKeys(), context));
+     }
+ 
++    public static class SortedListKeys {
++        @JSONField(serializeFeatures = JSONWriter.Feature.SortFieldNamesAlphabetically)
++        public Map<List<UnsortedKey>, String> m = new LinkedHashMap<>(
++                Collections.singletonMap(new ArrayList<>(Collections.singletonList(new UnsortedKey())), "v"));
++    }
++
++    @Test
++    public void fieldLevelSortedListKeysSortTheirBeans() {
++        // the beans inside a list key take their sorted variants as in a field-level sorted list value,
++        // with either creator and whether or not a filter sends the write through the context
++        String expected = "{\"m\":{\"[{\\\"first\\\":{\\\"a\\\":1},\\\"password\\\":\\\"hunter2\\\",\\\"second\\\":{\\\"a\\\":1},\\\"zeta\\\":\\\"z\\\"}]\":\"v\"}}";
++        for (ObjectWriterCreator creator : new ObjectWriterCreator[]{ObjectWriterCreatorASM.INSTANCE, ObjectWriterCreator.INSTANCE}) {
++            JSONWriter.Context context = new JSONWriter.Context(new ObjectWriterProvider(creator));
++            assertEquals(expected, JSON.toJSONString(new SortedListKeys(), context), creator.getClass().getSimpleName());
++            context.configFilter((PropertyFilter) (object, name, value) -> true);
++            assertEquals(expected, JSON.toJSONString(new SortedListKeys(), context), creator.getClass().getSimpleName() + " with a filter");
++        }
++    }
++
+     @Test
+     public void fieldLevelSortedBeanKeysAreTheRootOfTheirReferences() {
+         for (ObjectWriterCreator creator : new ObjectWriterCreator[]{ObjectWriterCreatorASM.INSTANCE, ObjectWriterCreator.INSTANCE}) {

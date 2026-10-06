@@ -1,0 +1,45 @@
+{
+	"java":"21.0.12",
+	"pass":3,
+	"fail":1,
+	"diff":0,
+	"info":2,
+	"results":[
+		{
+			"status":"FAIL",
+			"section":"L1",
+			"id":"ASM, no filter: 8 key shapes",
+			"detail":"8 differ: [List<B> {\"m\":{\"[{\\\"z\\\":1,\\\"a\\\":2}]\":\"v\"}}, Set<B> {\"m\":{\"[{\\\"z\\\":1,\\\"a\\\":2}]\":\"v\"}}, B[] {\"m\":{\"[{\\\"z\\\":1,\\\"a\\\":2}]\":\"v\"}}, Object[]{B} {\"m\":{\"[{\\\"z\\\":1,\\\"a\\\":2},1]\":\"v\"}}, Map{k:B} {\"m\":{\"{\\\"k\\\":{\\\"z\\\":1,\\\"a\\\":2}}\":\"v\"}}, JSONObject{k:B} {\"m\":{\"{\\\"k\\\":{\\\"z\\\":1,\\\"a\\\":2}}\":\"v\"}}, Optional<B> {\"m\":{\"{\\\"z\\\":1,\\\"a\\\":2}\":\"v\"}}, Map{k:List<B>} {\"m\":{\"{\\\"k\\\":[{\\\"z\\\":1,\\\"a\\\":2}]}\":\"v\"}}]"
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"ASM, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, no filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"ASM: 12 shapes, Object-typed field",
+			"detail":"keys [List<B>, Set<B>, B[], Object[]{B}, Map{k:B}, JSONObject{k:B}, Optional<B>, Map{k:List<B>}, List<List<B>>, AtomicReference<B>, Optional<List<B>>]  values [List<List<B>>, AtomicReference<B>, Optional<List<B>>]"
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"reflect: 12 shapes, Object-typed field",
+			"detail":"keys []  values []"
+		}
+	]
+}

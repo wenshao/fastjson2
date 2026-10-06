@@ -1,0 +1,19 @@
+V1 field-level sorted value == context-sorted value: shapes=30 cells=180 same=160
+  AtomicReference<B>               [asm/json, asm/utf8, asm/jsonb]
+      field-level {"f":{"z":1,"a":2}}  | context {"f":{"a":2,"z":1}}
+  Optional<List<B>>                [asm/json, asm/utf8]
+      field-level {"f":[{"z":1,"a":2}]}  | context {"f":[{"a":2,"z":1}]}
+  AtomicReference<List<B>>         [asm/json, asm/utf8, asm/jsonb]
+      field-level {"f":[{"z":1,"a":2}]}  | context {"f":[{"a":2,"z":1}]}
+  JSONArray[List<B>]               [asm/json, asm/utf8, asm/jsonb]
+      field-level {"f":[[{"z":1,"a":2}]]}  | context {"f":[[{"a":2,"z":1}]]}
+  Object=List<List<B>>             [asm/json, asm/utf8, asm/jsonb]
+      field-level {"f":[[{"z":1,"a":2}]]}  | context {"f":[[{"a":2,"z":1}]]}
+  Object=AtomicReference<B>        [asm/json, asm/utf8, asm/jsonb]
+      field-level {"f":{"z":1,"a":2}}  | context {"f":{"a":2,"z":1}}
+  List<List<B>>                    [asm/jsonb]
+      field-level {"f":[[{"z":1,"a":2}]]}  | context {"f":[[{"a":2,"z":1}]]}
+  List<Map<String,B>>              [asm/jsonb]
+      field-level {"f":[{"k":{"z":1,"a":2}}]}  | context {"f":[{"k":{"a":2,"z":1}}]}
+  Object=Object[]{List<B>}         [asm/jsonb]
+      field-level {"f":[[{"z":1,"a":2}]]}  | context {"f":[[{"a":2,"z":1}]]}

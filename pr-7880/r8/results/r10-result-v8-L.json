@@ -1,0 +1,45 @@
+{
+	"java":"21.0.12",
+	"pass":4,
+	"fail":0,
+	"diff":0,
+	"info":2,
+	"results":[
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"ASM, no filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"ASM, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, no filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"ASM: 12 shapes, Object-typed field",
+			"detail":"keys []  values [List<List<B>>, AtomicReference<B>, Optional<List<B>>]"
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"reflect: 12 shapes, Object-typed field",
+			"detail":"keys []  values []"
+		}
+	]
+}

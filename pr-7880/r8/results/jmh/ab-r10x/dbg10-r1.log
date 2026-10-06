@@ -1,0 +1,145 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.writeBasketArr100JSONB
+
+# Run progress: 0.00% complete, ETA 00:00:36
+# Fork: 1 of 1
+# Warmup Iteration   1: 550.146 ops/ms
+# Warmup Iteration   2: 594.009 ops/ms
+# Warmup Iteration   3: 559.957 ops/ms
+# Warmup Iteration   4: 567.664 ops/ms
+Iteration   1: 567.839 ops/ms
+Iteration   2: 567.369 ops/ms
+Iteration   3: 569.022 ops/ms
+Iteration   4: 568.200 ops/ms
+Iteration   5: 569.099 ops/ms
+
+
+Result "bench.Bench7880.writeBasketArr100JSONB":
+  568.306 ±(99.9%) 2.887 ops/ms [Average]
+  (min, avg, max) = (567.369, 568.306, 569.099), stdev = 0.750
+  CI (99.9%): [565.418, 571.193] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.writeList100Beans
+
+# Run progress: 25.00% complete, ETA 00:00:27
+# Fork: 1 of 1
+# Warmup Iteration   1: 135.694 ops/ms
+# Warmup Iteration   2: 152.698 ops/ms
+# Warmup Iteration   3: 153.614 ops/ms
+# Warmup Iteration   4: 153.426 ops/ms
+Iteration   1: 153.035 ops/ms
+Iteration   2: 153.366 ops/ms
+Iteration   3: 154.243 ops/ms
+Iteration   4: 154.107 ops/ms
+Iteration   5: 154.339 ops/ms
+
+
+Result "bench.Bench7880.writeList100Beans":
+  153.818 ±(99.9%) 2.240 ops/ms [Average]
+  (min, avg, max) = (153.035, 153.818, 154.339), stdev = 0.582
+  CI (99.9%): [151.579, 156.058] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.writeMediaContentJSONB
+
+# Run progress: 50.00% complete, ETA 00:00:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 8115.551 ops/ms
+# Warmup Iteration   2: 9324.441 ops/ms
+# Warmup Iteration   3: 9217.348 ops/ms
+# Warmup Iteration   4: 9239.646 ops/ms
+Iteration   1: 9230.610 ops/ms
+Iteration   2: 9211.885 ops/ms
+Iteration   3: 9223.260 ops/ms
+Iteration   4: 9217.153 ops/ms
+Iteration   5: 9201.333 ops/ms
+
+
+Result "bench.Bench7880.writeMediaContentJSONB":
+  9216.848 ±(99.9%) 42.876 ops/ms [Average]
+  (min, avg, max) = (9201.333, 9216.848, 9230.610), stdev = 11.135
+  CI (99.9%): [9173.972, 9259.725] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.writeOrderJSONB
+
+# Run progress: 75.00% complete, ETA 00:00:09
+# Fork: 1 of 1
+# Warmup Iteration   1: 2326.832 ops/ms
+# Warmup Iteration   2: 2634.966 ops/ms
+# Warmup Iteration   3: 2611.273 ops/ms
+# Warmup Iteration   4: 2567.427 ops/ms
+Iteration   1: 2567.876 ops/ms
+Iteration   2: 2566.288 ops/ms
+Iteration   3: 2556.953 ops/ms
+Iteration   4: 2571.072 ops/ms
+Iteration   5: 2564.514 ops/ms
+
+
+Result "bench.Bench7880.writeOrderJSONB":
+  2565.340 ±(99.9%) 20.303 ops/ms [Average]
+  (min, avg, max) = (2556.953, 2565.340, 2571.072), stdev = 5.273
+  CI (99.9%): [2545.037, 2585.643] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:37
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                          Mode  Cnt     Score    Error   Units
+Bench7880.writeBasketArr100JSONB  thrpt    5   568.306 ±  2.887  ops/ms
+Bench7880.writeList100Beans       thrpt    5   153.818 ±  2.240  ops/ms
+Bench7880.writeMediaContentJSONB  thrpt    5  9216.848 ± 42.876  ops/ms
+Bench7880.writeOrderJSONB         thrpt    5  2565.340 ± 20.303  ops/ms
+
+Benchmark result is saved to <work>/env/jmh/ab-r10x/dbg10-r1.json

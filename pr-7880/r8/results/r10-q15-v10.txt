@@ -1,0 +1,4 @@
+asm -      key [{"z":1,"a":2}]   value {"list":[{"a":2,"z":1}]}
+asm filter key [{"a":2,"z":1}]   value {"list":[{"a":2,"z":1}]}
+reflect -      key [{"a":2,"z":1}]   value {"list":[{"a":2,"z":1}]}
+reflect filter key [{"a":2,"z":1}]   value {"list":[{"a":2,"z":1}]}

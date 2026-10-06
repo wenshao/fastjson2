@@ -1,0 +1,113 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench9.MapKey7880.beanKeysFiltered
+
+# Run progress: 0.00% complete, ETA 00:00:27
+# Fork: 1 of 1
+# Warmup Iteration   1: 146.726 ops/ms
+# Warmup Iteration   2: 170.640 ops/ms
+# Warmup Iteration   3: 169.249 ops/ms
+# Warmup Iteration   4: 171.569 ops/ms
+Iteration   1: 170.165 ops/ms
+Iteration   2: 171.429 ops/ms
+Iteration   3: 171.207 ops/ms
+Iteration   4: 170.344 ops/ms
+Iteration   5: 171.216 ops/ms
+
+
+Result "bench9.MapKey7880.beanKeysFiltered":
+  170.872 ±(99.9%) 2.212 ops/ms [Average]
+  (min, avg, max) = (170.165, 170.872, 171.429), stdev = 0.574
+  CI (99.9%): [168.661, 173.084] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench9.MapKey7880.dateKeysFiltered
+
+# Run progress: 33.33% complete, ETA 00:00:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 136.047 ops/ms
+# Warmup Iteration   2: 162.217 ops/ms
+# Warmup Iteration   3: 156.922 ops/ms
+# Warmup Iteration   4: 156.835 ops/ms
+Iteration   1: 156.616 ops/ms
+Iteration   2: 156.789 ops/ms
+Iteration   3: 156.770 ops/ms
+Iteration   4: 156.784 ops/ms
+Iteration   5: 156.785 ops/ms
+
+
+Result "bench9.MapKey7880.dateKeysFiltered":
+  156.749 ±(99.9%) 0.287 ops/ms [Average]
+  (min, avg, max) = (156.616, 156.749, 156.789), stdev = 0.075
+  CI (99.9%): [156.462, 157.036] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench9.MapKeySorted7880.beanKeysFieldSorted
+
+# Run progress: 66.67% complete, ETA 00:00:09
+# Fork: 1 of 1
+# Warmup Iteration   1: 160.692 ops/ms
+# Warmup Iteration   2: 209.849 ops/ms
+# Warmup Iteration   3: 220.240 ops/ms
+# Warmup Iteration   4: 220.595 ops/ms
+Iteration   1: 220.757 ops/ms
+Iteration   2: 220.720 ops/ms
+Iteration   3: 220.789 ops/ms
+Iteration   4: 220.768 ops/ms
+Iteration   5: 220.564 ops/ms
+
+
+Result "bench9.MapKeySorted7880.beanKeysFieldSorted":
+  220.720 ±(99.9%) 0.348 ops/ms [Average]
+  (min, avg, max) = (220.564, 220.720, 220.789), stdev = 0.090
+  CI (99.9%): [220.371, 221.068] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:27
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                              Mode  Cnt    Score   Error   Units
+MapKey7880.beanKeysFiltered           thrpt    5  170.872 ± 2.212  ops/ms
+MapKey7880.dateKeysFiltered           thrpt    5  156.749 ± 0.287  ops/ms
+MapKeySorted7880.beanKeysFieldSorted  thrpt    5  220.720 ± 0.348  ops/ms
+
+Benchmark result is saved to <work>/env/jmh/ab-r10k/v10-r3.json
