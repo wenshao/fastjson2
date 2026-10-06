@@ -1,0 +1,51 @@
+{
+	"java":"21.0.12",
+	"pass":4,
+	"fail":3,
+	"diff":0,
+	"info":0,
+	"results":[
+		{
+			"status":"PASS",
+			"section":"K1",
+			"id":"ObjectWriterCreatorASM: key equals the key written with the sort feature on the context",
+			"detail":"field-level {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}  context {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K1",
+			"id":"ObjectWriterCreator: key equals the key written with the sort feature on the context",
+			"detail":"field-level {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}  context {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"FAIL",
+			"section":"K2",
+			"id":"LocalDate key keeps the context date format (no filter: sort comes from the field)",
+			"detail":"{\"byDay\":{\"2026-10-06\":\"v\"}}"
+		},
+		{
+			"status":"FAIL",
+			"section":"K2",
+			"id":"LocalDate key keeps the context date format (with a filter: sort is merged into the context)",
+			"detail":"{\"byDay\":{\"2026-10-06\":\"v\"}}"
+		},
+		{
+			"status":"FAIL",
+			"section":"K2",
+			"id":"context ValueFilter masks a field-level sorted bean key",
+			"detail":"{\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K3",
+			"id":"@JSONType(alphabetic=false) key is written in sorted order",
+			"detail":"{\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K3",
+			"id":"unsorted key on the filtering path equals JSON.toJSONString(key, context)",
+			"detail":"{\"zeta\":\"z\",\"first\":{\"a\":1},\"second\":{\"$ref\":\"$.first\"},\"password\":\"hunter2\"}"
+		}
+	]
+}

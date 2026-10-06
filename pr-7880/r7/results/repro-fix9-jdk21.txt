@@ -1,0 +1,83 @@
+PR #7880 repro | java 21.0.12 | fastjson2-fix9.jar
+
+1) custom ObjectWriter registered via JSON.register() is bypassed under SortFieldNamesAlphabetically
+   JSON.toJSONString(money)                     expected "$1.23"                        actual "$1.23"                        OK
+   JSON.toJSONString(money, Sort...)            expected "$1.23"                        actual "$1.23"                        OK
+
+2) per-call BeanToArray + SortFieldNamesAlphabetically reorders the positional array
+   toJSONString(t, BeanToArray)                 expected [1001,2002,300]                actual [1001,2002,300]                OK
+   toJSONString(t, BeanToArray, Sort...)        expected [1001,2002,300]                actual [1001,2002,300]                OK
+   JSONB.toBytes(t, BeanToArray, Sort...)       expected [1001,2002,300]                actual [1001,2002,300]                OK
+
+3) mixIn() after warm-up is not applied to the sorted writer cache
+   after mixIn, natural                         expected {"z":1,"renamed":2}            actual {"z":1,"renamed":2}            OK
+   after mixIn, Sort...                         expected {"renamed":2,"z":1}            actual {"renamed":2,"z":1}            OK
+
+4) cleanup(ClassLoader) does not purge sorted writers -> class loader leak
+   loader collected? (natural)                  expected true                           actual true                           OK
+   loader collected? (Sort...)                  expected true                           actual true                           OK
+
+5) [round 2] field-level @JSONField(serializeFeatures = BeanToArray) + SortFieldNamesAlphabetically
+   asm JSON  field, Sort...                     expected {"transfer":[1001,2002,300],"transfers":[{"to":1001,"from":2002,"amount":300}]} actual {"transfer":[1001,2002,300],"transfers":[{"to":1001,"from":2002,"amount":300}]} OK
+   asm JSONB field, Sort...                     expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+   reflect JSON  field, Sort...                 expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+   reflect JSONB field, Sort...                 expected {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} actual {"transfer":[1001,2002,300],"transfers":[[1001,2002,300]]} OK
+
+6) [round 2] canConvertToInt/Long on decimals just outside the range (jackson DecimalNode/DoubleNode: false)
+   canConvertToInt(2147483647.5)                expected false                          actual false                          OK
+   canConvertToInt(-2147483648.5)               expected false                          actual false                          OK
+   canConvertToLong(9223372036854775807.5)      expected false                          actual false                          OK
+
+7) [round 2] canConvertToInt cost on BigDecimal 1E+10000000 carried by an 11-byte JSONB payload
+   payload 11 bytes -> canConvertToInt = false in 1 ms OK
+
+8) [round 3] writer registered via ObjectWriters.objectWriter(...) is replaced under SortFieldNamesAlphabetically
+   toJSONString(credentials)                    expected {"name":"alice","password":"***"} actual {"name":"alice","password":"***"} OK
+   toJSONString(credentials, Sort...)           expected {"name":"alice","password":"***"} actual {"name":"alice","password":"***"} OK
+   toJSONString(profile, Sort...)               expected {"login":{"name":"alice","password":"***"}} actual {"login":{"name":"alice","password":"***"}} OK
+
+9) [round 3] new public JSONReader#readObject(long) on a JSONB reader
+   JSONReader.ofJSONB(bytes).readObject()       expected {"a":1}                        actual {"a":1}                        OK
+   JSONReader.ofJSONB(bytes).readObject(0L)     expected {"a":1}                        actual {"a":1}                        OK
+
+10) [round 3] JSONObject.from: an owner's @JSONType(serializeFeatures = WriteNulls) reaches its items
+   toJSONString(report)                         expected {"rows":[{"rank":1}],"title":null} actual {"rows":[{"rank":1}],"title":null} OK
+   JSONObject.from(report) (printed with WriteNulls) expected {"rows":[{"rank":1}],"title":null} actual {"rows":[{"rank":1}],"title":null} OK
+
+11) [round 4] filter registered with JSON.register(Class, Filter) under SortFieldNamesAlphabetically
+   toJSONString(member)                         expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+   toJSONString(member, Sort...)                expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+   toJSONString(team, Sort...)                  expected {"owner":{"id":7,"name":"alice","password":"***"}} actual {"owner":{"id":7,"name":"alice","password":"***"}} OK
+
+12) [round 4] registered ObjectWriters adapter that carries a filter, under SortFieldNamesAlphabetically
+   toJSONString(key, ctx)                       expected {"label":"ci"}                 actual {"label":"ci"}                 OK
+   toJSONString(key, ctx + Sort)                expected {"label":"ci"}                 actual {"label":"ci"}                 OK
+
+13) [round 4] JSONObject.from(obj, WriteLongAsString): values inside collections vs top-level
+   JSONObject.from(ledger)                      expected {"id":9007199254740993,"refs":[1,9007199254740993]} actual {"id":9007199254740993,"refs":[1,9007199254740993]} OK
+   JSONObject.from(ledger, WriteLongAsString)   expected {"id":9007199254740993,"refs":[1,9007199254740993]} actual {"id":9007199254740993,"refs":[1,9007199254740993]} OK
+
+14) [round 5] registered reflective writer with a bean-array field: both variants share the item cache
+   toJSONString(board, ctx + Sort)  (1st write) expected {"pins":[{"apple":1,"zebra":3}],"zulu":9} actual {"pins":[{"apple":1,"zebra":3}],"zulu":9} OK
+   toJSONString(board, ctx)         (no feature) expected {"zulu":9,"pins":[{"zebra":3,"apple":1}]} actual {"zulu":9,"pins":[{"zebra":3,"apple":1}]} OK
+   toJSONString(board, ctx)         (1st write) expected {"zulu":9,"pins":[{"zebra":3,"apple":1}]} actual {"zulu":9,"pins":[{"zebra":3,"apple":1}]} OK
+   toJSONString(board, ctx + Sort)              expected {"pins":[{"apple":1,"zebra":3}],"zulu":9} actual {"pins":[{"apple":1,"zebra":3}],"zulu":9} OK
+
+15) [round 5] @JSONField(serializeFeatures = BeanToArray) on a bean array, reflective creator
+   toJSONString(batch, ctx)                     expected {"transfers":[[1001,2002,300]]} actual {"transfers":[[1001,2002,300]]} OK
+   toJSONString(batch, ctx + Sort)              expected {"transfers":[[1001,2002,300]]} actual {"transfers":[[1001,2002,300]]} OK
+
+16) [round 6] natural and sorted writer created concurrently; a filter is set on the natural one meanwhile
+    (replayed in a fixed order: B = first sorted write, A = getObjectWriter(type).setFilter(mask), C = sorted write after both)
+   C: sorted write after setFilter returned (asm) expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+   later sorted write (asm)                     expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+   C: sorted write after setFilter returned (reflect) expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+   later sorted write (reflect)                 expected {"id":7,"name":"alice","password":"***"} actual {"id":7,"name":"alice","password":"***"} OK
+
+17) [round 6, 82514ab10] a class initializer that serializes while another thread creates a writer (default path)
+   first write of a bean whose ctor needs the class expected completed                      actual completed                      OK
+   first write of a bean with an enum field     expected completed                      actual completed                      OK
+
+18) [round 6, c47a3cf51] non-String map keys with a context date format and a filter (default path)
+   Date keys, dateFormat + no-op PropertyFilter expected {"byDate":{"1970/01/02":"a"},"byLocalDate":{"2026/10/06":"b"},"byLocalDateTime":{"2026/10/06":"c"}} actual {"byDate":{"1970/01/02":"a"},"byLocalDate":{"2026/10/06":"b"},"byLocalDateTime":{"2026/10/06":"c"}} OK
+   bean key, context ValueFilter masks password expected {"m":{"{\"password\":\"***\",\"user\":\"u\"}":"v"}} actual {"m":{"{\"password\":\"***\",\"user\":\"u\"}":"v"}} OK

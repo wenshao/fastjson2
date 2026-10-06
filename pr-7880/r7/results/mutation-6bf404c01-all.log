@@ -1,0 +1,33 @@
+=== mutation: none (mvn rc=0)
+  tests=113 failed=0
+=== mutation: creator-in-lock (mvn rc=1)
+  tests=113 failed=2
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+=== mutation: nolock (mvn rc=1)
+  tests=113 failed=1
+   FAIL ObjectWriterProviderVariantRaceTest.filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter
+=== mutation: link-after-publish (mvn rc=1)
+  tests=113 failed=1
+   FAIL ObjectWriterProviderVariantRaceTest.filterOnExistingNaturalWriterIsCopiedBeforeSortedPublication
+=== mutation: no-link (mvn rc=1)
+  tests=113 failed=5
+   FAIL ObjectWriterProviderVariantRaceTest.filterOnExistingNaturalWriterIsCopiedBeforeSortedPublication
+   FAIL ObjectWriterProviderVariantRaceTest.filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter
+   FAIL SortFieldNamesRegistryTest.counterpartAndFilterAfterInitialLookupStillMaskLaterHits
+   FAIL SortFieldNamesRegistryTest.filtersVisibleOnConcurrentFirstSortedWrites
+   FAIL SortFieldNamesRegistryTest.typeFiltersApplyToSortedVariant
+=== mutation: key-new-context (mvn rc=1)
+  tests=113 failed=3
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysGoThroughTheContextFilters
+=== mutation: sorted-key-new-context (mvn rc=1)
+  tests=113 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedKeysKeepTheContextDateFormat
+=== mutation: no-sorted-key-branch (mvn rc=1)
+  tests=113 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysAreTheRootOfTheirReferences
+=== mutation: no-root (mvn rc=1)
+  tests=113 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysAreTheRootOfTheirReferences

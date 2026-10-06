@@ -1,0 +1,116 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v9.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[A] JSONReader.Feature.ErrorOnDuplicateKeys
+  DIFF A.dup    POJO target (StrictBean) | simple duplicate    fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | first occurrence null fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  DIFF A.dup    POJO target (StrictBean) | escaped duplicate (\u0069d == id) fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]
+  -> duplicate-key differential vs jackson STRICT_DUPLICATE_DETECTION: 110/113 agree
+  INFO A.dup    differential agreement                         110/113 combinations agree with jackson
+  INFO A.dup    with IgnoreNullPropertyValue {a:null,a:1}      dup-error (null skipped before detection)
+  DIFF A.dup    JSONB input {a:1,a:2} + ErrorOnDuplicateKeys   -> ok  (JSONB reader is outside the feature's scope; DuplicateKeyValueAsArray is ignored there too: ok:{"a":2})
+
+[B1] SortFieldNamesAlphabetically: shape x creator x base-features x sequence x channel matrix
+  -> 1224 scenarios, 4896 serializations, 0 wrong-order outputs
+
+[B2] SortFieldNamesAlphabetically semantics
+
+[B3] BeanToArray positional output must never be reordered
+
+[B4] ObjectWriterProvider maintenance APIs vs the new sorted caches
+
+[B5] cleanup(ClassLoader) releases a hot-reloaded class loader
+
+[B6] concurrent mixed sorted/unsorted writes on one provider
+
+[B7] canonical JSON / digest parity with jackson
+  INFO B7       default output (for contrast)                  {"zId":"o-1","amount":100,"items":[{"z":1,"a":"x","m":true},{"z":1,"a":"x","m":true}],"meta":{"zeta":1,"alpha":{"y":2,"b":3}},"inner":{"z":1,"a":"x","m":true},"currency":"CNY"}
+  INFO B7       canonical output                               {"amount":100,"currency":"CNY","inner":{"a":"x","m":true,"z":1},"items":[{"a":"x","m":true,"z":1},{"a":"x","m":true,"z":1}],"meta":{"alpha":{"b":3,"y":2},"zeta":1},"zId":"o-1"}  sha256=6500a713bea3e2fb686ecc335ec4139fe559cd093ccac158ff2f9dc6c42a779e
+
+[C] JSONObject/JSONArray helpers
+  INFO C.deep   non-JSONObject Map value (HashMap) is shared, not copied same instance=true (documented)
+  INFO C.deep   self-referencing object                        fastjson2=ok jackson=error:StackOverflowError (same behavior)
+  INFO C.req    required("id", Long.class) on {"id":1}         error:required value not of type java.lang.Long : id  (no numeric widening; {"big":12345678901} as Long -> ok; getLong/getObject would convert)
+  INFO C.req    jackson required(): explicit null / missing    null -> ok:NULL, missing -> error:IllegalArgumentException (fastjson2 rejects explicit null; stricter, documented)
+  DIFF C.conv   canConvertTo*(put Float 2.1474836E9)           fastjson2 false/true, jackson FloatNode true/true (jackson float rounding quirk)
+
+[D] native any-setter (@JSONField(unwrapped=true) on (String,Object) method)
+  INFO D        any-setter bean + ErrorOnUnknownProperties     ok:{"x":1}
+
+[E] feature mask uniqueness
+
+[F1] writers registered via ObjectWriters.objectWriter(...) under the feature
+  INFO F1       omitting adapter WITH feature: key order       {"id":7,"name":"alice"}
+
+[F2] field-writer gates in the sorted path
+
+[F3] JSONReader#readObject(long)
+  INFO F3       readObject(long) is public                     public java.util.Map com.alibaba.fastjson2.JSONReader.readObject(long)
+
+[F4] ErrorOnDuplicateKeys: seen-set semantics and propagation
+  DIFF F4       @JSONField strict, object inside array: DList [..] {"payload":[{"z":1,"z":2}]} -> annotation accepted verify.Round3$DList@49b2a47d, per-call rejected
+
+[F5] deepCopy on cyclic and shared trees
+  INFO F5       one instance referenced twice                  copy.l == copy.r: true, copy.l != source: true
+
+[F6] JSONObject.from / JSON.toJSON match toJSONString
+
+[F7] root-writer resolution in JSON.toJSONBytes overloads
+  INFO F7       toJSONBytes(charset, FieldBased) (feature off) toJSONString={"x":1} toJSONBytes(charset)={"x":1}
+
+[F8] cleanup(ClassLoader): sorted writers of a parent-loader holder
+  INFO F8       natural variant                                a parent-loader holder pins the child loader on main too (pre-existing, not checked here)
+
+[G1] writer filters under the feature
+  INFO G1       JSON.register(Class, ValueFilter): JSONB natural (pre-existing, filters not applied to JSONB) {"id":7,"name":"alice","password":"hunter2"}
+  INFO G1       GA2 written sorted before the filter           {"id":7,"name":"alice","password":"hunter2"}
+  INFO G1       provider.getObjectWriter(T).setFilter: JSONB natural (pre-existing, filters not applied to JSONB) {"id":7,"name":"alice","password":"hunter2"}
+
+[G2] JSONObject.from(obj, features): value-format features (as on main, not applied to the tree)
+  INFO G2       from(rec)                                      {"amount":1E+2,"amounts":[100.0],"color":"RED","colors":["RED"],"id":9007199254740993,"ids":[1,9007199254740993],"rows":[{"n":5}],"zero":0,"zeros":[0]}
+
+[G3] JSON.toJSON(Object, long) at the root vs the Feature... overload
+  INFO G3       tree helper                                    ObjectWriterAdapter.toJSON(Object, long) (package-private)
+
+[G4] API surface
+  INFO G4       JSONReader.readObject(long) modifiers          public
+
+[H1] registered writers: natural and sorted variants share field writers (U-S-U-S, S-U-S-U; JSON, UTF-8, JSONB)
+  INFO H1       registered ASM writers under the feature       served as registered (field order not sorted), by design since round 2
+
+[H2] registered writer already in alphabetical order (same instance in both cells): a sorted write first
+
+[H3] field-level @JSONField(serializeFeatures = BeanToArray) on a bean array, reflective creator
+  INFO H3       natural                                        {"arr":[[1001,2002,300]]}
+  INFO H3       ASM creator, natural (field BeanToArray not applied to array items, as on main) {"arr":[{"to":1001,"from":2002,"amount":300}]}
+
+[H4] tree conversion with global defaults (JSON.config)
+
+[H5] API surface
+
+[I1] one registered writer, 3 sorted cells, 4 filter kinds, filter set after / before / cleared
+
+[I2] weak links
+
+[I3] publication order (a test provider pauses one thread inside the cache lookups)
+
+[I3] unpaced stress
+
+[I4] tree helper: toJSON(obj, f.mask) vs JSON.toJSON(obj, f) for every Feature
+
+[J1] writer creation vs a class initializer that serializes (default path, no features)
+
+[J2] non-String map keys and the caller's context (date format, filters)
+
+[K1] field-level sorted bean keys are the root of their own references (ReferenceDetection)
+  FAIL K1       ObjectWriterCreatorASM: key equals the key written with the sort feature on the context field-level {"first":{"a":1},"password":"hunter2","second":{"$ref":"first"},"zeta":"z"}  context {"first":{"a":1},"password":"hunter2","second":{"$ref":"$.first"},"zeta":"z"}
+
+[K2] field-level sorted keys keep the caller's context (date format, filters)
+
+[K3] field-level sort selects the key's sorted writer; the default branch is main's
+
+
+SUMMARY  PASS=420  FAIL=1  DIFF=6  INFO=23  (java 21.0.12)

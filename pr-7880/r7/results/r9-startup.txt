@@ -1,0 +1,7 @@
+# probe7/src/g/Startup.java: first write of 400 bean types (gen_beans.py), JDK 21, taskset 0-3; JVMs interleaved main/v8/v9, 6 each
+threads=1 main ms: 542 544 549 472 549 477
+threads=1 v8 ms: 478 536 543 548 552 477
+threads=1 v9 ms: 493 542 490 488 479 478
+threads=4 main ms: 428 377 399 441 389 408
+threads=4 v8 ms: 469 484 511 484 566 539
+threads=4 v9 ms: 445 402 410 433 406 419

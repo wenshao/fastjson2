@@ -1,0 +1,17 @@
+# 6bf404c01 vs the round-6 suggested patch (fix-r6.diff applied to 07faf7789 in wt-fix8)
+$ git diff --stat 07faf7789 6bf404c01
+  .../fastjson2/writer/ObjectWriterImplMap.java      |  18 +-
+  .../fastjson2/writer/ObjectWriterProvider.java     |  26 ++-
+  .../fastjson2/writer/MapKeyContextTest.java        |  50 +++++
+  .../ObjectWriterProviderCreationLockTest.java      | 136 ++++++++++++++
+  .../ObjectWriterProviderVariantRaceTest.java       | 207 +++++++++++++++++++++
+  5 files changed, 420 insertions(+), 17 deletions(-)
+$ sha1sum <file in patched tree> <file at 6bf404c01>
+  4ad9f90676bb 4ad9f90676bb same  ObjectWriterImplMap.java
+  84e3bcea4926 84e3bcea4926 same  ObjectWriterProvider.java
+  4590e687a360 4590e687a360 same  MapKeyContextTest.java
+  7ec090887746 7ec090887746 same  ObjectWriterProviderCreationLockTest.java
+  aa9016337724 aa9016337724 same  ObjectWriterProviderVariantRaceTest.java
+$ git diff 6bf404c01 -- . (patched worktree): 0 files differ
+$ unzip both core jars; diff -r   # mvn -pl core package, same JDK 25 / Maven
+  entries: 777 (770 classes); differing: 0

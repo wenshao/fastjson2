@@ -1,0 +1,48 @@
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 8112, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 56, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 98, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 1355, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] Tests run: 60, Failures: 0, Errors: 0, Skipped: 0
+[INFO] You have 0 Checkstyle violations.
+[INFO] Reactor Summary for fastjson2-parent 2.0.66-SNAPSHOT:
+[INFO] fastjson2-parent ................................... SUCCESS [  0.984 s]
+[INFO] fastjson2 .......................................... SUCCESS [ 53.641 s]
+[INFO] fastjson2-extension ................................ SUCCESS [  4.651 s]
+[INFO] fastjson2-benchmark ................................ SUCCESS [  7.463 s]
+[INFO] fastjson2-extension-solon .......................... SUCCESS [  9.984 s]
+[INFO] example-solon-test ................................. SUCCESS [  0.813 s]
+[INFO] fastjson2-extension-spring5 ........................ SUCCESS [  5.269 s]
+[INFO] example-spring-test ................................ SUCCESS [  0.842 s]
+[INFO] fastjson2-extension-jaxrs .......................... SUCCESS [  0.027 s]
+[INFO] fastjson2-extension-jaxrs-javax .................... SUCCESS [  2.084 s]
+[INFO] fastjson1-compatible ............................... SUCCESS [ 18.045 s]
+[INFO] fastjson2-kotlin ................................... SUCCESS [  3.602 s]
+[INFO] safemode-test ...................................... SUCCESS [  1.449 s]
+[INFO] test-jdk25 ......................................... SUCCESS [  1.256 s]
+[INFO] fastjson2-benchmark_25 ............................. SUCCESS [  0.421 s]
+[INFO] fastjson2-extension-spring6 ........................ SUCCESS [  3.253 s]
+[INFO] example-spring6-test ............................... SUCCESS [  0.250 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  01:54 min
+rc=0

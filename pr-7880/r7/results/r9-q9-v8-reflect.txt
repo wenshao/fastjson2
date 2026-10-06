@@ -1,0 +1,9 @@
+ReferenceDetection, distinct Inner, no field sort    -> {"m":{{"alpha":"a","first":{"a":1},"password":"hunter2","second":{"a":1},"zeta":"z"}:"v"}}
+ReferenceDetection, distinct Inner, field-level sort -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}":"v"}}
+no features,        distinct Inner, field-level sort -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}":"v"}}
+ReferenceDetection, shared Inner, no field sort    -> {"m":{{"alpha":"a","first":{"a":1},"password":"hunter2","second":{"$ref":"$.m.first"},"zeta":"z"}:"v"}}
+ReferenceDetection, shared Inner, field-level sort -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}":"v"}}
+no features,        shared Inner, field-level sort -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}":"v"}}
+masking ValueFilter, field-level sort             -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}":"v"}}
+dateFormat + PropertyFilter, field-level sort     -> {"byDay":{"2026-10-06":"v"}}
+context sort + ReferenceDetection, shared Inner   -> {"m":{"{\"alpha\":\"a\",\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}":"v"}}

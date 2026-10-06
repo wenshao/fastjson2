@@ -1,0 +1,1 @@
+6bf404c01 run the bean creator outside the variant lock and keep map keys on the caller's context
