@@ -1,0 +1,24 @@
+v5 asm rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=88 unconverged-rounds=0
+v5 reflect rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=15 unconverged-rounds=0
+v6 Exception in thread "main" java.util.concurrent.ExecutionException: com.alibaba.fastjson2.JSONException: JSON#toJSONString cannot serialize 'p.Race6$Account@51e8eb1c'
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:205)
+	at p.Race6.main(Race6.java:59)
+Caused by: com.alibaba.fastjson2.JSONException: JSON#toJSONString cannot serialize 'p.Race6$Account@51e8eb1c'
+	at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3264)
+	at p.Race6.lambda$main$2(Race6.java:46)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.NullPointerException: Cannot invoke "java.lang.ref.WeakReference.get()" because "linked" is null
+	at com.alibaba.fastjson2.writer.ObjectWriterAdapter.linkSortedVariant(ObjectWriterAdapter.java:253)
+	at com.alibaba.fastjson2.writer.ObjectWriterProvider.linkSortedVariant(ObjectWriterProvider.java:853)
+	at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:830)
+	at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:668)
+	at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+	at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3259)
+	... 5 more
+v6 reflect rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0
+fix6 asm rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0
+fix6 reflect rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0

@@ -1,0 +1,113 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.featureWriteBasketArr100Sorted
+
+# Run progress: 0.00% complete, ETA 00:00:27
+# Fork: 1 of 1
+# Warmup Iteration   1: 139.267 ops/ms
+# Warmup Iteration   2: 157.309 ops/ms
+# Warmup Iteration   3: 157.892 ops/ms
+# Warmup Iteration   4: 155.847 ops/ms
+Iteration   1: 156.539 ops/ms
+Iteration   2: 155.959 ops/ms
+Iteration   3: 158.353 ops/ms
+Iteration   4: 158.763 ops/ms
+Iteration   5: 158.722 ops/ms
+
+
+Result "bench.Bench7880.featureWriteBasketArr100Sorted":
+  157.667 ±(99.9%) 5.085 ops/ms [Average]
+  (min, avg, max) = (155.959, 157.667, 158.763), stdev = 1.320
+  CI (99.9%): [152.583, 162.752] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.featureWriteList100Sorted
+
+# Run progress: 33.33% complete, ETA 00:00:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 135.740 ops/ms
+# Warmup Iteration   2: 152.095 ops/ms
+# Warmup Iteration   3: 152.940 ops/ms
+# Warmup Iteration   4: 152.080 ops/ms
+Iteration   1: 152.600 ops/ms
+Iteration   2: 152.342 ops/ms
+Iteration   3: 153.342 ops/ms
+Iteration   4: 152.976 ops/ms
+Iteration   5: 153.315 ops/ms
+
+
+Result "bench.Bench7880.featureWriteList100Sorted":
+  152.915 ±(99.9%) 1.693 ops/ms [Average]
+  (min, avg, max) = (152.342, 152.915, 153.342), stdev = 0.440
+  CI (99.9%): [151.221, 154.608] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench.Bench7880.featureWriteOrderSorted
+
+# Run progress: 66.67% complete, ETA 00:00:09
+# Fork: 1 of 1
+# Warmup Iteration   1: 517.066 ops/ms
+# Warmup Iteration   2: 613.291 ops/ms
+# Warmup Iteration   3: 621.560 ops/ms
+# Warmup Iteration   4: 620.867 ops/ms
+Iteration   1: 621.884 ops/ms
+Iteration   2: 617.253 ops/ms
+Iteration   3: 626.212 ops/ms
+Iteration   4: 625.514 ops/ms
+Iteration   5: 626.258 ops/ms
+
+
+Result "bench.Bench7880.featureWriteOrderSorted":
+  623.424 ±(99.9%) 14.990 ops/ms [Average]
+  (min, avg, max) = (617.253, 623.424, 626.258), stdev = 3.893
+  CI (99.9%): [608.434, 638.415] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:28
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                  Mode  Cnt    Score    Error   Units
+Bench7880.featureWriteBasketArr100Sorted  thrpt    5  157.667 ±  5.085  ops/ms
+Bench7880.featureWriteList100Sorted       thrpt    5  152.915 ±  1.693  ops/ms
+Bench7880.featureWriteOrderSorted         thrpt    5  623.424 ± 14.990  ops/ms
+
+Benchmark result is saved to <work>/env/jmh/ab-r7feat/v8-r2.json

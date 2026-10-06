@@ -1,0 +1,91 @@
+=== mutation: none (mvn rc=1)
+  tests=110 failed=4
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+=== mutation: nolock (mvn rc=1)
+  tests=110 failed=3
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderVariantRaceTest.filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter
+=== mutation: readarray (mvn rc=1)
+  tests=110 failed=7
+   FAIL ErrorOnDuplicateKeysTest.annotationDrivenStrictnessCrossesArrays
+   FAIL ErrorOnDuplicateKeysTest.readObjectPerCallFeatures
+   FAIL ErrorOnDuplicateKeysTest.readObjectWordCrossesArrays
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+=== mutation: dup-type (mvn rc=1)
+  tests=110 failed=6
+   FAIL ErrorOnDuplicateKeysTest.duplicatedTypeDiscriminatorRejected
+   FAIL ErrorOnDuplicateKeysTest.duplicatedTypeDiscriminatorRejectedTypedMap
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+=== mutation: map-typed (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.mapFieldKeepsTypedResolutionUnderWriteClassName
+=== mutation: mixin (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesRegistryTest.mixInAfterWarmupAppliesToFieldBasedVariantsToo
+=== mutation: proxy (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesRegistryTest.fieldBasedSortedProxyKeepsFields
+=== mutation: tree-reresolve (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.treeConversionReResolvesByRuntimeTypeUnderSortedVariant
+=== mutation: unwrapped (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.unwrappedTreeMatchesStringOutput
+=== mutation: contentas (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesContentAsResolution
+=== mutation: canconvert (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: keycontext (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.fieldAnnotationSortsEveryFieldShape
+=== mutation: collection-merge (mvn rc=1)
+  tests=110 failed=5
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+   FAIL SortFieldNamesAlphabeticallyTest.fieldAnnotationSortsEveryFieldShape

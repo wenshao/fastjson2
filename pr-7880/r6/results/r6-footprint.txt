@@ -1,0 +1,5 @@
+# shallow size of a bean writer for class Bean { int id; String name; } (+lock = plus the linkedVariantsLock object), Instrumentation.getObjectSize, JDK 21, compressed oops
+main: reflect ObjectWriter2 shallow=120 +lock=120 | asm shallow=120 +lock=120
+v5: reflect ObjectWriter2 shallow=120 +lock=120 | asm shallow=120 +lock=120
+v6: reflect ObjectWriter2 shallow=128 +lock=144 | asm shallow=128 +lock=144
+fix6: reflect ObjectWriter2 shallow=128 +lock=144 | asm shallow=128 +lock=144

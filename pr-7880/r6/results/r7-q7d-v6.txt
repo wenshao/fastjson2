@@ -1,0 +1,131 @@
+jar fastjson2-v6.jar
+asm [] json : {"list":[{"zebra":3,"hidden":4,"mid":5}],"map":{"k":{"zebra":3,"hidden":4,"mid":5}},"single":{"zebra":3,"hidden":4,"mid":5}}
+asm [] jsonb: {
+	"list":[
+		{
+			"zebra":3,
+			"hidden":4,
+			"mid":5
+		}
+	],
+	"map":{
+		"k":{
+			"zebra":3,
+			"hidden":4,
+			"mid":5
+		}
+	},
+	"single":{
+		"zebra":3,
+		"hidden":4,
+		"mid":5
+	}
+}
+asm [BeanToArray] json : [[[3,4,5]],{"k":[3,4,5]},[3,4,5]]
+asm [BeanToArray] jsonb: [
+	[
+		[
+			4,
+			5,
+			3
+		]
+	],
+	{
+		"k":{
+			"zebra":3,
+			"hidden":4,
+			"mid":5
+		}
+	},
+	[
+		3,
+		4,
+		5
+	]
+]
+asm [WriteNulls] json : {"list":[{"zebra":3,"hidden":4,"mid":5}],"map":{"k":{"zebra":3,"hidden":4,"mid":5}},"single":{"zebra":3,"hidden":4,"mid":5}}
+asm [WriteNulls] jsonb: {
+	"list":[
+		{
+			"zebra":3,
+			"hidden":4,
+			"mid":5
+		}
+	],
+	"map":{
+		"k":{
+			"zebra":3,
+			"hidden":4,
+			"mid":5
+		}
+	},
+	"single":{
+		"zebra":3,
+		"hidden":4,
+		"mid":5
+	}
+}
+reflect [] json : {"list":[{"hidden":4,"mid":5,"zebra":3}],"map":{"k":{"hidden":4,"mid":5,"zebra":3}},"single":{"hidden":4,"mid":5,"zebra":3}}
+reflect [] jsonb: {
+	"list":[
+		{
+			"hidden":4,
+			"mid":5,
+			"zebra":3
+		}
+	],
+	"map":{
+		"k":{
+			"hidden":4,
+			"mid":5,
+			"zebra":3
+		}
+	},
+	"single":{
+		"hidden":4,
+		"mid":5,
+		"zebra":3
+	}
+}
+reflect [BeanToArray] json : [[[4,5,3]],{"k":[3,5]},[3,5]]
+reflect [BeanToArray] jsonb: [
+	[
+		[
+			4,
+			5,
+			3
+		]
+	],
+	{
+		"k":{
+			"zebra":3,
+			"mid":5
+		}
+	},
+	[
+		3,
+		5
+	]
+]
+reflect [WriteNulls] json : {"list":[{"hidden":4,"mid":5,"zebra":3}],"map":{"k":{"hidden":4,"mid":5,"zebra":3}},"single":{"hidden":4,"mid":5,"zebra":3}}
+reflect [WriteNulls] jsonb: {
+	"list":[
+		{
+			"hidden":4,
+			"mid":5,
+			"zebra":3
+		}
+	],
+	"map":{
+		"k":{
+			"hidden":4,
+			"mid":5,
+			"zebra":3
+		}
+	},
+	"single":{
+		"hidden":4,
+		"mid":5,
+		"zebra":3
+	}
+}

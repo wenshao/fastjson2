@@ -1,0 +1,6 @@
+threads=1 main ms: 475 476 547 547 544 549
+threads=1 v8 ms: 559 547 477 477 466 543
+threads=1 fix8 ms: 549 548 541 555 542 469
+threads=4 main ms: 411 403 381 407 431 426
+threads=4 v8 ms: 488 555 504 552 533 544
+threads=4 fix8 ms: 397 381 431 404 417 411

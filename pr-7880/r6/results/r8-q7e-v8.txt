@@ -1,0 +1,5 @@
+jar fastjson2-v8.jar
+dateFormat only           : {"byDate":{"1970/01/02":"a"},"byLocalDate":{"2026/10/06":"b"},"byLocalDateTime":{"2026/10/06":"c"},"when":"1970/01/02"}
+dateFormat + no-op filter : {"byDate":{"1970-01-02 08:00:00":"a"},"byLocalDate":{"2026-10-06":"b"},"byLocalDateTime":{"2026-10-06 01:02:03":"c"},"when":"1970/01/02"}
++ WriteNonStringKeyAsString: {"byDate":{"1970-01-02 08:00:00":"a"},"byLocalDate":{"2026-10-06":"b"},"byLocalDateTime":{"2026-10-06 01:02:03":"c"},"when":"1970/01/02"}
+utf8 dateFormat + filter  : {"byDate":{"1970-01-02 08:00:00":"a"},"byLocalDate":{"2026-10-06":"b"},"byLocalDateTime":{"2026-10-06 01:02:03":"c"},"when":"1970/01/02"}

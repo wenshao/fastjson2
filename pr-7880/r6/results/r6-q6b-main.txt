@@ -1,0 +1,9 @@
+fastjson2 jar: fastjson2-main.jar
+R2-1 polymorphic field, tree conversion
+  cold JSONObject.from(h)                                    {"data":{"zebra":3}}
+  toJSONString(h2) then JSONObject.from(h2)                  {"data":{"zebra":3,"apple":1}}
+R2-33 proxy, FieldBased
+  warm target FB, then proxy FB                              {"hidden":42,"name":"n"}
+R2-12 mixIn after first write (natural mode with a class mixin)
+  mode natural                                               {"apple":1,"zebra":3} -> {"apple":1}
+  mode FieldBased                                            {"apple":1,"zebra":3} -> {"apple":1,"zebra":3}

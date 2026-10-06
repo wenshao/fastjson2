@@ -1,0 +1,73 @@
+# probe6/p/Deadlock7.java, JDK 21, default provider, no features; HUNG = both threads still blocked after 10 s
+fastjson2-main.jar ctor creator=asm: completed
+fastjson2-main.jar ctor creator=reflect: completed
+fastjson2-main.jar enum creator=asm: completed
+fastjson2-main.jar enum creator=reflect: completed
+fastjson2-v6.jar ctor creator=asm: completed
+fastjson2-v6.jar ctor creator=reflect: completed
+fastjson2-v6.jar enum creator=asm: completed
+fastjson2-v6.jar enum creator=reflect: completed
+fastjson2-v8.jar ctor creator=asm: HUNG after 10 s
+  A-static-init BLOCKED on java.lang.Object owned by B-serialize
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+      at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3228)
+      at p.Deadlock7$Registry.<clinit>(Deadlock7.java:46)
+      at p.Deadlock7.lambda$main$0(Deadlock7.java:90)
+  B-serialize RUNNABLE
+      at p.Deadlock7$Order.<init>(Deadlock7.java:59)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.setDefaultValue(ObjectWriterCreator.java:399)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreatorASM.createObjectWriter(ObjectWriterCreatorASM.java:461)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+fastjson2-v8.jar ctor creator=reflect: HUNG after 10 s
+  A-static-init BLOCKED on java.lang.Object owned by B-serialize
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+      at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3228)
+      at p.Deadlock7$Registry.<clinit>(Deadlock7.java:46)
+      at p.Deadlock7.lambda$main$0(Deadlock7.java:90)
+  B-serialize RUNNABLE
+      at p.Deadlock7$Order.<init>(Deadlock7.java:59)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.setDefaultValue(ObjectWriterCreator.java:399)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.createObjectWriter(ObjectWriterCreator.java:670)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+fastjson2-v8.jar enum creator=asm: HUNG after 10 s
+  A-static-init BLOCKED on java.lang.Object owned by B-serialize
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+      at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3228)
+      at p.Deadlock7$Color.<clinit>(Deadlock7.java:74)
+      at p.Deadlock7.lambda$main$0(Deadlock7.java:90)
+  B-serialize RUNNABLE
+      at com.alibaba.fastjson2.util.BeanUtils.getEnumValueField(BeanUtils.java:919)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreatorASM.createFieldWriter(ObjectWriterCreatorASM.java:4489)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.createFieldWriter(ObjectWriterCreator.java:347)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreatorASM.lambda$createObjectWriter$0(ObjectWriterCreatorASM.java:227)
+      at com.alibaba.fastjson2.util.BeanUtils.declaredFields(BeanUtils.java:347)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreatorASM.createObjectWriter(ObjectWriterCreatorASM.java:223)
+fastjson2-v8.jar enum creator=reflect: HUNG after 10 s
+  A-static-init BLOCKED on java.lang.Object owned by B-serialize
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriterInternal(ObjectWriterProvider.java:834)
+      at com.alibaba.fastjson2.writer.ObjectWriterProvider.getObjectWriter(ObjectWriterProvider.java:677)
+      at com.alibaba.fastjson2.JSONWriter$Context.getObjectWriter(JSONWriter.java:3508)
+      at com.alibaba.fastjson2.JSON.toJSONString(JSON.java:3228)
+      at p.Deadlock7$Color.<clinit>(Deadlock7.java:74)
+      at p.Deadlock7.lambda$main$0(Deadlock7.java:90)
+  B-serialize RUNNABLE
+      at com.alibaba.fastjson2.util.BeanUtils.getEnumValueField(BeanUtils.java:919)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.createFieldWriter(ObjectWriterCreator.java:1141)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.createFieldWriter(ObjectWriterCreator.java:347)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.lambda$createObjectWriter$1(ObjectWriterCreator.java:493)
+      at com.alibaba.fastjson2.util.BeanUtils.declaredFields(BeanUtils.java:347)
+      at com.alibaba.fastjson2.writer.ObjectWriterCreator.createObjectWriter(ObjectWriterCreator.java:490)
+fastjson2-fix8.jar ctor creator=asm: completed
+fastjson2-fix8.jar ctor creator=reflect: completed
+fastjson2-fix8.jar enum creator=asm: completed
+fastjson2-fix8.jar enum creator=reflect: completed

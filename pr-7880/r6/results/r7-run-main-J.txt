@@ -1,0 +1,12 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-main.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[J1] writer creation vs a class initializer that serializes (default path, no features)
+
+[J2] non-String map keys and the caller's context (date format, filters)
+
+
+SUMMARY  PASS=4  FAIL=0  DIFF=0  INFO=0  (java 21.0.12)

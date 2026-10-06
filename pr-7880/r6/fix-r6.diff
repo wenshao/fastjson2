@@ -1,0 +1,499 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 775ddb35e..a71c934bb 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -414,9 +414,21 @@ public final class ObjectWriterImplMap
+         }
+ 
+         final JSONWriter.Context context = jsonWriter.getContext();
+-        JSONWriter.Context keyContext = new JSONWriter.Context(context.provider);
+-        keyContext.setFeatures(jsonWriter.getFeatures() | this.features | features);
+-        String str = JSON.toJSONString(key, keyContext);
++        String str;
++        long contextFeatures = context.getFeatures();
++        if (((this.features | features) & ~contextFeatures & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++            str = JSON.toJSONString(key, context);
++        } else {
++            // a field-level sort request selects the key's sorted writer variant; the key is still written
++            // with the caller's context, so its date format and filters apply as for any other key
++            Class<?> keyClass = key.getClass();
++            ObjectWriter keyObjectWriter = context.provider.getObjectWriter(keyClass, keyClass,
++                    contextFeatures | JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
++            try (JSONWriter keyWriter = JSONWriter.of(context)) {
++                keyObjectWriter.write(keyWriter, key, null, null, 0);
++                str = keyWriter.toString();
++            }
++        }
+         if (str != null) {
+             final int length = str.length();
+             if (length > 1) {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 3f41b249b..dd39ba003 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -70,9 +70,11 @@ public class ObjectWriterProvider
+     final ConcurrentMap<Type, ObjectWriter> cacheFieldNamesSortedFieldBased = new ConcurrentHashMap<>();
+ 
+     /**
+-     * Serializes writer creation with filter-link initialization: a cache hit must never see a variant
+-     * before the filters of its counterpart variant were applied to it. Only the creation path takes it,
+-     * so hot cache-hit reads stay lock-free.
++     * Makes the counterpart lookup, filter-link initialization and publication of a newly created writer one
++     * step: a cache hit never sees a variant before the filters of its counterpart variant were applied to it,
++     * and of two variants created concurrently the later one always finds the earlier. The creator runs outside
++     * it, because it runs user code (default constructors, enum and class initializers) that may itself
++     * serialize; hot cache-hit reads never take it.
+      */
+     private final Object createLock = new Object();
+     final ConcurrentMap<Class, Class> mixInCache = new ConcurrentHashMap<>();
+@@ -830,24 +832,20 @@ public class ObjectWriterProvider
+ 
+         if (objectWriter == null) {
+             ObjectWriterCreator creator = getCreator();
++            objectWriter = creator.createObjectWriter(
++                    objectClass,
++                    (fieldBased ? JSONWriter.Feature.FieldBased.mask : 0)
++                            | (fieldNamesSorted ? JSONWriter.Feature.SortFieldNamesAlphabetically.mask : 0),
++                    this
++            );
+             synchronized (createLock) {
+-                objectWriter = creator.createObjectWriter(
+-                        objectClass,
+-                        (fieldBased ? JSONWriter.Feature.FieldBased.mask : 0)
+-                                | (fieldNamesSorted ? JSONWriter.Feature.SortFieldNamesAlphabetically.mask : 0),
+-                        this
+-                );
+                 // link before publication: a cache hit by another thread must never see the writer
+                 // without the filters its counterpart variant carries
+                 linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
+                 ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-
+                 if (previous != null) {
+                     objectWriter = previous;
+                 }
+-                // reconcile: the counterpart variant may have been published after the pre-publication
+-                // lookup, so two writers created concurrently are linked by at least the later attempt
+-                linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
+             }
+         }
+         return objectWriter;
+@@ -856,7 +854,7 @@ public class ObjectWriterProvider
+     /**
+      * Links a newly created bean writer with the other field-order variant of the same type, so a filter set on
+      * the natural writer (for example by {@code JSON.register(Class, Filter)}) also applies to the sorted one.
+-     * Idempotent: the reconciling second call in the create path adds nothing twice.
++     * Called under {@code createLock}, so whichever variant is published second is linked before it is visible.
+      */
+     private void linkSortedVariant(Type objectType, boolean fieldBased, boolean fieldNamesSorted, ObjectWriter objectWriter) {
+         ObjectWriter other = cacheOf(fieldBased, !fieldNamesSorted).get(objectType);
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+new file mode 100644
+index 000000000..ff83e5eb0
+--- /dev/null
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+@@ -0,0 +1,50 @@
++package com.alibaba.fastjson2.writer;
++
++import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONWriter;
++import com.alibaba.fastjson2.filter.PropertyFilter;
++import com.alibaba.fastjson2.filter.ValueFilter;
++import org.junit.jupiter.api.Test;
++
++import java.time.LocalDate;
++import java.util.Collections;
++import java.util.LinkedHashMap;
++import java.util.Map;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++/**
++ * Non-String map keys are written with the caller's context, so its date format and filters apply to them as
++ * they do to values; a context with filters takes the filtering write path, which serializes such keys separately.
++ */
++public class MapKeyContextTest {
++    public static class Dated {
++        public Map<LocalDate, String> byDay = new LinkedHashMap<>(Collections.singletonMap(LocalDate.of(2026, 10, 6), "v"));
++        public LocalDate day = LocalDate.of(2026, 10, 6);
++    }
++
++    @Test
++    public void dateKeysKeepTheContextFormatWhenFiltersAreSet() {
++        JSONWriter.Context context = new JSONWriter.Context();
++        context.setDateFormat("yyyy/MM/dd");
++        context.configFilter((PropertyFilter) (object, name, value) -> true);
++        assertEquals("{\"byDay\":{\"2026/10/06\":\"v\"},\"day\":\"2026/10/06\"}", JSON.toJSONString(new Dated(), context));
++    }
++
++    public static class Secret {
++        public String password = "hunter2";
++        public String user = "u";
++    }
++
++    public static class KeyedBySecret {
++        public Map<Secret, String> m = new LinkedHashMap<>(Collections.singletonMap(new Secret(), "v"));
++    }
++
++    @Test
++    public void beanKeysGoThroughTheContextFilters() {
++        JSONWriter.Context context = new JSONWriter.Context();
++        context.configFilter((ValueFilter) (object, name, value) -> "password".equals(name) ? "***" : value);
++        assertEquals("{\"m\":{\"{\\\"password\\\":\\\"***\\\",\\\"user\\\":\\\"u\\\"}\":\"v\"}}",
++                JSON.toJSONString(new KeyedBySecret(), context));
++    }
++}
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderCreationLockTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderCreationLockTest.java
+new file mode 100644
+index 000000000..bcd4103c2
+--- /dev/null
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderCreationLockTest.java
+@@ -0,0 +1,136 @@
++package com.alibaba.fastjson2.writer;
++
++import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONWriter;
++import org.junit.jupiter.api.Test;
++
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicInteger;
++
++import static org.junit.jupiter.api.Assertions.assertFalse;
++
++/**
++ * Writer creation runs user code: the creator instantiates the bean for default values and builds enum field
++ * writers, which initializes classes. If that ran under a provider-wide lock, a class initializer serializing on
++ * another thread would wait for the lock while the lock holder waits for the initializer. Each test uses its own
++ * provider and its own classes, so a regression hangs only the two threads of that test.
++ */
++public class ObjectWriterProviderCreationLockTest {
++    static final ObjectWriterProvider CTOR_PROVIDER = new ObjectWriterProvider();
++    static final CountDownLatch CTOR_A_STARTED = new CountDownLatch(1);
++    static final CountDownLatch CTOR_B_IN_CREATOR = new CountDownLatch(1);
++    static volatile Thread ctorA;
++
++    static final ObjectWriterProvider ENUM_PROVIDER = new ObjectWriterProvider();
++    static final CountDownLatch ENUM_A_STARTED = new CountDownLatch(1);
++    static final CountDownLatch ENUM_B_SERIALIZING = new CountDownLatch(1);
++
++    static void await(CountDownLatch latch) {
++        try {
++            latch.await(5, TimeUnit.SECONDS);
++        } catch (InterruptedException e) {
++            Thread.currentThread().interrupt();
++        }
++    }
++
++    /** Waits until the given thread has blocked on a monitor or finished, at most 5 s. */
++    static void awaitBlockedOrDone(Thread thread) {
++        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
++        while (System.nanoTime() < deadline && thread.isAlive() && thread.getState() != Thread.State.BLOCKED) {
++            Thread.yield();
++        }
++    }
++
++    public static class Meta {
++        public String name = "meta";
++    }
++
++    public static class Registry {
++        static final String DESCRIPTION;
++
++        static {
++            CTOR_A_STARTED.countDown();
++            await(CTOR_B_IN_CREATOR);
++            DESCRIPTION = JSON.toJSONString(new Meta(), new JSONWriter.Context(CTOR_PROVIDER));
++        }
++    }
++
++    public static class Order {
++        static final AtomicInteger CONSTRUCTED = new AtomicInteger();
++        public int id = 1;
++        public String registry;
++
++        public Order() {
++            // the second instance is the one the creator builds for default values
++            if (CONSTRUCTED.incrementAndGet() == 2) {
++                CTOR_B_IN_CREATOR.countDown();
++                awaitBlockedOrDone(ctorA);
++                registry = Registry.DESCRIPTION;
++            }
++        }
++    }
++
++    @Test
++    public void constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes() throws Exception {
++        Thread a = new Thread(() -> {
++            Object description = Registry.DESCRIPTION;
++        }, "class-initializer");
++        a.setDaemon(true);
++        ctorA = a;
++        a.start();
++        await(CTOR_A_STARTED);
++        Thread b = new Thread(() -> JSON.toJSONString(new Order(), new JSONWriter.Context(CTOR_PROVIDER)), "first-write");
++        b.setDaemon(true);
++        b.start();
++        a.join(10_000);
++        b.join(10_000);
++        assertFalse(a.isAlive() || b.isAlive(), "writer creation and a serializing class initializer deadlocked");
++    }
++
++    public static class Meta2 {
++        public String name = "meta2";
++    }
++
++    public enum Color {
++        RED;
++        static final String DESCRIPTION;
++
++        static {
++            ENUM_A_STARTED.countDown();
++            await(ENUM_B_SERIALIZING);
++            // give the other thread time to enter the creator for Paint, which initializes this enum
++            try {
++                Thread.sleep(200);
++            } catch (InterruptedException e) {
++                Thread.currentThread().interrupt();
++            }
++            DESCRIPTION = JSON.toJSONString(new Meta2(), new JSONWriter.Context(ENUM_PROVIDER));
++        }
++    }
++
++    public static class Paint {
++        public int id = 1;
++        public Color color;
++    }
++
++    @Test
++    public void enumFieldWriterMayWaitForAnEnumInitializerThatSerializes() throws Exception {
++        Thread a = new Thread(() -> {
++            Object description = Color.DESCRIPTION;
++        }, "enum-initializer");
++        a.setDaemon(true);
++        a.start();
++        await(ENUM_A_STARTED);
++        Thread b = new Thread(() -> {
++            Paint paint = new Paint();
++            ENUM_B_SERIALIZING.countDown();
++            JSON.toJSONString(paint, new JSONWriter.Context(ENUM_PROVIDER));
++        }, "first-write");
++        b.setDaemon(true);
++        b.start();
++        a.join(10_000);
++        b.join(10_000);
++        assertFalse(a.isAlive() || b.isAlive(), "writer creation and a serializing enum initializer deadlocked");
++    }
++}
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderVariantRaceTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderVariantRaceTest.java
+new file mode 100644
+index 000000000..62bc08108
+--- /dev/null
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/ObjectWriterProviderVariantRaceTest.java
+@@ -0,0 +1,207 @@
++package com.alibaba.fastjson2.writer;
++
++import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONWriter;
++import com.alibaba.fastjson2.annotation.JSONType;
++import com.alibaba.fastjson2.filter.ValueFilter;
++import org.junit.jupiter.api.Test;
++
++import java.lang.reflect.Type;
++import java.util.AbstractMap;
++import java.util.Map;
++import java.util.Set;
++import java.util.concurrent.ConcurrentMap;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.Executors;
++import java.util.concurrent.Future;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicInteger;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++/**
++ * Replays, in a fixed order, the races between creating, linking and publishing the two field-order variants of a
++ * bean writer: a provider subclass pauses the thread creating the sorted writer at its lookups of the natural cell.
++ */
++public class ObjectWriterProviderVariantRaceTest {
++    @JSONType(alphabetic = false)
++    public static class Account {
++        public String password = "hunter2";
++        public String name = "alice";
++        public int id = 7;
++    }
++
++    static final ValueFilter MASK = (object, name, value) -> "password".equals(name) ? "***" : value;
++    static final String MASKED = "{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}";
++
++    static final class PausingProvider extends ObjectWriterProvider {
++        volatile Thread paused;
++        volatile Runnable onNaturalLookup;
++        final AtomicInteger naturalLookups = new AtomicInteger();
++
++        PausingProvider() {
++            super(ObjectWriterCreator.INSTANCE);
++        }
++
++        @Override
++        ConcurrentMap<Type, ObjectWriter> cacheOf(boolean fieldBased, boolean fieldNamesSorted) {
++            ConcurrentMap<Type, ObjectWriter> map = super.cacheOf(fieldBased, fieldNamesSorted);
++            return fieldNamesSorted || Thread.currentThread() != paused ? map : new PausingView(map, this);
++        }
++
++        boolean sortedPublished() {
++            return super.cacheOf(false, true).containsKey(Account.class);
++        }
++
++        String sortedWrite() {
++            return JSON.toJSONString(new Account(), new JSONWriter.Context(this, JSONWriter.Feature.SortFieldNamesAlphabetically));
++        }
++    }
++
++    static final class PausingView extends AbstractMap<Type, ObjectWriter> implements ConcurrentMap<Type, ObjectWriter> {
++        final ConcurrentMap<Type, ObjectWriter> map;
++        final PausingProvider provider;
++
++        PausingView(ConcurrentMap<Type, ObjectWriter> map, PausingProvider provider) {
++            this.map = map;
++            this.provider = provider;
++        }
++
++        @Override
++        public ObjectWriter get(Object key) {
++            ObjectWriter value = map.get(key);
++            if (key == Account.class) {
++                provider.naturalLookups.incrementAndGet();
++                provider.onNaturalLookup.run();
++            }
++            return value;
++        }
++
++        @Override
++        public Set<Map.Entry<Type, ObjectWriter>> entrySet() {
++            return map.entrySet();
++        }
++
++        @Override
++        public ObjectWriter put(Type key, ObjectWriter value) {
++            return map.put(key, value);
++        }
++
++        @Override
++        public ObjectWriter putIfAbsent(Type key, ObjectWriter value) {
++            return map.putIfAbsent(key, value);
++        }
++
++        @Override
++        public boolean remove(Object key, Object value) {
++            return map.remove(key, value);
++        }
++
++        @Override
++        public boolean replace(Type key, ObjectWriter oldValue, ObjectWriter newValue) {
++            return map.replace(key, oldValue, newValue);
++        }
++
++        @Override
++        public ObjectWriter replace(Type key, ObjectWriter value) {
++            return map.replace(key, value);
++        }
++    }
++
++    static void await(CountDownLatch latch) {
++        try {
++            latch.await(5, TimeUnit.SECONDS);
++        } catch (InterruptedException e) {
++            Thread.currentThread().interrupt();
++        }
++    }
++
++    @Test
++    public void filterOnExistingNaturalWriterIsCopiedBeforeSortedPublication() throws Exception {
++        PausingProvider provider = new PausingProvider();
++        provider.getObjectWriter(Account.class, Account.class, false).setFilter(MASK);
++
++        // B creates the sorted writer and is paused at its look at the natural cell; C writes sorted as soon as
++        // the sorted writer is published, or tells B to go on after seeing it unpublished
++        CountDownLatch bPaused = new CountDownLatch(1);
++        CountDownLatch cTurnTaken = new CountDownLatch(1);
++        provider.onNaturalLookup = () -> {
++            if (provider.naturalLookups.get() == 1) {
++                bPaused.countDown();
++                await(cTurnTaken);
++            }
++        };
++        ExecutorService pool = Executors.newSingleThreadExecutor();
++        try {
++            Future<String> b = pool.submit(() -> {
++                provider.paused = Thread.currentThread();
++                return provider.sortedWrite();
++            });
++            await(bPaused);
++            if (!provider.sortedPublished()) {
++                cTurnTaken.countDown();
++                while (!provider.sortedPublished()) {
++                    Thread.yield();
++                }
++            }
++            String c = provider.sortedWrite();
++            cTurnTaken.countDown();
++            assertEquals(MASKED, c);
++            assertEquals(MASKED, b.get(10, TimeUnit.SECONDS));
++        } finally {
++            pool.shutdownNow();
++        }
++    }
++
++    @Test
++    public void filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter() throws Exception {
++        PausingProvider provider = new PausingProvider();
++
++        // B starts the first sorted write and is paused right after its first look at the (empty) natural cell.
++        // A then creates the natural writer and sets a filter on it. B is paused again at any later look at the
++        // natural cell, while C writes sorted: C starts after setFilter returned, so it must be masked.
++        CountDownLatch bPaused = new CountDownLatch(1);
++        CountDownLatch aDone = new CountDownLatch(1);
++        CountDownLatch cDone = new CountDownLatch(1);
++        Thread[] a = new Thread[1];
++        provider.onNaturalLookup = () -> {
++            if (provider.naturalLookups.get() == 1) {
++                bPaused.countDown();
++                // let A run to completion, or until it waits for this thread
++                long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
++                while (aDone.getCount() > 0 && System.nanoTime() < deadline
++                        && (a[0] == null || a[0].getState() != Thread.State.BLOCKED)) {
++                    Thread.yield();
++                }
++            } else {
++                await(cDone);
++            }
++        };
++        ExecutorService pool = Executors.newFixedThreadPool(2);
++        try {
++            Future<String> b = pool.submit(() -> {
++                provider.paused = Thread.currentThread();
++                return provider.sortedWrite();
++            });
++            await(bPaused);
++            Future<?> natural = pool.submit(() -> {
++                a[0] = Thread.currentThread();
++                provider.getObjectWriter(Account.class, Account.class, false).setFilter(MASK);
++                aDone.countDown();
++                return null;
++            });
++            natural.get(10, TimeUnit.SECONDS);
++            while (!provider.sortedPublished()) {
++                Thread.yield();
++            }
++            String c = provider.sortedWrite();
++            cDone.countDown();
++            b.get(10, TimeUnit.SECONDS);
++            assertEquals(MASKED, c);
++            assertEquals(MASKED, provider.sortedWrite());
++        } finally {
++            pool.shutdownNow();
++        }
++    }
++}

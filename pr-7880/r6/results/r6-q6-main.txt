@@ -1,0 +1,12 @@
+fastjson2 jar: fastjson2-main.jar
+R2-26 canConvertToLong on a raw AtomicLong
+  JSON.toJSON(metrics) value class                           AtomicLong
+  JSONObject.from(metrics) value class                       AtomicLong
+  o.put(count, AtomicLong(6)).canConvertToLong               THROWS NoSuchMethodException: com.alibaba.fastjson2.JSONObject.canConvertToLong(java.lang.String)
+  o.getLongValue(count)                                      6
+R1-7 ErrorOnDuplicateKeys and objects inside arrays
+R2-11 duplicated @type under ErrorOnDuplicateKeys
+  main control: cold provider: proxy FieldBased              {"name":"n"}
+R2-12 mixIn after first write, per cache cell
+  mode natural                                               {"zebra":3,"apple":1} -> after mixIn {"zebra":3,"apple":1}  (cold: {"zebra":3,"apple":1})
+  mode FieldBased                                            {"zebra":3,"apple":1} -> after mixIn {"zebra":3,"apple":1}  (cold: {"apple":1})

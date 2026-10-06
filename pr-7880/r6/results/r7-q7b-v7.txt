@@ -1,0 +1,25 @@
+jar fastjson2-v7.jar
+asm after [FieldBased]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":{"zebra":3,"mid":5}}}   warmed {"map":{"k":{"zebra":3,"mid":5}}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}
+asm after [WriteNulls]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":{"zebra":3,"mid":5}}}   warmed {"map":{"k":{"zebra":3,"mid":5}}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}
+asm after [WriteLongAsString]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":{"zebra":3,"mid":5}}}   warmed {"map":{"k":{"zebra":3,"mid":5}}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}
+reflect after [FieldBased]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":[3,null,5]}}   warmed {"map":{"k":[3,null,5]}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}
+reflect after [WriteNulls]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":[3,null,5]}}   warmed {"map":{"k":[3,null,5]}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}
+reflect after [WriteLongAsString]:
+   Positional, BeanToArray ctx : fresh [{"k":[3,null,5]}]   warmed [{"k":[3,null,5]}]
+   Positional, no feature      : fresh {"map":{"k":[3,null,5]}}   warmed {"map":{"k":[3,null,5]}}
+   Plain, no feature           : fresh {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}   warmed {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}}}

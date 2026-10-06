@@ -1,0 +1,9 @@
+# bytecode length of the changed methods (javap -c), FreqInlineSize=325
+main  FieldWriterObjectArray getItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type)=233, writeArray(com.alibaba.fastjson2.JSONWriter, boolean, java.lang.Object[])=455
+v5    FieldWriterObjectArray getItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type)=233, writeArray(com.alibaba.fastjson2.JSONWriter, boolean, java.lang.Object[])=455
+v6    FieldWriterObjectArray getItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type)=289, resolveItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type, java.lang.Class)=47, writeArray(com.alibaba.fastjson2.JSONWriter, boolean, java.lang.Object[])=455
+fix6  FieldWriterObjectArray getItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type)=289, resolveItemWriter(com.alibaba.fastjson2.JSONWriter, java.lang.reflect.Type, java.lang.Class)=47, writeArray(com.alibaba.fastjson2.JSONWriter, boolean, java.lang.Object[])=455
+main  ObjectWriterAdapter setValueFilter(com.alibaba.fastjson2.filter.ValueFilter)=15, toJSONObject(T)=7, toJSONObject(T, long)=676
+v5    ObjectWriterAdapter linkSortedVariant(com.alibaba.fastjson2.writer.ObjectWriterAdapter)=72, setValueFilter(com.alibaba.fastjson2.filter.ValueFilter)=29, toJSON(java.lang.Object, long)=262, toJSONObject(T)=7, toJSONObject(T, long)=691
+v6    ObjectWriterAdapter linkSortedVariant(com.alibaba.fastjson2.writer.ObjectWriterAdapter)=232, setValueFilter(com.alibaba.fastjson2.filter.ValueFilter)=86, toJSON(java.lang.Object, long)=200, toJSONObject(T)=7, toJSONObject(T, long)=691
+fix6  ObjectWriterAdapter linkSortedVariant(com.alibaba.fastjson2.writer.ObjectWriterAdapter)=232, setValueFilter(com.alibaba.fastjson2.filter.ValueFilter)=86, toJSON(java.lang.Object, long)=200, toJSONObject(T)=7, toJSONObject(T, long)=691

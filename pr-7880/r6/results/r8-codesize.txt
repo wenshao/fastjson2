@@ -1,0 +1,21 @@
+# bytecode length (javap -c) of the reader methods touched by c47a3cf51/07faf7789 and JSONObject.required; FreqInlineSize=325
+main ObjectReaderImplObject {'readObject': 1673}
+v6   ObjectReaderImplObject {'readObject': 1777}
+v7   ObjectReaderImplObject {'readObject': 1791}
+v8   ObjectReaderImplObject {'readObject': 1767}
+main ObjectReaderImplMapTyped {'readObject': 1114}
+v6   ObjectReaderImplMapTyped {'readObject': 1223}
+v7   ObjectReaderImplMapTyped {'readObject': 1379}
+v8   ObjectReaderImplMapTyped {'readObject': 1275}
+main ObjectReaderImplMapMultiValueType {'readObject': 449}
+v6   ObjectReaderImplMapMultiValueType {'readObject': 525}
+v7   ObjectReaderImplMapMultiValueType {'readObject': 533}
+v8   ObjectReaderImplMapMultiValueType {'readObject': 508}
+main JSONObject {}
+v6   JSONObject {'required': 90}
+v7   JSONObject {'required': 90}
+v8   JSONObject {'required': 49}
+main JSONReader {'readObject': 1199, 'readArray': 920}
+v6   JSONReader {'readObject': 1290, 'readArray': 920}
+v7   JSONReader {'readObject': 1291, 'readArray': 940}
+v8   JSONReader {'readObject': 1291, 'readArray': 940}

@@ -1,0 +1,33 @@
+{
+	"java":"21.0.12",
+	"pass":4,
+	"fail":0,
+	"diff":0,
+	"info":0,
+	"results":[
+		{
+			"status":"PASS",
+			"section":"J1",
+			"id":"creator's default-value constructor waits for a serializing initializer",
+			"detail":"both threads finished; first write = {\"id\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"J1",
+			"id":"creator's enum field writer waits for a serializing enum initializer",
+			"detail":"both threads finished; first write = {\"id\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"J2",
+			"id":"Date/LocalDate/LocalDateTime keys keep the context date format when a filter is set",
+			"detail":"with filter {\"byDate\":{\"1970/01/02\":\"a\"},\"byLocalDate\":{\"2026/10/06\":\"b\"},\"byLocalDateTime\":{\"2026/10/06\":\"c\"}}  without {\"byDate\":{\"1970/01/02\":\"a\"},\"byLocalDate\":{\"2026/10/06\":\"b\"},\"byLocalDateTime\":{\"2026/10/06\":\"c\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"J2",
+			"id":"context ValueFilter applies to a bean used as a map key",
+			"detail":"{\"m\":{\"{\\\"password\\\":\\\"***\\\",\\\"user\\\":\\\"u\\\"}\":\"v\"}}"
+		}
+	]
+}

@@ -1,0 +1,6 @@
+threads=1 main ms: 549 545 475 545 484 490
+threads=1 v7 ms: 467 550 532 549 484 551
+threads=1 fix7 ms: 469 539 552 474 481 476
+threads=4 main ms: 432 385 423 411 395 394
+threads=4 v7 ms: 558 554 478 478 552 538
+threads=4 fix7 ms: 419 427 415 428 421 398

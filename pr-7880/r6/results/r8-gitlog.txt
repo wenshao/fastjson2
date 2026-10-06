@@ -1,0 +1,5 @@
+07faf7789 hoist new exception-message concatenations out of inlining-budget paths
+82514ab10 serialize variant creation with filter initialization and keep the linked-variants array dense
+c47a3cf51 thread feature words through reader arrays, typed maps, and item resolutions; keep declared map types and link/filter semantics consistent
+2e6afd5d4 gate array item writers by variant, reconcile links after publication, and release dead variants
+2dd085431 publish linked writers fully initialized, track every linked variant, and merge feature masks in place

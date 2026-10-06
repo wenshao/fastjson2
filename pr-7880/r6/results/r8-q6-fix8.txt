@@ -1,0 +1,41 @@
+fastjson2 jar: fastjson2-fix8.jar
+R2-26 canConvertToLong on a raw AtomicLong
+  JSON.toJSON(metrics) value class                           AtomicLong
+  JSONObject.from(metrics) value class                       AtomicLong
+  o.put(count, AtomicLong(6)).canConvertToLong               true
+  o.getLongValue(count)                                      6
+R1-7 ErrorOnDuplicateKeys and objects inside arrays
+  parse({payload:[{a:1,a:2}]}, Frame, DUP)                   THROWS JSONException: duplicate key : a, offset 24, character 2, line 1, column 24, fastjson-version 2.0.64 {"payload":[{"a":1,"a":2}]}
+  parseObject([{a:1,a:2}] inside object, DUP)                THROWS JSONException: duplicate key : a, offset 18, character 2, line 1, column 18, fastjson-version 2.0.64 {"x":[{"a":1,"a":2}]}
+  parseArray([{a:1,a:2}], DUP)                               THROWS JSONException: duplicate key : a, offset 13, character 2, line 1, column 13, fastjson-version 2.0.64 [{"a":1,"a":2}]
+  parseObject({p:{a:1,a:2}}, Frame, DUP)                     THROWS JSONException: duplicate key : a, offset 23, character 2, line 1, column 23, fastjson-version 2.0.64 {"payload":{"a":1,"a":2}}
+R2-11 duplicated @type under ErrorOnDuplicateKeys
+  parseObject({data:{@type:x,@type:y}}, ObjBox, DUP)         THROWS JSONException: duplicate key : @type, offset 51, character ", line 1, column 51, fastjson-version 2.0.64 {"data":{"@type":"com.exampl
+  parse({@type:a,@type:b}, DUP)                              THROWS JSONException: duplicate key : @type, offset 22, character ", line 1, column 22, fastjson-version 2.0.64 {"@type":"a","@type":"b"}
+  parseObject({@type:a,@type:b}, DUP)                        THROWS JSONException: duplicate key : @type, offset 22, character ", line 1, column 22, fastjson-version 2.0.64 {"@type":"a","@type":"b"}
+  parseObject({k:1,k:2}, DUP) (control)                      THROWS JSONException: duplicate key : k, offset 12, character 2, line 1, column 12, fastjson-version 2.0.64 {"k":1,"k":2}
+R1-1 contentAs list, context-level Sort (field-level annotation case needs Sort on the field)
+  toJSONString(host, Sort)                                   {"contentAsList":[{"apple":1,"zebra":3}],"single":{"apple":1,"zebra":3},"typed":[{"apple":1,"zebra":3}]}
+R2-30 Map<String,Item> field with WriteClassName
+  WriteClassName                                             {"@type":"p.Q6$MapBean","map":{"@type":"java.util.LinkedHashMap","k":{"zebra":3,"apple":1}},"id":9}
+  WriteClassName + Sort                                      {"@type":"p.Q6$MapBean","id":9,"map":{"@type":"java.util.LinkedHashMap","k":{"apple":1,"zebra":3}}}
+R1-8 unwrapped field in tree conversion
+  toJSONString(u, Sort)                                      {"aa":2,"zz":1,"top":0}
+  JSONObject.from(u, Sort)                                   {"aa":2,"zz":1,"top":0}
+  JSONObject.from(u)                                         {"top":0,"zz":1,"aa":2}
+R2-1 polymorphic field in tree conversion under Sort
+  JSONObject.from(h) (natural, warms)                        {"data":{"zebra":3,"apple":1}}
+  JSONObject.from(h, Sort)                                   {"data":{"apple":1,"zebra":3}}
+  toJSONString(h, Sort)                                      {"data":{"apple":1,"zebra":3}}
+  JSONObject.from(h, Sort) cold provider                     {"data":{"apple":1,"zebra":3}}
+R2-33 CGLIB-named proxy with FieldBased + Sort
+  toJSONString(proxy, FieldBased)                            {"name":"n"}
+  toJSONString(proxy, FieldBased, Sort)                      {"hidden":42,"name":"n"}
+  cold provider: proxy FieldBased+Sort                       {"hidden":42,"name":"n"}
+  cold provider: target FieldBased+Sort                      {"hidden":42,"name":"n"}
+  main control: cold provider: proxy FieldBased              {"name":"n"}
+R2-12 mixIn after first write, per cache cell
+  mode natural                                               {"zebra":3,"apple":1} -> after mixIn {"zebra":3,"apple":1}  (cold: {"zebra":3,"apple":1})
+  mode FieldBased                                            {"zebra":3,"apple":1} -> after mixIn {"apple":1}  (cold: {"apple":1})
+  mode +Sort                                                 {"apple":1,"zebra":3} -> after mixIn {"apple":1,"zebra":3}  (cold: {"apple":1,"zebra":3})
+  mode FieldBased+Sort                                       {"apple":1,"zebra":3} -> after mixIn {"apple":1}  (cold: {"apple":1})

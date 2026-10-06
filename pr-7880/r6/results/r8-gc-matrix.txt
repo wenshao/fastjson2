@@ -1,0 +1,24 @@
+# ObjectWriterAdapterLinkTest on 07faf7789 test sources, openjdk version "25.0.2" 2026-01-20, flags via JAVA_TOOL_OPTIONS
+-XX:+UseSerialGC #1: tests=4 failures=0 
+-XX:+UseSerialGC #2: tests=4 failures=0 
+-XX:+UseSerialGC #3: tests=4 failures=0 
+-XX:+UseParallelGC #1: tests=4 failures=0 
+-XX:+UseParallelGC #2: tests=4 failures=0 
+-XX:+UseParallelGC #3: tests=4 failures=0 
+-XX:+UseG1GC #1: tests=4 failures=0 
+-XX:+UseG1GC #2: tests=4 failures=0 
+-XX:+UseG1GC #3: tests=4 failures=0 
+-XX:+UseZGC #1: tests=4 failures=0 
+-XX:+UseZGC #2: tests=4 failures=0 
+-XX:+UseZGC #3: tests=4 failures=0 
+-XX:+UseShenandoahGC #1: not run: the GraalVM CE 25 JIT does not support Shenandoah (GraalError, VM aborts)
+-XX:+UseShenandoahGC #2: not run: the GraalVM CE 25 JIT does not support Shenandoah (GraalError, VM aborts)
+-XX:+UseShenandoahGC #3: not run: the GraalVM CE 25 JIT does not support Shenandoah (GraalError, VM aborts)
+-XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent #1: tests=4 failures=0 
+-XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent #2: tests=4 failures=0 
+-XX:+UseG1GC -XX:+ExplicitGCInvokesConcurrent #3: tests=4 failures=0 
+-XX:+DisableExplicitGC #1: tests=4 failures=1 linkedVariantsReleasedAfterUnregister
+-XX:+DisableExplicitGC #2: tests=4 failures=1 linkedVariantsReleasedAfterUnregister
+-XX:+DisableExplicitGC #3: tests=4 failures=1 linkedVariantsReleasedAfterUnregister
+SortFieldNamesRegistryTest -Dfastjson2.creator=reflect: tests=24 failures=0 
+SortFieldNamesRegistryTest -Dfastjson2.creator=lambda: tests=24 failures=0 
