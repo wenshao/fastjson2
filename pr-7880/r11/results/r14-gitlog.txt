@@ -1,0 +1,1 @@
+cb60e5eaa pin the strict bit on the reflect single-object list path with a failing-first witness

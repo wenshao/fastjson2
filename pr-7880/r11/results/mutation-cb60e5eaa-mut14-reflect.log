@@ -1,0 +1,13 @@
+=== mutation: h12-ObjectReaderImplList  [creator=reflect] (mvn rc=1)
+  tests=129 failed=1
+   FAIL ErrorOnDuplicateKeysTest.singleObjectListFieldForwardsTheStrictBitWithReflect
+=== mutation: h03-JSONReaderJSONB  [creator=reflect] (mvn rc=0)
+  tests=129 failed=0
+=== mutation: h06-FieldReaderList  [creator=reflect] (mvn rc=0)
+  tests=129 failed=0
+=== mutation: c:asmr-site-mapping  [creator=reflect] (mvn rc=0)
+  tests=129 failed=0
+=== mutation: h13-ObjectReaderImplList  [creator=reflect] (mvn rc=1)
+  tests=129 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+MUTDONE

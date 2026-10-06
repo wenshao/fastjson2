@@ -1,0 +1,3 @@
+# core jar 7f8ba05da (a) vs cb60e5eaa (b), unzipped, diff -rq
+entries a=777 b=777
+identical: 0 differing entries

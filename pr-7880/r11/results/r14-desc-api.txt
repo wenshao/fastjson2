@@ -1,0 +1,2 @@
+New public API: two enum constants, five JSONObject/JSONArray methods, `JSONReader.readObject(long)`, `JSONReader.readArray(long)` and `JSONReader.readAny(long)`, and two `ObjectWriterProvider#getObjectWriter` overloads that preserve the existing signatures (b
+新增公开 API：两个枚举常量、5 个 JSONObject/JSONArray 方法、`JSONReader.readObject(long)`、`JSONReader.readArray(long)` 与 `JSONReader.readAny(long)`、两个保留原签名的 `ObjectWriterProvider` 重载（二进制兼容，japicmp 对 mai
