@@ -1,0 +1,6 @@
+=== mutation: delegation-text (mvn rc=1)
+  tests=58 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: delegation-jsonb (mvn rc=1)
+  tests=58 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator

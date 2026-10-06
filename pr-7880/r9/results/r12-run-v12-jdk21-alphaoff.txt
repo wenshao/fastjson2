@@ -1,0 +1,10 @@
+== PR #7880 independent verification harness ==
+java.version   : 21.0.12 (OpenJDK 64-Bit Server VM)
+fastjson2 jar  : fastjson2-v12.jar
+fastjson2 ver  : 2.0.64
+jackson oracle : 2.17.2
+
+[B8] -Dfastjson2.writer.alphabetic=false (global switch off)
+
+
+SUMMARY  PASS=3  FAIL=0  DIFF=0  INFO=0  (java 21.0.12)

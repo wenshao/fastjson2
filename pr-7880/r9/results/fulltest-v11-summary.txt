@@ -1,0 +1,30 @@
+[INFO] fastjson2-parent ................................... SUCCESS [  1.036 s]
+[INFO] fastjson2 .......................................... SUCCESS [ 52.352 s]
+[INFO] fastjson2-extension ................................ SUCCESS [  4.732 s]
+[INFO] fastjson2-benchmark ................................ SUCCESS [  7.252 s]
+[INFO] fastjson2-extension-solon .......................... SUCCESS [  9.898 s]
+[INFO] example-solon-test ................................. SUCCESS [  0.782 s]
+[INFO] fastjson2-extension-spring5 ........................ SUCCESS [  5.130 s]
+[INFO] example-spring-test ................................ SUCCESS [  0.853 s]
+[INFO] fastjson2-extension-jaxrs .......................... SUCCESS [  0.027 s]
+[INFO] fastjson2-extension-jaxrs-javax .................... SUCCESS [  2.125 s]
+[INFO] fastjson1-compatible ............................... SUCCESS [ 17.431 s]
+[INFO] fastjson2-kotlin ................................... SUCCESS [  3.463 s]
+[INFO] safemode-test ...................................... SUCCESS [  1.548 s]
+[INFO] test-jdk25 ......................................... SUCCESS [  1.276 s]
+[INFO] fastjson2-benchmark_25 ............................. SUCCESS [  0.465 s]
+[INFO] fastjson2-extension-spring6 ........................ SUCCESS [  3.586 s]
+[INFO] example-spring6-test ............................... SUCCESS [  0.276 s]
+[INFO] BUILD SUCCESS
+[INFO] Tests run: 8114, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 56, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 98, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 1355, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 36, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 60, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  01:52 min

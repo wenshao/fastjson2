@@ -1,0 +1,19 @@
+fastjson2 jar: fastjson2-v12.jar
+R2-1 polymorphic field, tree conversion
+  cold JSONObject.from(h)                                    {"data":{"zebra":3,"apple":1}}
+  toJSONString(h2) then JSONObject.from(h2)                  {"data":{"zebra":3,"apple":1}}
+  toJSONString(h3,Sort) then JSONObject.from(h3,Sort)        {"data":{"apple":1,"zebra":3}}
+  toJSONString(h3, Sort)                                     {"data":{"apple":1,"zebra":3}}
+R2-33 proxy, FieldBased
+  warm target FB, then proxy FB                              {"hidden":42,"name":"n"}
+  warm target FB only, then proxy FB+Sort                    {"hidden":42,"name":"n"}
+  warm target FB+Sort, then proxy FB+Sort                    {"hidden":42,"name":"n"}
+R2-12 mixIn after first write (natural mode with a class mixin)
+  mode natural                                               {"apple":1,"zebra":3} -> {"apple":1}
+  mode FieldBased                                            {"apple":1,"zebra":3} -> {"apple":1}
+R1-7 field-level ErrorOnDuplicateKeys, no context feature
+  {payload:{a:1,a:2}}                                        THROWS JSONException: duplicate key : a, offset 23, character 2, line 1, column 23, fastjson-version 2.0.64 {"payload":{"a":1,"a":2}}
+  {payload:[{a:1,a:2}]}                                      THROWS JSONException: duplicate key : a, offset 24, character 2, line 1, column 24, fastjson-version 2.0.64 {"payload":[{"a":1,"a":2}]}
+R1-1 / R2-25 field-level Sort only, no context feature
+  JSON                                                       {"array":[{"apple":1,"zebra":3}],"contentAsList":[{"apple":1,"zebra":3}],"map":{"k":{"apple":1,"zebra":3}},"set":[{"apple":1,"zebra":3}],"single":{"apple":1,"zebra":3},"typed":[{"apple":1,"zebra":3}]}
+  JSONB -> JSON                                              {"array":[{"apple":1,"zebra":3}],"contentAsList":[{"apple":1,"zebra":3}],"map":{"k":{"apple":1,"zebra":3}},"set":[{"apple":1,"zebra":3}],"single":{"apple":1,"zebra":3},"typed":[{"apple":1,"zebra":3}]}

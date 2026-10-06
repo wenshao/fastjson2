@@ -1,0 +1,177 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench12.Read7880.basketParse
+
+# Run progress: 0.00% complete, ETA 00:00:45
+# Fork: 1 of 1
+# Warmup Iteration   1: 224.261 ops/ms
+# Warmup Iteration   2: 259.136 ops/ms
+# Warmup Iteration   3: 255.982 ops/ms
+# Warmup Iteration   4: 260.679 ops/ms
+Iteration   1: 261.533 ops/ms
+Iteration   2: 262.019 ops/ms
+Iteration   3: 262.011 ops/ms
+Iteration   4: 262.110 ops/ms
+Iteration   5: 261.725 ops/ms
+
+
+Result "bench12.Read7880.basketParse":
+  261.879 ±(99.9%) 0.930 ops/ms [Average]
+  (min, avg, max) = (261.533, 261.879, 262.110), stdev = 0.242
+  CI (99.9%): [260.949, 262.810] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench12.Read7880.basketParseUTF8
+
+# Run progress: 20.00% complete, ETA 00:00:37
+# Fork: 1 of 1
+# Warmup Iteration   1: 217.785 ops/ms
+# Warmup Iteration   2: 252.276 ops/ms
+# Warmup Iteration   3: 254.241 ops/ms
+# Warmup Iteration   4: 253.198 ops/ms
+Iteration   1: 253.598 ops/ms
+Iteration   2: 253.554 ops/ms
+Iteration   3: 253.489 ops/ms
+Iteration   4: 253.913 ops/ms
+Iteration   5: 253.721 ops/ms
+
+
+Result "bench12.Read7880.basketParseUTF8":
+  253.655 ±(99.9%) 0.644 ops/ms [Average]
+  (min, avg, max) = (253.489, 253.655, 253.913), stdev = 0.167
+  CI (99.9%): [253.011, 254.299] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench12.Read7880.filteredMapWrite
+
+# Run progress: 40.00% complete, ETA 00:00:27
+# Fork: 1 of 1
+# Warmup Iteration   1: 95.412 ops/ms
+# Warmup Iteration   2: 110.388 ops/ms
+# Warmup Iteration   3: 111.454 ops/ms
+# Warmup Iteration   4: 110.556 ops/ms
+Iteration   1: 110.680 ops/ms
+Iteration   2: 110.372 ops/ms
+Iteration   3: 110.687 ops/ms
+Iteration   4: 111.161 ops/ms
+Iteration   5: 110.925 ops/ms
+
+
+Result "bench12.Read7880.filteredMapWrite":
+  110.765 ±(99.9%) 1.140 ops/ms [Average]
+  (min, avg, max) = (110.372, 110.765, 111.161), stdev = 0.296
+  CI (99.9%): [109.625, 111.905] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench12.Read7880.rootListParse
+
+# Run progress: 60.00% complete, ETA 00:00:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 224.230 ops/ms
+# Warmup Iteration   2: 259.455 ops/ms
+# Warmup Iteration   3: 258.580 ops/ms
+# Warmup Iteration   4: 259.366 ops/ms
+Iteration   1: 260.637 ops/ms
+Iteration   2: 260.817 ops/ms
+Iteration   3: 260.832 ops/ms
+Iteration   4: 260.529 ops/ms
+Iteration   5: 260.266 ops/ms
+
+
+Result "bench12.Read7880.rootListParse":
+  260.616 ±(99.9%) 0.898 ops/ms [Average]
+  (min, avg, max) = (260.266, 260.616, 260.832), stdev = 0.233
+  CI (99.9%): [259.719, 261.514] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench12.Read7880.treeParse
+
+# Run progress: 80.00% complete, ETA 00:00:09
+# Fork: 1 of 1
+# Warmup Iteration   1: 195.090 ops/ms
+# Warmup Iteration   2: 224.565 ops/ms
+# Warmup Iteration   3: 228.411 ops/ms
+# Warmup Iteration   4: 230.186 ops/ms
+Iteration   1: 230.267 ops/ms
+Iteration   2: 230.094 ops/ms
+Iteration   3: 230.391 ops/ms
+Iteration   4: 230.227 ops/ms
+Iteration   5: 230.130 ops/ms
+
+
+Result "bench12.Read7880.treeParse":
+  230.222 ±(99.9%) 0.453 ops/ms [Average]
+  (min, avg, max) = (230.094, 230.222, 230.391), stdev = 0.118
+  CI (99.9%): [229.769, 230.675] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:46
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                   Mode  Cnt    Score   Error   Units
+Read7880.basketParse       thrpt    5  261.879 ± 0.930  ops/ms
+Read7880.basketParseUTF8   thrpt    5  253.655 ± 0.644  ops/ms
+Read7880.filteredMapWrite  thrpt    5  110.765 ± 1.140  ops/ms
+Read7880.rootListParse     thrpt    5  260.616 ± 0.898  ops/ms
+Read7880.treeParse         thrpt    5  230.222 ± 0.453  ops/ms
+
+Benchmark result is saved to <work>/env/jmh/ab-r12r/fix12-r8.json

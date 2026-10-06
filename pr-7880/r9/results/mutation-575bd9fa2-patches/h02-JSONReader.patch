@@ -1,0 +1,32 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+index 005b59d0b..a4106e25f 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+@@ -3931,6 +3931,27 @@ public abstract class JSONReader
+         return read(Object.class);
+     }
+ 
++    /**
++     * Reads any JSON value and returns it as an Object, honoring the supplied feature word
++     * on top of the reader context features. Only {@link Feature#ErrorOnDuplicateKeys} is
++     * honored today; other bits are parsed as on the plain {@link #readAny()} call.
++     *
++     * @param features the per-call feature word, a mask of {@link Feature} bits
++     * @return The JSON value as an Object
++     * @since 2.0.66
++     */
++    public Object readAny(long features) {
++        if ((features & Feature.ErrorOnDuplicateKeys.mask) != 0) {
++            if (ch == '{') {
++                return readObject(features);
++            }
++            if (ch == '[') {
++                return readArray(features);
++            }
++        }
++        return read(Object.class);
++    }
++
+     /**
+      * Reads a JSON array with elements of a specified type.
+      *

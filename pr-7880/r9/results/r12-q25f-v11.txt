@@ -1,0 +1,6 @@
+asm list field given one object: ok
+asm positional bean, list field: ok
+asm positional bean, list field (context SupportArrayToBean): ok
+reflect list field given one object: ok
+reflect positional bean, list field: ok
+reflect positional bean, list field (context SupportArrayToBean): ok

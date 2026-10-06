@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+index bae1379af..ebe474b3f 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+@@ -189,7 +190,7 @@ public final class ObjectReaderImplObject
+                                 continue;
+                             }
+                         } else {
+-                            value = jsonReader.readObject(features);
++                            value = jsonReader.readObject((features & JSONReader.Feature.ErrorOnDuplicateKeys.mask));
+                         }
+                         break;
+                     case '"':

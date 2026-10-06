@@ -1,0 +1,64 @@
+=== mutation: h01-JSONObject (mvn rc=1)
+  tests=120 failed=1
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: h03-JSONReaderJSONB (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h04-FieldReaderAnySetter (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h05-FieldReaderList (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h06-FieldReaderList (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h07-FieldReaderList (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h08-FieldReaderMapReadOnly (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h09-ObjectReaderCreatorASM (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h10-ObjectReaderCreatorASM (mvn rc=1)
+  tests=120 failed=1
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+=== mutation: h11-ObjectReaderImplGenericArray (mvn rc=1)
+  tests=120 failed=1
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+=== mutation: h12-ObjectReaderImplList (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h13-ObjectReaderImplList (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h14-ObjectReaderImplMapTyped (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h15-ObjectReaderImplObject (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h16-ObjectReaderImplObject (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h17-ObjectReaderImplObject (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h18-ObjectReaderImplObject (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h19-ObjectReaderImplOptional (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h22-ObjectWriterImplMap (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h23-ObjectWriterImplMap (mvn rc=1)
+  tests=120 failed=1
+   FAIL MapFilteredSortTest.filteredSortedMapValuesStaySorted
+=== mutation: h24-ObjectWriterProvider (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h27-ObjectWriterProvider (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h28-ObjectWriterProvider (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h29-ObjectWriterProvider (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:readany-word (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:fwo-cache (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:fwo-mapnull (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:asmw-bail (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:asmw-cache (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:fromcache-nosort (mvn rc=0)
+  tests=120 failed=0

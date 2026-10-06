@@ -1,0 +1,30 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index dd39ba003..914f01a09 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -839,12 +875,19 @@ public class ObjectWriterProvider
+                     this
+             );
+             synchronized (createLock) {
+-                // link before publication: a cache hit by another thread must never see the writer
+-                // without the filters its counterpart variant carries
+-                linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
+-                ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-                if (previous != null) {
+-                    objectWriter = previous;
++                // double-check inside the lock: a creator that races another loses only the building
++                // cost, not a redundant generated class published into the same cell (R2-20)
++                ObjectWriter existing = cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++                if (existing != null) {
++                    objectWriter = existing;
++                } else {
++                    // link before publication: a cache hit by another thread must never see the writer
++                    // without the filters its counterpart variant carries
++                    linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
++                    ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
++                    if (previous != null) {
++                        objectWriter = previous;
++                    }
+                 }
+             }
+         }

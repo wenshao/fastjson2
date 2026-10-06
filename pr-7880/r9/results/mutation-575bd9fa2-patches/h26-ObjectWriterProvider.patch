@@ -1,0 +1,23 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index dd39ba003..914f01a09 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -601,6 +616,18 @@ public class ObjectWriterProvider
+                 : cache.get(objectType);
+     }
+ 
++    /**
++     * Read-only lookup on the variant cell matching the feature word, computed with the same
++     * fieldBased/sorted axes as {@link #getObjectWriter(Type, Class, long)}; never creates a writer.
++     */
++    public ObjectWriter getObjectWriterFromCache(Type objectType, Class objectClass, long contextFeatures) {
++        boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
++        boolean fieldNamesSorted = (contextFeatures & (
++                JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
++                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++        return cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++    }
++
+     /**
+      * Gets an ObjectWriter for the specified type, class, and format with field-based option.
+      *

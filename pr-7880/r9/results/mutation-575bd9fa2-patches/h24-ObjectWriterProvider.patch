@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index dd39ba003..914f01a09 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -286,7 +286,7 @@ public class ObjectWriterProvider
+      * subclasses with their own write logic and positional (BeanToArray) adapters, is honored as registered.
+      */
+     static ObjectWriter sortedVariantOf(ObjectWriter objectWriter) {
+-        if (!(objectWriter instanceof ObjectWriterAdapter) || !PLAIN_ADAPTERS.contains(objectWriter.getClass())) {
++        if (!(objectWriter instanceof ObjectWriterAdapter) || !isPlainAdapter(objectWriter.getClass())) {
+             return objectWriter;
+         }
+         ObjectWriterAdapter adapter = (ObjectWriterAdapter) objectWriter;

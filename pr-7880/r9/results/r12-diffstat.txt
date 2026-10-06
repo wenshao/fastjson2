@@ -1,0 +1,20 @@
+ .../java/com/alibaba/fastjson2/JSONObject.java     |  6 ++-
+ .../java/com/alibaba/fastjson2/JSONReader.java     | 21 ++++++++
+ .../com/alibaba/fastjson2/JSONReaderJSONB.java     |  6 +++
+ .../fastjson2/reader/FieldReaderAnySetter.java     |  4 +-
+ .../alibaba/fastjson2/reader/FieldReaderList.java  |  6 +--
+ .../fastjson2/reader/FieldReaderMapReadOnly.java   |  2 +-
+ .../fastjson2/reader/ObjectReaderCreatorASM.java   |  6 +++
+ .../reader/ObjectReaderImplGenericArray.java       |  2 +-
+ .../fastjson2/reader/ObjectReaderImplList.java     |  4 +-
+ .../fastjson2/reader/ObjectReaderImplMapTyped.java |  9 ++--
+ .../fastjson2/reader/ObjectReaderImplObject.java   |  9 ++--
+ .../fastjson2/reader/ObjectReaderImplOptional.java |  2 +-
+ .../fastjson2/writer/FieldWriterObject.java        | 12 +++--
+ .../fastjson2/writer/ObjectWriterCreatorASM.java   |  7 ++-
+ .../fastjson2/writer/ObjectWriterImplMap.java      | 10 ++--
+ .../fastjson2/writer/ObjectWriterProvider.java     | 57 ++++++++++++++++++---
+ .../java/com/alibaba/fastjson2/TreeModelTest.java  | 12 +++++
+ .../features/ErrorOnDuplicateKeysTest.java         | 59 ++++++++++++++++++++++
+ .../fastjson2/writer/MapFilteredSortTest.java      | 46 +++++++++++++++++
+ 19 files changed, 243 insertions(+), 37 deletions(-)

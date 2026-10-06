@@ -1,0 +1,55 @@
+=== mutation: mut10:none (mvn rc=0)
+  tests=115 failed=0
+=== mutation: mut10:no-sort-word (mvn rc=1)
+  tests=115 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedListKeysSortTheirBeans
+=== mutation: mut10:no-root (mvn rc=1)
+  tests=115 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysAreTheRootOfTheirReferences
+=== mutation: mut10:no-sorted-key-branch (mvn rc=1)
+  tests=115 failed=2
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysAreTheRootOfTheirReferences
+   FAIL MapKeyContextTest.fieldLevelSortedListKeysSortTheirBeans
+=== mutation: mut10:sorted-key-new-context (mvn rc=1)
+  tests=115 failed=1
+   FAIL MapKeyContextTest.fieldLevelSortedKeysKeepTheContextDateFormat
+=== mutation: mut10:key-new-context (mvn rc=1)
+  tests=115 failed=3
+   FAIL MapKeyContextTest.beanKeysGoThroughTheContextFilters
+   FAIL MapKeyContextTest.dateKeysKeepTheContextFormatWhenFiltersAreSet
+   FAIL MapKeyContextTest.fieldLevelSortedBeanKeysGoThroughTheContextFilters
+=== mutation: mut10:creator-in-lock (mvn rc=1)
+  tests=115 failed=2
+   FAIL ObjectWriterProviderCreationLockTest.constructorRunByTheCreatorMayWaitForAnInitializerThatSerializes
+   FAIL ObjectWriterProviderCreationLockTest.enumFieldWriterMayWaitForAnEnumInitializerThatSerializes
+=== mutation: mut10:nolock (mvn rc=1)
+  tests=115 failed=1
+   FAIL ObjectWriterProviderVariantRaceTest.filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter
+=== mutation: mut10:link-after-publish (mvn rc=1)
+  tests=115 failed=1
+   FAIL ObjectWriterProviderVariantRaceTest.filterOnExistingNaturalWriterIsCopiedBeforeSortedPublication
+=== mutation: mut10:no-link (mvn rc=1)
+  tests=115 failed=5
+   FAIL ObjectWriterProviderVariantRaceTest.filterOnExistingNaturalWriterIsCopiedBeforeSortedPublication
+   FAIL ObjectWriterProviderVariantRaceTest.filterSetWhileBothVariantsAreCreatedReachesTheSortedWriter
+   FAIL SortFieldNamesRegistryTest.counterpartAndFilterAfterInitialLookupStillMaskLaterHits
+   FAIL SortFieldNamesRegistryTest.filtersVisibleOnConcurrentFirstSortedWrites
+   FAIL SortFieldNamesRegistryTest.typeFiltersApplyToSortedVariant
+=== mutation: mutU:list-text (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: mutU:list-jsonb (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: mutU:optional (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: mutU:atomic-text (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: mutU:atomic-jsonb (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator
+=== mutation: mutU:array-jsonb (mvn rc=1)
+  tests=115 failed=1
+   FAIL SortFieldNamesAlphabeticallyTest.fieldLevelSortReachesBeansInNestedContainersWithEitherCreator

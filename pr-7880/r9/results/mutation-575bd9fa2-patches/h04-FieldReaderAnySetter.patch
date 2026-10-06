@@ -1,0 +1,15 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+index 6832c9de9..a55b0f1b7 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+@@ -38,7 +38,9 @@ class FieldReaderAnySetter<T>
+         String name = jsonReader.getFieldName();
+ 
+         ObjectReader itemObjectReader = getItemObjectReader(jsonReader);
+-        Object value = itemObjectReader.readObject(jsonReader, fieldType, fieldName, 0);
++        Object value = itemObjectReader.readObject(jsonReader, fieldType, fieldName,
++                (features | jsonReader.getContext().getFeatures())
++                        & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+ 
+         try {
+             method.invoke(object, name, value);

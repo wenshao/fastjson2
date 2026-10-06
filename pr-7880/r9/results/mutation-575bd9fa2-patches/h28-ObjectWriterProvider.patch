@@ -1,0 +1,16 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index dd39ba003..914f01a09 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -816,6 +847,11 @@ public class ObjectWriterProvider
+         }
+ 
+         if (objectWriter != null) {
++            // special-name publication paths must not leave the sorted cell served a writer that
++            // never honored the sort axis; plain adapters get a rebuilt sorted variant as elsewhere
++            if (fieldNamesSorted) {
++                objectWriter = sortedVariantOf(objectWriter);
++            }
+             ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+             if (previous != null) {
+                 objectWriter = previous;

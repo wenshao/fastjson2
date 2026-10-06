@@ -1,0 +1,25 @@
+=== mutation: h05-FieldReaderList  [creator=reflect] (mvn rc=1)
+  tests=120 failed=1
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+=== mutation: h04-FieldReaderAnySetter  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h06-FieldReaderList  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h07-FieldReaderList  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h08-FieldReaderMapReadOnly  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h09-ObjectReaderCreatorASM  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h12-ObjectReaderImplList  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h13-ObjectReaderImplList  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h14-ObjectReaderImplMapTyped  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h15-ObjectReaderImplObject  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: h19-ObjectReaderImplOptional  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0
+=== mutation: c:readany-word  [creator=reflect] (mvn rc=0)
+  tests=120 failed=0

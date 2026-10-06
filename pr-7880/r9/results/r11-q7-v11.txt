@@ -1,0 +1,11 @@
+jar fastjson2-v11.jar
+asm WriteClassName, SubChild in Map<String,Child>: {"@type":"p.Q7$Poly","annotated":{"@type":"java.util.LinkedHashMap","k":{"@type":"p.Q7$SubChild","zebra":3,"mid":5,"extra":9}},"plain":{"@type":"java.util.LinkedHashMap","k":{"@type":"p.Q7$SubChild","zebra":3,"mid":5,"extra":9}}}
+asm   JSONB round trip (SupportAutoType): annotated value class=SubChild, plain value class=SubChild
+asm BeanToArray context: [[[3,null,5]],{"k":[3,null,5]},[3,null,5]]
+asm no context feature : {"list":[{"zebra":3,"mid":5}],"map":{"k":{"zebra":3,"mid":5}},"single":[3,null,5]}
+asm ValueFilter on context, bean map key: {"m":{"{\"password\":\"***\",\"user\":\"u\"}":"v"}}
+reflect WriteClassName, SubChild in Map<String,Child>: {"@type":"p.Q7$Poly","annotated":{"@type":"java.util.LinkedHashMap","k":{"@type":"p.Q7$SubChild","zebra":3,"apple":null,"mid":5,"extra":9}},"plain":{"@type":"java.util.LinkedHashMap","k":{"@type":"p.Q7$SubChild","zebra":3,"mid":5,"extra":9}}}
+reflect   JSONB round trip (SupportAutoType): annotated value class=SubChild, plain value class=SubChild
+reflect BeanToArray context: [[[3,null,5]],{"k":[3,null,5]},[3,null,5]]
+reflect no context feature : {"list":[[3,null,5]],"map":{"k":[3,null,5]},"single":[3,null,5]}
+reflect ValueFilter on context, bean map key: {"m":{"{\"password\":\"***\",\"user\":\"u\"}":"v"}}

@@ -1,0 +1,113 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench11.ListJsonb7880.basketJSONB
+
+# Run progress: 0.00% complete, ETA 00:00:27
+# Fork: 1 of 1
+# Warmup Iteration   1: 498.578 ops/ms
+# Warmup Iteration   2: 601.043 ops/ms
+# Warmup Iteration   3: 599.018 ops/ms
+# Warmup Iteration   4: 596.680 ops/ms
+Iteration   1: 602.162 ops/ms
+Iteration   2: 600.162 ops/ms
+Iteration   3: 601.749 ops/ms
+Iteration   4: 603.026 ops/ms
+Iteration   5: 602.778 ops/ms
+
+
+Result "bench11.ListJsonb7880.basketJSONB":
+  601.975 ±(99.9%) 4.357 ops/ms [Average]
+  (min, avg, max) = (600.162, 601.975, 603.026), stdev = 1.131
+  CI (99.9%): [597.619, 606.332] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench11.ListJsonb7880.nestedListJSON
+
+# Run progress: 33.33% complete, ETA 00:00:18
+# Fork: 1 of 1
+# Warmup Iteration   1: 162.501 ops/ms
+# Warmup Iteration   2: 211.613 ops/ms
+# Warmup Iteration   3: 213.480 ops/ms
+# Warmup Iteration   4: 213.061 ops/ms
+Iteration   1: 213.041 ops/ms
+Iteration   2: 210.353 ops/ms
+Iteration   3: 213.182 ops/ms
+Iteration   4: 213.421 ops/ms
+Iteration   5: 213.653 ops/ms
+
+
+Result "bench11.ListJsonb7880.nestedListJSON":
+  212.730 ±(99.9%) 5.195 ops/ms [Average]
+  (min, avg, max) = (210.353, 212.730, 213.653), stdev = 1.349
+  CI (99.9%): [207.535, 217.925] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.12, OpenJDK 64-Bit Server VM, 21.0.12+8-LTS
+# VM invoker: <jdk21>/bin/java
+# VM options: -Xms1g -Xmx1g
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 4 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: bench11.ListJsonb7880.rootListJSONB
+
+# Run progress: 66.67% complete, ETA 00:00:09
+# Fork: 1 of 1
+# Warmup Iteration   1: 520.278 ops/ms
+# Warmup Iteration   2: 631.513 ops/ms
+# Warmup Iteration   3: 611.540 ops/ms
+# Warmup Iteration   4: 614.462 ops/ms
+Iteration   1: 616.638 ops/ms
+Iteration   2: 616.588 ops/ms
+Iteration   3: 620.498 ops/ms
+Iteration   4: 618.737 ops/ms
+Iteration   5: 617.655 ops/ms
+
+
+Result "bench11.ListJsonb7880.rootListJSONB":
+  618.023 ±(99.9%) 6.314 ops/ms [Average]
+  (min, avg, max) = (616.588, 618.023, 620.498), stdev = 1.640
+  CI (99.9%): [611.710, 624.337] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:27
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                      Mode  Cnt    Score   Error   Units
+ListJsonb7880.basketJSONB     thrpt    5  601.975 ± 4.357  ops/ms
+ListJsonb7880.nestedListJSON  thrpt    5  212.730 ± 5.195  ops/ms
+ListJsonb7880.rootListJSONB   thrpt    5  618.023 ± 6.314  ops/ms
+
+Benchmark result is saved to <work>/env/jmh/ab-r11h/v11b-r1.json

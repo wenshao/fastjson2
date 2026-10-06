@@ -1,0 +1,14 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+index bae1379af..ebe474b3f 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+@@ -142,7 +142,8 @@ public final class ObjectReaderImplObject
+                 if (name == null) {
+                     char current = jsonReader.current();
+                     if (current == '{' || current == '[') {
+-                        name = jsonReader.readAny();
++                        name = jsonReader.readAny((features | context.getFeatures())
++                                & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+                         if (!jsonReader.nextIfMatch(':')) {
+                             throw new JSONException(jsonReader.info("illegal input"));
+                         }

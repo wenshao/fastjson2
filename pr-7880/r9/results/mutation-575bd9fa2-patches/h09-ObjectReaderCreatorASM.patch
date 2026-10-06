@@ -1,0 +1,16 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+index 9a27e6ec9..f8efc792b 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+@@ -4051,7 +4051,11 @@ public class ObjectReaderCreatorASM
+                 mw.aload(JSON_READER);
+                 gwGetFieldType(classNameType, mw, i, fieldType);
+                 mw.visitLdcInsn(fieldReader.fieldName);
++                // the FEATURES slot is the caller's word (0 on a root call); merge the field's own
++                // word so @JSONField(deserializeFeatures=ErrorOnDuplicateKeys) travels to item readers
++                mw.visitLdcInsn(fieldReader.features);
+                 mw.lload(FEATURES);
++                mw.lor();
+                 mw.invokeinterface(
+                         TYPE_OBJECT_READER,
+                         jsonb ? "readArrayMappingJSONBObject" : "readArrayMappingObject",

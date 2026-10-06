@@ -1,0 +1,2 @@
+asm constructor List<Map> param: ok [{b=2}]
+reflect constructor List<Map> param: ok [{b=2}]

@@ -1,0 +1,11 @@
+  630  cells
+    0  reflect output changed
+  168  ASM unchanged, equal to reflect
+  241  ASM unchanged, differs from reflect
+  221  ASM changed
+  221    of which key order only
+    0    of which content changed
+   97    of which now equal to reflect
+  124    of which still differ from reflect in content (X does not reach the beans under ASM)
+    0    of which REGRESSION (was equal to reflect)
+    0    other

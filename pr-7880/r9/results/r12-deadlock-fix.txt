@@ -1,0 +1,9 @@
+# probe6/p/Deadlock7.java, JDK 21, default provider, no features; HUNG = both threads still blocked after 10 s
+fastjson2-fix12f.jar ctor creator=asm: completed
+fastjson2-fix12f.jar ctor creator=reflect: completed
+fastjson2-fix12f.jar enum creator=asm: completed
+fastjson2-fix12f.jar enum creator=reflect: completed
+fastjson2-fix12cf.jar ctor creator=asm: completed
+fastjson2-fix12cf.jar ctor creator=reflect: completed
+fastjson2-fix12cf.jar enum creator=asm: completed
+fastjson2-fix12cf.jar enum creator=reflect: completed

@@ -1,0 +1,4 @@
+asm/plain  List<Object>=MyList={"f":[]}  MyList=MyList={"f":"CUSTOM"}  Collection=MySet={"f":"CUSTOM"}  Set=MySet={"f":"CUSTOM"}  Base=Sub={"f":"CUSTOM"}  JSONObject=MyJSONObject={"f":{}}  Map=MyJSONObject={"f":{}}
+asm/filter  List<Object>=MyList={"f":[]}  MyList=MyList={"f":"CUSTOM"}  Collection=MySet={"f":"CUSTOM"}  Set=MySet={"f":"CUSTOM"}  Base=Sub={"f":"CUSTOM"}  JSONObject=MyJSONObject={"f":{}}  Map=MyJSONObject={"f":{}}
+reflect/plain  List<Object>=MyList={"f":[]}  MyList=MyList={"f":"CUSTOM"}  Collection=MySet={"f":"CUSTOM"}  Set=MySet={"f":"CUSTOM"}  Base=Sub={"f":"CUSTOM"}  JSONObject=MyJSONObject={"f":{}}  Map=MyJSONObject={"f":{}}
+reflect/filter  List<Object>=MyList={"f":[]}  MyList=MyList={"f":"CUSTOM"}  Collection=MySet={"f":"CUSTOM"}  Set=MySet={"f":"CUSTOM"}  Base=Sub={"f":"CUSTOM"}  JSONObject=MyJSONObject={"f":{}}  Map=MyJSONObject={"f":{}}

@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplList.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplList.java
+index 8439487ef..2769748d6 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplList.java
+@@ -651,7 +651,7 @@ public final class ObjectReaderImplList
+             jsonReader.next();
+         } else {
+             if ((itemClass != Object.class && itemObjectReader != null) || (itemClass == Object.class && jsonReader.isObject())) {
+-                Object item = itemObjectReader.readObject(jsonReader, itemType, 0, 0);
++                Object item = itemObjectReader.readObject(jsonReader, itemType, 0, (features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+                 list.add(item);
+                 if (builder != null) {
+                     list = (Collection) builder.apply(list);

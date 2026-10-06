@@ -1,0 +1,418 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 17d25e82e..2999b2cfb 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -253,11 +253,12 @@ public class JSONObject
+                     && decimal.compareTo(BigDecimal.valueOf(Long.MAX_VALUE)) <= 0;
+         }
+         if (value instanceof Number) {
+-            // any other integral Number (AtomicInteger, AtomicLong, LongAdder, custom types):
+-            // answered from the same conversion getLongValue would use, so a wrapped or
+-            // non-integral value (DoubleAdder, atomic accumulators) answers false
++            // any other Number (AtomicInteger, AtomicLong, LongAdder, DoubleAdder, custom types):
++            // answered from the same conversion getLongValue would use. It is convertible when
++            // longValue() is the truncated value, so a fraction counts as for Double, while a
++            // wrapped, out-of-range or NaN value answers false
+             Number number = (Number) value;
+-            return number.longValue() == number.doubleValue();
++            return Math.abs(number.longValue() - number.doubleValue()) < 1;
+         }
+         return false;
+     }
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+index a4106e25f..5f2382545 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+@@ -3769,7 +3769,7 @@ public abstract class JSONReader
+                 } else if (ch == '{') {
+                     name = readObject(features);
+                 } else if (ch == '[') {
+-                    name = readArray();
++                    name = readArray(features);
+                 } else {
+                     name = readFieldNameUnquote();
+                 }
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+index f8efc792b..3ea9cf5a7 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+@@ -4051,9 +4051,10 @@ public class ObjectReaderCreatorASM
+                 mw.aload(JSON_READER);
+                 gwGetFieldType(classNameType, mw, i, fieldType);
+                 mw.visitLdcInsn(fieldReader.fieldName);
+-                // the FEATURES slot is the caller's word (0 on a root call); merge the field's own
+-                // word so @JSONField(deserializeFeatures=ErrorOnDuplicateKeys) travels to item readers
+-                mw.visitLdcInsn(fieldReader.features);
++                // the FEATURES slot is the caller's word (0 on a root call); merge only the strict bit of the
++                // field's own word, so @JSONField(deserializeFeatures=ErrorOnDuplicateKeys) travels to item
++                // readers while other field features keep applying to the list alone, as with the reflective creator
++                mw.visitLdcInsn(fieldReader.features & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+                 mw.lload(FEATURES);
+                 mw.lor();
+                 mw.invokeinterface(
+@@ -4072,7 +4073,7 @@ public class ObjectReaderCreatorASM
+             mw.aload(JSON_READER);
+             gwGetFieldType(classNameType, mw, i, fieldType);
+             mw.visitLdcInsn(fieldReader.fieldName);
+-            mw.visitLdcInsn(fieldReader.features);
++            mw.visitLdcInsn(fieldReader.features & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+             mw.lload(FEATURES);
+             mw.lor();
+             mw.invokeinterface(
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 17a3c3f6c..49e8cf965 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -153,7 +153,7 @@ public class FieldWriterObject<T>
+             return formattedWriter;
+         }
+ 
+-        if (format == null && !Map.class.isAssignableFrom(fieldClass)) {
++        if (format == null) {
+             formattedWriter = jsonWriter.context.provider.getObjectWriterFromCache(valueClass, valueClass, features | jsonWriter.getFeatures());
+         }
+         if (formattedWriter instanceof ObjectWriterImplMap && Map.class.isAssignableFrom(fieldClass)) {
+diff --git a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+index 86f619dac..7f6060cde 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+@@ -278,6 +278,18 @@ public class TreeModelTest {
+         assertFalse(wrapped.canConvertToLong("nanAcc"));
+         wrapped.put("maxLongDiscriminatingProbe", Long.MAX_VALUE);
+         assertTrue(wrapped.canConvertToLong("maxLongDiscriminatingProbe"));
++
++        // a fraction is truncated as for Double and BigDecimal; NaN in an accumulator is not convertible
++        java.util.concurrent.atomic.DoubleAdder fraction = new java.util.concurrent.atomic.DoubleAdder();
++        fraction.add(1.5);
++        wrapped.put("fraction", fraction);
++        wrapped.put("double", 1.5);
++        assertTrue(wrapped.canConvertToLong("fraction"));
++        assertTrue(wrapped.canConvertToLong("double"));
++        java.util.concurrent.atomic.DoubleAdder nan = new java.util.concurrent.atomic.DoubleAdder();
++        nan.add(Double.NaN);
++        wrapped.put("nan", nan);
++        assertFalse(wrapped.canConvertToLong("nan"));
+     }
+ 
+     @com.alibaba.fastjson2.annotation.JSONType(alphabetic = false)
+diff --git a/core/src/test/java/com/alibaba/fastjson2/features/ErrorOnDuplicateKeysTest.java b/core/src/test/java/com/alibaba/fastjson2/features/ErrorOnDuplicateKeysTest.java
+index 15c548b47..9c0fe3e61 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/features/ErrorOnDuplicateKeysTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/features/ErrorOnDuplicateKeysTest.java
+@@ -7,6 +7,9 @@ import com.alibaba.fastjson2.JSONFactory;
+ import com.alibaba.fastjson2.JSONObject;
+ import com.alibaba.fastjson2.JSONReader;
+ import com.alibaba.fastjson2.TypeReference;
++import com.alibaba.fastjson2.reader.ObjectReaderCreator;
++import com.alibaba.fastjson2.reader.ObjectReaderCreatorASM;
++import com.alibaba.fastjson2.reader.ObjectReaderProvider;
+ import org.junit.jupiter.api.Tag;
+ import org.junit.jupiter.api.Test;
+ 
+@@ -15,6 +18,7 @@ import java.util.LinkedHashMap;
+ import java.util.Map;
+ 
+ import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.junit.jupiter.api.Assertions.assertNull;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
+ import static org.junit.jupiter.api.Assertions.assertTrue;
+ 
+@@ -452,4 +456,140 @@ public class ErrorOnDuplicateKeysTest {
+             assertTrue(error.getMessage().contains("duplicate key"));
+         }
+     }
++
++    @Test
++    public void arrayMapKeysGetTheStrictWord() {
++        try (JSONReader jsonReader = JSONReader.of("{[{\"x\":1,\"x\":2}]:1}")) {
++            JSONException error = assertThrows(JSONException.class,
++                    () -> jsonReader.readObject(JSONReader.Feature.ErrorOnDuplicateKeys.mask));
++            assertTrue(error.getMessage().contains("duplicate key"));
++        }
++    }
++
++    public static class Row {
++        public String name;
++    }
++
++    public static class StrictRowsHolder {
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = {
++                JSONReader.Feature.ErrorOnDuplicateKeys, JSONReader.Feature.InitStringFieldAsEmpty})
++        public java.util.List<Row> rows;
++    }
++
++    @Test
++    public void typedListFieldsForwardOnlyTheStrictBitWithEitherCreator() {
++        // the strict bit of a list field reaches its item readers with either creator; the field's other
++        // features keep applying to the field alone, so the items are read as without the annotation
++        for (ObjectReaderCreator creator : new ObjectReaderCreator[]{ObjectReaderCreatorASM.INSTANCE, ObjectReaderCreator.INSTANCE}) {
++            ObjectReaderProvider provider = new ObjectReaderProvider(creator);
++            JSONException error = assertThrows(JSONException.class,
++                    () -> JSON.parseObject("{\"rows\":[{\"b\":1,\"b\":2}]}", StrictTypedListHolder.class, new JSONReader.Context(provider)));
++            assertDuplicateKeyMessage(error, "b");
++            StrictRowsHolder holder = JSON.parseObject("{\"rows\":[{}]}", StrictRowsHolder.class, new JSONReader.Context(provider));
++            assertNull(holder.rows.get(0).name, creator.getClass().getSimpleName());
++        }
++    }
++
++    public static class StrictShapes {
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.List<Map<String, Object>> list;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public Map<String, Object>[] array;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.Set<Map<String, Object>> set;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.Optional<Map<String, Object>> optional;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public Map<String, java.util.List<Map<String, Object>>> listsInMap;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.List<java.util.List<Map<String, Object>>> listsInList;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public Map<Map<String, Object>, String> mapKeys;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public Map<Object, String> objectKeys;
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.List<Object> objects;
++    }
++
++    public static class StrictAnySetter {
++        public Map<String, Object> extras = new LinkedHashMap<>();
++
++        @com.alibaba.fastjson2.annotation.JSONField(unwrapped = true, deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public void add(String name, Object value) {
++            extras.put(name, value);
++        }
++    }
++
++    public static class StrictUnwrappedReadOnly {
++        private final Map<String, Object> extras = new LinkedHashMap<>();
++
++        @com.alibaba.fastjson2.annotation.JSONField(unwrapped = true, deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public Map<String, Object> getExtras() {
++            return extras;
++        }
++    }
++
++    public static class StrictCreatorRows {
++        final java.util.List<Map<String, Object>> rows;
++
++        @com.alibaba.fastjson2.annotation.JSONCreator(parameterNames = "rows")
++        public StrictCreatorRows(
++                @com.alibaba.fastjson2.annotation.JSONField(name = "rows", deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++                java.util.List<Map<String, Object>> rows) {
++            this.rows = rows;
++        }
++    }
++
++    @com.alibaba.fastjson2.annotation.JSONType(deserializeFeatures = JSONReader.Feature.SupportArrayToBean)
++    public static class StrictPositionalRows {
++        @com.alibaba.fastjson2.annotation.JSONField(deserializeFeatures = JSONReader.Feature.ErrorOnDuplicateKeys)
++        public java.util.List<Map<String, Object>> rows;
++    }
++
++    @Test
++    public void fieldLevelStrictBitReachesNestedMapsWithEitherCreator() {
++        // a field-level strict bit rejects a duplicate in any map nested in the field's value, keys included, as the
++        // context-level one does, with either creator and for String and UTF-8 input
++        String dup = "{\"b\":1,\"b\":2}";
++        String[] inputs = {
++                "{\"list\":[" + dup + "]}",
++                "{\"array\":[" + dup + "]}",
++                "{\"set\":[" + dup + "]}",
++                "{\"optional\":" + dup + "}",
++                "{\"listsInMap\":{\"k\":[" + dup + "]}}",
++                "{\"listsInList\":[[" + dup + "]]}",
++                "{\"mapKeys\":{" + dup + ":\"v\"}}",
++                "{\"objectKeys\":{" + dup + ":\"v\"}}",
++                "{\"objects\":[" + dup + "]}",
++                "{\"objects\":[{" + dup + ":\"v\"}]}",
++        };
++        for (ObjectReaderCreator creator : new ObjectReaderCreator[]{ObjectReaderCreatorASM.INSTANCE, ObjectReaderCreator.INSTANCE}) {
++            for (String json : inputs) {
++                assertDuplicateKeyRejected(creator, StrictShapes.class, json);
++            }
++            assertDuplicateKeyRejected(creator, StrictAnySetter.class, "{\"l\":" + dup + "}");
++            assertDuplicateKeyRejected(creator, StrictUnwrappedReadOnly.class, "{\"x\":" + dup + "}");
++            assertDuplicateKeyRejected(creator, StrictCreatorRows.class, "{\"rows\":[" + dup + "]}");
++            assertDuplicateKeyRejected(creator, StrictPositionalRows.class, "[[" + dup + "]]");
++        }
++    }
++
++    private static void assertDuplicateKeyRejected(ObjectReaderCreator creator, Class<?> type, String json) {
++        for (boolean utf8 : new boolean[]{false, true}) {
++            JSONReader.Context context = new JSONReader.Context(new ObjectReaderProvider(creator));
++            String message = creator.getClass().getSimpleName() + (utf8 ? " utf8 " : " ") + json;
++            JSONException error = assertThrows(JSONException.class, () -> {
++                try (JSONReader reader = utf8
++                        ? JSONReader.of(json.getBytes(java.nio.charset.StandardCharsets.UTF_8), context)
++                        : JSONReader.of(json, context)) {
++                    reader.read(type);
++                }
++            }, message);
++            boolean duplicate = false;
++            for (Throwable cause = error; cause != null; cause = cause.getCause()) {
++                duplicate |= String.valueOf(cause.getMessage()).contains("duplicate key");
++            }
++            assertTrue(duplicate, message + " -> " + error);
++        }
++    }
+ }
+diff --git a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+index f826dfa63..19531c4d5 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+@@ -649,4 +649,128 @@ public class SortFieldNamesRegistryTest {
+             JSONFactory.setContextWriterCreator(contextCreator);
+         }
+     }
++
++    public static class Ledger
++            extends java.util.HashMap<String, Object> {
++    }
++
++    static final class LedgerWriter
++            implements ObjectWriter<Ledger> {
++        static final LedgerWriter INSTANCE = new LedgerWriter();
++
++        @Override
++        public void write(JSONWriter jsonWriter, Object object, Object fieldName, Type fieldType, long features) {
++            jsonWriter.writeString("ledger");
++        }
++    }
++
++    public static class LedgerHolder {
++        public java.util.Map<String, Object> asMap = new Ledger();
++        public Ledger asLedger = new Ledger();
++        public Object asObject = new Ledger();
++    }
++
++    @Test
++    public void registeredMapWriterHonoredForMapDeclaredFields() {
++        // a writer registered for the runtime Map class applies whatever the field's declared type, as before;
++        // only the untyped built-in map writer is skipped for Map-declared fields
++        ObjectWriterCreator contextCreator = JSONFactory.getContextWriterCreator();
++        JSONFactory.setContextWriterCreator(null);
++        try {
++            for (ObjectWriterCreator creator : new ObjectWriterCreator[]{ObjectWriterCreatorASM.INSTANCE, ObjectWriterCreator.INSTANCE}) {
++                ObjectWriterProvider provider = new ObjectWriterProvider(creator);
++                provider.register(Ledger.class, LedgerWriter.INSTANCE);
++                String expected = "{\"asLedger\":\"ledger\",\"asMap\":\"ledger\",\"asObject\":\"ledger\"}";
++                assertEquals(expected, JSON.toJSONString(new LedgerHolder(), new JSONWriter.Context(provider)));
++                assertEquals(expected, JSON.toJSONString(new LedgerHolder(),
++                        new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically)));
++            }
++        } finally {
++            JSONFactory.setContextWriterCreator(contextCreator);
++        }
++    }
++
++    @JSONType(alphabetic = false)
++    public static class Natural {
++        public int zeta = 1;
++        public int alpha = 2;
++    }
++
++    @Test
++    public void generatedAndModuleWritersGetSortedVariants() {
++        // a registered writer built by the ASM creator, and a plain writer returned by a module, are rebuilt in
++        // field-name order for a sorted context, as a registered writer built by the reflective creator already was
++        ObjectWriterCreator contextCreator = JSONFactory.getContextWriterCreator();
++        JSONFactory.setContextWriterCreator(null);
++        try {
++            ObjectWriterProvider registered = new ObjectWriterProvider();
++            registered.register(Natural.class, ObjectWriterCreatorASM.INSTANCE.createObjectWriter(Natural.class));
++            ObjectWriter moduleWriter = ObjectWriterCreator.INSTANCE.createObjectWriter(Natural.class);
++            ObjectWriterProvider fromModule = new ObjectWriterProvider();
++            fromModule.register(new com.alibaba.fastjson2.modules.ObjectWriterModule() {
++                @Override
++                public ObjectWriter getObjectWriter(Type objectType, Class objectClass) {
++                    return objectClass == Natural.class ? moduleWriter : null;
++                }
++            });
++            for (ObjectWriterProvider provider : new ObjectWriterProvider[]{registered, fromModule}) {
++                assertEquals("{\"zeta\":1,\"alpha\":2}", JSON.toJSONString(new Natural(), new JSONWriter.Context(provider)));
++                assertEquals("{\"alpha\":2,\"zeta\":1}", JSON.toJSONString(new Natural(),
++                        new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically)));
++            }
++        } finally {
++            JSONFactory.setContextWriterCreator(contextCreator);
++        }
++    }
++
++    public static class TypedMapHolder {
++        public java.util.Map<String, Natural> entries = new java.util.LinkedHashMap<>(java.util.Collections.singletonMap("k", new Natural()));
++    }
++
++    @Test
++    public void mapFieldKeepsTypedWriterAfterTheRuntimeMapCellIsWarm() {
++        // Map-declared fields consult the cache for registered writers, but the built-in untyped map writer cached for
++        // the runtime class is still skipped: it would drop the declared value type and add a per-entry @type
++        ObjectWriterCreator contextCreator = JSONFactory.getContextWriterCreator();
++        JSONFactory.setContextWriterCreator(null);
++        try {
++            ObjectWriterProvider provider = new ObjectWriterProvider(ObjectWriterCreatorASM.INSTANCE);
++            JSON.toJSONString(new java.util.LinkedHashMap<>(), new JSONWriter.Context(provider));
++            String json = JSON.toJSONString(new TypedMapHolder(), new JSONWriter.Context(provider, JSONWriter.Feature.WriteClassName));
++            assertEquals(-1, json.indexOf(Natural.class.getName()), json);
++        } finally {
++            JSONFactory.setContextWriterCreator(contextCreator);
++        }
++    }
++
++    @JSONType(alphabetic = false)
++    public static class Position {
++        public int zulu = 7;
++        public int alpha = 1;
++    }
++
++    @JSONType(serializeFeatures = JSONWriter.Feature.SortFieldNamesAlphabetically)
++    public static class SortedPositions {
++        public java.util.List<Position> items = java.util.Collections.singletonList(new Position());
++    }
++
++    @Test
++    public void annotationSortedListItemsKeepPositionalOrderWarmOrCold() {
++        // positional JSONB of a list field's items keeps the declared order whether or not the item's natural writer
++        // was cached first: the generated list writer must not bake either order into a sorted creation
++        ObjectWriterCreator contextCreator = JSONFactory.getContextWriterCreator();
++        JSONFactory.setContextWriterCreator(null);
++        try {
++            for (boolean warm : new boolean[]{false, true}) {
++                ObjectWriterProvider provider = new ObjectWriterProvider(ObjectWriterCreatorASM.INSTANCE);
++                if (warm) {
++                    JSON.toJSONString(new Position(), new JSONWriter.Context(provider));
++                }
++                byte[] jsonb = JSONB.toBytes(new SortedPositions(), new JSONWriter.Context(provider, JSONWriter.Feature.BeanToArray));
++                assertEquals("[[[7,1]]]", JSON.toJSONString(JSONB.parse(jsonb)), warm ? "warm" : "cold");
++            }
++        } finally {
++            JSONFactory.setContextWriterCreator(contextCreator);
++        }
++    }
+ }
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+index 2541a46eb..931844613 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+@@ -117,4 +117,20 @@ public class MapKeyContextTest {
+                     JSON.toJSONString(new SortedKeys(), context), creator.getClass().getSimpleName());
+         }
+     }
++
++    @Test
++    public void sortedBeanKeyValuesAreNotReferencedThroughTheKeyText() {
++        // the text of a sorted bean key is not a path any reader resolves, so a value repeated under such keys is
++        // written in full, as without the sort
++        Secret shared = new Secret();
++        Map<Object, Object> map = new LinkedHashMap<>();
++        map.put(new Secret(), shared);
++        map.put(new Secret(), shared);
++        for (ObjectWriterCreator creator : new ObjectWriterCreator[]{ObjectWriterCreatorASM.INSTANCE, ObjectWriterCreator.INSTANCE}) {
++            JSONWriter.Context context = new JSONWriter.Context(new ObjectWriterProvider(creator),
++                    JSONWriter.Feature.ReferenceDetection, JSONWriter.Feature.SortFieldNamesAlphabetically);
++            String json = JSON.toJSONString(map, context);
++            assertEquals(-1, json.indexOf("$ref"), creator.getClass().getSimpleName() + " " + json);
++        }
++    }
+ }

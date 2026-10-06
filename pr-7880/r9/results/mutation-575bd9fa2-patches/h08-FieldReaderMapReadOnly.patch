@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderMapReadOnly.java b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderMapReadOnly.java
+index 0a110b32f..b60521c8b 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderMapReadOnly.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderMapReadOnly.java
+@@ -94,7 +94,7 @@ class FieldReaderMapReadOnly<T>
+         String name = jsonReader.getFieldName();
+ 
+         ObjectReader itemObjectReader = getItemObjectReader(jsonReader);
+-        Object value = itemObjectReader.readObject(jsonReader, getItemType(), fieldName, 0);
++        Object value = itemObjectReader.readObject(jsonReader, getItemType(), fieldName, (features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+         getReadOnlyMap(object)
+                 .put(name, value);
+     }

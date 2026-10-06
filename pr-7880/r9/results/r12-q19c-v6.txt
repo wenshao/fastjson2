@@ -1,0 +1,4 @@
+asm cold {"@type":"p19c.Q19c$WithMap","entries":{"@type":"java.util.LinkedHashMap","k":{"zebra":3,"apple":1}},"id":9}
+asm warm {"@type":"p19c.Q19c$WithMap","entries":{"@type":"java.util.LinkedHashMap","k":{"@type":"p19c.Q19c$V","zebra":3,"apple":1}},"id":9}
+reflect cold {"@type":"p19c.Q19c$WithMap","entries":{"@type":"java.util.LinkedHashMap","k":{"@type":"p19c.Q19c$V","zebra":3,"apple":1}},"id":9}
+reflect warm {"@type":"p19c.Q19c$WithMap","entries":{"@type":"java.util.LinkedHashMap","k":{"@type":"p19c.Q19c$V","zebra":3,"apple":1}},"id":9}

@@ -1,0 +1,4 @@
+asm provider, module writer from asm creator: natural={"zeta":1,"alpha":2} sorted={"zeta":1,"alpha":2}
+asm provider, module writer from reflect creator: natural={"zeta":1,"alpha":2} sorted={"zeta":1,"alpha":2}
+reflect provider, module writer from asm creator: natural={"zeta":1,"alpha":2} sorted={"zeta":1,"alpha":2}
+reflect provider, module writer from reflect creator: natural={"zeta":1,"alpha":2} sorted={"zeta":1,"alpha":2}

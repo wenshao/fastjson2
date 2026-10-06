@@ -1,0 +1,17 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 029bd159b..17d25e82e 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -254,8 +254,10 @@ public class JSONObject
+         }
+         if (value instanceof Number) {
+             // any other integral Number (AtomicInteger, AtomicLong, LongAdder, custom types):
+-            // answered from the same conversion getLongValue would use
+-            return true;
++            // answered from the same conversion getLongValue would use, so a wrapped or
++            // non-integral value (DoubleAdder, atomic accumulators) answers false
++            Number number = (Number) value;
++            return number.longValue() == number.doubleValue();
+         }
+         return false;
+     }

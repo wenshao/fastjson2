@@ -1,0 +1,17 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index c63245e9e..3c273cce0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -464,8 +464,10 @@ public final class ObjectWriterImplMap
+                     jsonWriter.writeNameAny(key);
+                 } else {
+                     // bean keys under the sort feature resolve with the merged word, so a
+-                    // field-level sort request reaches the key's own fields
+-                    jsonWriter.writeName(strKey = mapKeyToString(key, jsonWriter, features));
++                    // field-level sort request reaches the key's own fields. The rendered blob is
++                    // not a name any reader resolves, so do NOT keep it in strKey: a $ref built
++                    // from the blob loses its value on the round trip
++                    jsonWriter.writeName(mapKeyToString(key, jsonWriter, features));
+                 }
+             }
+         }

@@ -1,0 +1,4 @@
+fix12f asm asm rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0
+fix12f reflect reflect rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0
+fix12cf asm asm rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0
+fix12cf reflect reflect rounds=3000 writers=6 writes-after-setFilter=360000 unmasked=0 unconverged-rounds=0

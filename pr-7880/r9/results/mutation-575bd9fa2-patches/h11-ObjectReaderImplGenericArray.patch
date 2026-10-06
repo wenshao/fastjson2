@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplGenericArray.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplGenericArray.java
+index 1ffac89b6..03ca5e7da 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplGenericArray.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplGenericArray.java
+@@ -110,7 +110,7 @@ class ObjectReaderImplGenericArray
+         while (!jsonReader.nextIfArrayEnd()) {
+             Object item;
+             if (itemObjectReader != null) {
+-                item = itemObjectReader.readObject(jsonReader, itemType, null, 0);
++                item = itemObjectReader.readObject(jsonReader, itemType, null, (features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+             } else {
+                 if (itemType == String.class) {
+                     item = jsonReader.readString();

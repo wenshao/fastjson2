@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+index 1b1bb870c..82fa3f2cd 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+@@ -88,7 +88,7 @@ class ObjectReaderImplOptional
+                     itemObjectReader = formattedObjectReader;
+                 }
+             }
+-            value = itemObjectReader.readObject(jsonReader, itemType, fieldName, 0);
++            value = itemObjectReader.readObject(jsonReader, itemType, fieldName, (features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+         }
+ 
+         if (value == null) {

@@ -1,0 +1,2745 @@
+{
+	"java":"1.8.0_504",
+	"pass":425,
+	"fail":0,
+	"diff":6,
+	"info":25,
+	"results":[
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | simple duplicate",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"DIFF",
+			"section":"A.dup",
+			"id":"POJO target (StrictBean) | simple duplicate",
+			"detail":"fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | first occurrence null",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"DIFF",
+			"section":"A.dup",
+			"id":"POJO target (StrictBean) | first occurrence null",
+			"detail":"fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"DIFF",
+			"section":"A.dup",
+			"id":"POJO target (StrictBean) | escaped duplicate (\\u0069d == id)",
+			"detail":"fastjson2=ok jackson(STRICT_DUPLICATE_DETECTION)=dup-error  [documented scope: untyped Map/tree only]"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | duplicate in nested object",
+			"detail":"fastjson2=dup-error jackson=dup-error"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | case differs (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=error:MismatchedInputException"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=error:MismatchedInputException"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"POJO target (StrictBean) | same key at different depth (not a duplicate)",
+			"detail":"fastjson2=ok jackson=error:MismatchedInputException"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(String) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(byte[] UTF8) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(char[]).readObject | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(InputStream) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSONReader.of(Reader).readObject | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parse(String) -> Object | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Object.class) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, Map.class) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, HashMap.class) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseObject(s, TreeMap.class) | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Object>> | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,String>> | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<String,Integer>> | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"TypeReference<Map<Integer,Object>> | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"JSON.parseArray -> JSONArray | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"Bean{Map<String,Object> payload} | no duplicate",
+			"detail":"fastjson2=ok jackson=ok"
+		},
+		{
+			"status":"INFO",
+			"section":"A.dup",
+			"id":"differential agreement",
+			"detail":"110/113 combinations agree with jackson"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"error message names key + position",
+			"detail":"duplicate key : a, offset 14, character 2, line 2, column 7, fastjson-version 2.0.64 {\"a\":1,  \"a\":2}"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"ErrorOnDuplicateKeys wins over DuplicateKeyValueAsArray",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"feature off: last value wins (unchanged)",
+			"detail":"{\"a\":2}"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"feature off: DuplicateKeyValueAsArray unchanged",
+			"detail":"{\"a\":[1,2]}"
+		},
+		{
+			"status":"INFO",
+			"section":"A.dup",
+			"id":"with IgnoreNullPropertyValue {a:null,a:1}",
+			"detail":"dup-error (null skipped before detection)"
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"global JSON.config(ErrorOnDuplicateKeys,true)",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"A.dup",
+			"id":"global config reset -> lenient again",
+			"detail":""
+		},
+		{
+			"status":"DIFF",
+			"section":"A.dup",
+			"id":"JSONB input {a:1,a:2} + ErrorOnDuplicateKeys",
+			"detail":"-> ok  (JSONB reader is outside the feature's scope; DuplicateKeyValueAsArray is ignored there too: ok:{\"a\":2})"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root Inner (final)",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root InnerNF",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Inner(final)",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field InnerNF",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field polymorphic SubNF",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Object=Inner",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field List<Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field List<InnerNF> poly",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field List<Object>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Arrays.asList",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field unmodifiableList",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Set<Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Collection(ArrayDeque)",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Inner[] (final item)",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field InnerNF[]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Object[]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Map<String,Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Map<String,InnerNF>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Map<String,Object>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Map<String,List<Inner>>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field List<List<Inner>>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Optional<Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field AtomicReference<Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field Holder<Inner> generic",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field JSONObject{Inner}",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"field JSONArray[Inner]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"getters obj/list/arr/map",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root ArrayList<Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root LinkedHashMap<String,Inner>",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root Inner[]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root InnerNF[]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root Object[]",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root JSONObject{Inner}",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B1",
+			"id":"root singletonList",
+			"detail":"144 serializations, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"ordering == @JSONType(alphabetic=true) (ordinals honored)",
+			"detail":"{\"a\":4,\"b\":3,\"y\":2,\"z\":1} vs {\"a\":4,\"b\":3,\"y\":2,\"z\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"feature off keeps declaration order",
+			"detail":"{\"z\":1,\"y\":2,\"b\":3,\"a\":4}"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"provider.setAlphabetic(false): default declaration order",
+			"detail":"{\"z\":1,\"a\":\"x\",\"m\":true}"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"provider.setAlphabetic(false): feature restores sort",
+			"detail":"{\"a\":\"x\",\"m\":true,\"z\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"global provider interleaved U/S/U/S (HList)",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"JSON.toJSONBytes(obj, feature)",
+			"detail":"{\"f\":{\"k1\":{\"a\":\"x\",\"m\":true,\"z\":1},\"k2\":{\"a\":\"x\",\"m\":true,\"z\":1}},\"zz\":0}"
+		},
+		{
+			"status":"PASS",
+			"section":"B2",
+			"id":"combined with PrettyFormat",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: per-call BeanToArray + feature (fresh provider)",
+			"detail":"[0,[1,\"x\",true]] vs [0,[1,\"x\",true]]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: per-call BeanToArray + feature (sorted cache warm)",
+			"detail":"[0,[1,\"x\",true]] vs [0,[1,\"x\",true]]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: @JSONType(serializeFeatures=BeanToArray) + feature",
+			"detail":"[1,2,3] vs [1,2,3]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: JSONB BeanToArray + feature",
+			"detail":"[\n\t0,\n\t[\n\t\t1,\n\t\t\"x\",\n\t\ttrue\n\t]\n] vs [\n\t0,\n\t[\n\t\t1,\n\t\t\"x\",\n\t\ttrue\n\t]\n]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: @JSONField(BeanToArray) field + feature, JSON",
+			"detail":"{\"list\":[{\"to\":1001,\"from\":2002,\"amount\":300}],\"t\":[1001,2002,300]} vs {\"list\":[{\"to\":1001,\"from\":2002,\"amount\":300}],\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: @JSONType(BeanToArray) parent, nested + feature, JSON",
+			"detail":"[{\"amount\":300,\"from\":2002,\"to\":1001}]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"asm: @JSONField(BeanToArray) field + feature, JSONB",
+			"detail":"{\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]} vs {\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"DIFF",
+			"section":"B3",
+			"id":"asm: @JSONType(BeanToArray) parent, nested + feature, JSONB",
+			"detail":"{\"t\":[1001,2002,300]} vs {\"t\":[300,2002,1001]}  (pre-existing ASM/reflect JSONB divergence on main)"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: per-call BeanToArray + feature (fresh provider)",
+			"detail":"[0,[1,\"x\",true]] vs [0,[1,\"x\",true]]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: per-call BeanToArray + feature (sorted cache warm)",
+			"detail":"[0,[1,\"x\",true]] vs [0,[1,\"x\",true]]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: @JSONType(serializeFeatures=BeanToArray) + feature",
+			"detail":"[1,2,3] vs [1,2,3]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: JSONB BeanToArray + feature",
+			"detail":"[\n\t0,\n\t[\n\t\t1,\n\t\t\"x\",\n\t\ttrue\n\t]\n] vs [\n\t0,\n\t[\n\t\t1,\n\t\t\"x\",\n\t\ttrue\n\t]\n]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: @JSONField(BeanToArray) field + feature, JSON",
+			"detail":"{\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]} vs {\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: @JSONType(BeanToArray) parent, nested + feature, JSON",
+			"detail":"[{\"amount\":300,\"from\":2002,\"to\":1001}]"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: @JSONField(BeanToArray) field + feature, JSONB",
+			"detail":"{\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]} vs {\"list\":[[1001,2002,300]],\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"B3",
+			"id":"reflect: @JSONType(BeanToArray) parent, nested + feature, JSONB",
+			"detail":"{\"t\":{\"amount\":300,\"from\":2002,\"to\":1001}}"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register(Money) honored without feature",
+			"detail":"\"$1.23\""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register(Money) honored WITH feature (root)",
+			"detail":"\"$1.23\""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register(Money) honored WITH feature (as bean field)",
+			"detail":"unsorted={\"zz\":0,\"price\":\"$1.23\"} sorted={\"price\":\"$1.23\",\"zz\":0}"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register(Money) honored WITH feature (JSONB field)",
+			"detail":"{\"price\":\"$1.23\",\"zz\":0}"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"JSON.register(Money) honored WITH feature (global)",
+			"detail":"\"$1.23\""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register() after warm-up: visible without feature",
+			"detail":"\"$1.23\""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"register() after warm-up: visible WITH feature",
+			"detail":"\"$1.23\""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"mixIn() after warm-up: applied without feature",
+			"detail":"{\"z\":1,\"renamed\":2}"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"mixIn() after warm-up: applied WITH feature",
+			"detail":"{\"renamed\":2,\"z\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"cleanup(Class) evicts natural cache",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"cleanup(Class) evicts sorted cache",
+			"detail":"cacheFieldNamesSorted still holds []"
+		},
+		{
+			"status":"PASS",
+			"section":"B4",
+			"id":"clear() empties sorted caches",
+			"detail":"0 sorted writers survive clear()"
+		},
+		{
+			"status":"PASS",
+			"section":"B5",
+			"id":"asm (feature off)",
+			"detail":"loader collected after cleanup(loader)"
+		},
+		{
+			"status":"PASS",
+			"section":"B5",
+			"id":"asm + SortFieldNamesAlphabetically",
+			"detail":"loader collected after cleanup(loader)"
+		},
+		{
+			"status":"PASS",
+			"section":"B5",
+			"id":"reflect (feature off)",
+			"detail":"loader collected after cleanup(loader)"
+		},
+		{
+			"status":"PASS",
+			"section":"B5",
+			"id":"reflect + SortFieldNamesAlphabetically",
+			"detail":"loader collected after cleanup(loader)"
+		},
+		{
+			"status":"PASS",
+			"section":"B6",
+			"id":"asm: 16 threads x 3000 mixed writes",
+			"detail":"48000 writes, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B6",
+			"id":"reflect: 16 threads x 3000 mixed writes",
+			"detail":"48000 writes, 0 wrong order"
+		},
+		{
+			"status":"PASS",
+			"section":"B7",
+			"id":"same content, different map insertion order -> identical bytes",
+			"detail":"6500a713bea3e2fb / 6500a713bea3e2fb"
+		},
+		{
+			"status":"PASS",
+			"section":"B7",
+			"id":"byte-identical to jackson SORT_PROPERTIES_ALPHABETICALLY+ORDER_MAP_ENTRIES_BY_KEYS",
+			"detail":"fastjson2={\"amount\":100,\"currency\":\"CNY\",\"inner\":{\"a\":\"x\",\"m\":true,\"z\":1},\"items\":[{\"a\":\"x\",\"m\":true,\"z\":1},{\"a\":\"x\",\"m\":true,\"z\":1}],\"meta\":{\"alpha\":{\"b\":3,\"y\":2},\"zeta\":1},\"zId\":\"o-1\"}  jackson={\"amount\":100,\"currency\":\"CNY\",\"inner\":{\"a\":\"x\",\"m\":true,\"z\":1},\"items\":[{\"a\":\"x\",\"m\":true,\"z\":1},{\"a\":\"x\",\"m\":true,\"z\":1}],\"meta\":{\"alpha\":{\"b\":3,\"y\":2},\"zeta\":1},\"zId\":\"o-1\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"B7",
+			"id":"default output (for contrast)",
+			"detail":"{\"zId\":\"o-1\",\"amount\":100,\"items\":[{\"z\":1,\"a\":\"x\",\"m\":true},{\"z\":1,\"a\":\"x\",\"m\":true}],\"meta\":{\"zeta\":1,\"alpha\":{\"y\":2,\"b\":3}},\"inner\":{\"z\":1,\"a\":\"x\",\"m\":true},\"currency\":\"CNY\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"B7",
+			"id":"canonical output",
+			"detail":"{\"amount\":100,\"currency\":\"CNY\",\"inner\":{\"a\":\"x\",\"m\":true,\"z\":1},\"items\":[{\"a\":\"x\",\"m\":true,\"z\":1},{\"a\":\"x\",\"m\":true,\"z\":1}],\"meta\":{\"alpha\":{\"b\":3,\"y\":2},\"zeta\":1},\"zId\":\"o-1\"}  sha256=6500a713bea3e2fb686ecc335ec4139fe559cd093ccac158ff2f9dc6c42a779e"
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"nested edits do not leak into source",
+			"detail":"{\"z\":1,\"a\":{\"b\":[1,{\"c\":2}]},\"s\":\"str\",\"hm\":{\"k\":1}}"
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"key order preserved",
+			"detail":"[z, a, s, hm]"
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"null values preserved",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"nested containers are new instances",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"leaf values shared (documented)",
+			"detail":""
+		},
+		{
+			"status":"INFO",
+			"section":"C.deep",
+			"id":"non-JSONObject Map value (HashMap) is shared, not copied",
+			"detail":"same instance=true (documented)"
+		},
+		{
+			"status":"PASS",
+			"section":"C.deep",
+			"id":"JSONArray.deepCopy isolation",
+			"detail":"[[1,2],{\"a\":[3]}] / copy [[1,2,9],{\"a\":[]}]"
+		},
+		{
+			"status":"INFO",
+			"section":"C.deep",
+			"id":"self-referencing object",
+			"detail":"fastjson2=ok jackson=error:StackOverflowError (same behavior)"
+		},
+		{
+			"status":"PASS",
+			"section":"C.req",
+			"id":"required(present)",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"C.req",
+			"id":"required(missing) -> JSONException",
+			"detail":"error:required value missing : absent"
+		},
+		{
+			"status":"PASS",
+			"section":"C.req",
+			"id":"required(null value) -> JSONException",
+			"detail":"error:required value missing : nil"
+		},
+		{
+			"status":"PASS",
+			"section":"C.req",
+			"id":"required(key, String.class)",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"C.req",
+			"id":"required(key, wrong type) -> JSONException",
+			"detail":"error:required value not of type java.lang.Integer : name"
+		},
+		{
+			"status":"INFO",
+			"section":"C.req",
+			"id":"required(\"id\", Long.class) on {\"id\":1}",
+			"detail":"error:required value not of type java.lang.Long : id  (no numeric widening; {\"big\":12345678901} as Long -> ok; getLong/getObject would convert)"
+		},
+		{
+			"status":"INFO",
+			"section":"C.req",
+			"id":"jackson required(): explicit null / missing",
+			"detail":"null -> ok:NULL, missing -> error:IllegalArgumentException (fastjson2 rejects explicit null; stricter, documented)"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(0)",
+			"detail":"fastjson2 Integer -> true/true, jackson IntNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-0)",
+			"detail":"fastjson2 Integer -> true/true, jackson IntNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(0.0)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-0.0)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1)",
+			"detail":"fastjson2 Integer -> true/true, jackson IntNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1.0)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1.5)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-1.5)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1e2)",
+			"detail":"fastjson2 Double -> true/true, jackson DoubleNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1E-2)",
+			"detail":"fastjson2 Double -> true/true, jackson DoubleNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(3.0E10)",
+			"detail":"fastjson2 Double -> false/true, jackson DoubleNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483647)",
+			"detail":"fastjson2 Integer -> true/true, jackson IntNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483648)",
+			"detail":"fastjson2 Long -> false/true, jackson LongNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483648)",
+			"detail":"fastjson2 Long -> true/true, jackson IntNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483649)",
+			"detail":"fastjson2 Long -> false/true, jackson LongNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483647.0)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483647.4)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483647.5)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483647.9999999)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(2147483648.0)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483648.0)",
+			"detail":"fastjson2 BigDecimal -> true/true, jackson DecimalNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483648.5)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483648.9999999)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-2147483649.0)",
+			"detail":"fastjson2 BigDecimal -> false/true, jackson DecimalNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(9223372036854775807)",
+			"detail":"fastjson2 Long -> false/true, jackson LongNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(9223372036854775808)",
+			"detail":"fastjson2 BigInteger -> false/false, jackson BigIntegerNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-9223372036854775808)",
+			"detail":"fastjson2 BigInteger -> false/true, jackson LongNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-9223372036854775809)",
+			"detail":"fastjson2 BigInteger -> false/false, jackson BigIntegerNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(9223372036854775807.5)",
+			"detail":"fastjson2 BigDecimal -> false/false, jackson DecimalNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(9223372036854775808.0)",
+			"detail":"fastjson2 BigDecimal -> false/false, jackson DecimalNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-9223372036854775808.5)",
+			"detail":"fastjson2 BigDecimal -> false/false, jackson DecimalNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-9223372036854775809.0)",
+			"detail":"fastjson2 BigDecimal -> false/false, jackson DecimalNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(9.223372036854776E18)",
+			"detail":"fastjson2 Double -> false/true, jackson DoubleNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-9.223372036854776E18)",
+			"detail":"fastjson2 Double -> false/true, jackson DoubleNode -> false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1e19)",
+			"detail":"fastjson2 Double -> false/false, jackson DoubleNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1e300)",
+			"detail":"fastjson2 Double -> false/false, jackson DoubleNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1e400)",
+			"detail":"fastjson2 Double -> false/false, jackson DoubleNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(-1e400)",
+			"detail":"fastjson2 Double -> false/false, jackson DoubleNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(1e-400)",
+			"detail":"fastjson2 Double -> true/true, jackson DoubleNode -> true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(123456789012345678901234567890)",
+			"detail":"fastjson2 BigInteger -> false/false, jackson BigIntegerNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(\"1\")",
+			"detail":"fastjson2 String -> false/false, jackson TextNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(true)",
+			"detail":"fastjson2 Boolean -> false/false, jackson BooleanNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(null)",
+			"detail":"fastjson2 null -> false/false, jackson NullNode -> false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Double NaN)",
+			"detail":"fastjson2 false/false, jackson DoubleNode false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Double Infinity)",
+			"detail":"fastjson2 false/false, jackson DoubleNode false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Double 2.1474836475E9)",
+			"detail":"fastjson2 false/true, jackson DoubleNode false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put BigDecimal 2147483647.5)",
+			"detail":"fastjson2 false/true, jackson DecimalNode false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put BigDecimal -2147483648.5)",
+			"detail":"fastjson2 false/true, jackson DecimalNode false/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put BigDecimal 9223372036854775807.5)",
+			"detail":"fastjson2 false/false, jackson DecimalNode false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put BigDecimal 1E+30)",
+			"detail":"fastjson2 false/false, jackson DecimalNode false/false"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Short 7)",
+			"detail":"fastjson2 true/true, jackson ShortNode true/true"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Float 1.5)",
+			"detail":"fastjson2 true/true, jackson FloatNode true/true"
+		},
+		{
+			"status":"DIFF",
+			"section":"C.conv",
+			"id":"canConvertTo*(put Float 2.14748365E9)",
+			"detail":"fastjson2 false/true, jackson FloatNode true/true (jackson float rounding quirk)"
+		},
+		{
+			"status":"PASS",
+			"section":"C.conv",
+			"id":"canConvertTo*(BigDecimal 1E+10000000 from 11-byte JSONB) cost",
+			"detail":"0.4 ms, result false (jackson DecimalNode: compareTo, ~0.01 ms)"
+		},
+		{
+			"status":"PASS",
+			"section":"D",
+			"id":"unknown fields collected",
+			"detail":"{x=1, y={\"k\":\"v\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"D",
+			"id":"ErrorOnUnknownProperties still rejects on beans without any-setter",
+			"detail":"error:Unknown Property x"
+		},
+		{
+			"status":"INFO",
+			"section":"D",
+			"id":"any-setter bean + ErrorOnUnknownProperties",
+			"detail":"ok:{\"x\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"E",
+			"id":"ErrorOnDuplicateKeys mask is exclusive",
+			"detail":"1L<<35 clashes=[]"
+		},
+		{
+			"status":"PASS",
+			"section":"E",
+			"id":"SortFieldNamesAlphabetically mask is exclusive",
+			"detail":"1L<<46 clashes=[]"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"omitting adapter: natural",
+			"detail":"{\"name\":\"alice\",\"id\":7}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"omitting adapter WITH feature: toJSONString",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"omitting adapter WITH feature: toJSONBytes",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"omitting adapter WITH feature: JSONB",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"omitting adapter WITH feature: JSONObject.from",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"F1",
+			"id":"omitting adapter WITH feature: key order",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"masking adapter (field): natural",
+			"detail":"{\"account\":{\"name\":\"alice\",\"password\":\"***\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"masking adapter (field) WITH feature",
+			"detail":"{\"account\":{\"name\":\"alice\",\"password\":\"***\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"masking adapter (field) WITH feature: JSONB",
+			"detail":"{\"account\":{\"name\":\"alice\",\"password\":\"***\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"custom provider, register after warm-up WITH feature",
+			"detail":"{\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F1",
+			"id":"unregister() restores the created sorted writer",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"writeUsing honored WITH feature",
+			"detail":"natural={\"secret\":\"MASKED\"} sorted={\"secret\":\"MASKED\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"writeUsing honored WITH feature: JSONB",
+			"detail":"{\"secret\":\"MASKED\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"List<Date> item format kept WITH feature",
+			"detail":"natural={\"dates\":[\"1970-01-01\"]} sorted={\"dates\":[\"1970-01-01\"]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"contentAs: natural -> sorted -> natural",
+			"detail":"{\"items\":[{\"zebra\":3,\"apple\":1}]} | {\"items\":[{\"apple\":1,\"zebra\":3}]} | {\"items\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"contentAs: sorted -> natural",
+			"detail":"{\"items\":[{\"apple\":1,\"zebra\":3}]} | {\"items\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"List<Item>: natural -> sorted (text, JSONB) -> natural",
+			"detail":"{\"items\":[{\"zebra\":3,\"apple\":1}]} | {\"items\":[{\"apple\":1,\"zebra\":3}]} | {\"items\":[{\"apple\":1,\"zebra\":3}]} | {\"items\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, sorted first on a cold provider: ColdHolder",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, sorted first on a cold provider: ColdHolder JSONB",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, natural after a cold sorted write: ColdHolder",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, sorted first on a cold provider: ColdHolderFinal",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, sorted first on a cold provider: ColdHolderFinal JSONB",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"field BeanToArray, natural after a cold sorted write: ColdHolderFinal",
+			"detail":"{\"t\":[1001,2002,300]}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"FieldBased proxy reuses the target's field-based writer",
+			"detail":"plain={\"hidden\":42,\"name\":\"n\"} proxy={\"hidden\":42,\"name\":\"n\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"F2",
+			"id":"FieldBased proxy WITH feature",
+			"detail":"plain={\"hidden\":42,\"name\":\"n\"} proxy={\"hidden\":42,\"name\":\"n\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"F3",
+			"id":"readObject(long) is public",
+			"detail":"public java.util.Map com.alibaba.fastjson2.JSONReader.readObject(long)"
+		},
+		{
+			"status":"PASS",
+			"section":"F3",
+			"id":"JSONB reader: readObject(0L) == readObject()",
+			"detail":"readObject()={\"a\":1,\"b\":{\"c\":2}} readObject(0L)={\"a\":1,\"b\":{\"c\":2}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F3",
+			"id":"text reader: readObject(0L)",
+			"detail":"{\"a\":1,\"b\":{\"c\":2}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F3",
+			"id":"text reader: readObject(DUP.mask) rejects nested duplicate",
+			"detail":"EXC duplicate key : a, offset 17, character 2, line 1, column 17, fastjson-version 2.0.64 {\"x\":{\"a\":1,\"a\":2}}"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"read(Map) into a pre-seeded map: accepted",
+			"detail":"accepted {\"a\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"pre-seeded objectSupplier: accepted",
+			"detail":"accepted {\"a\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"rejects null then value + IgnoreNullPropertyValue",
+			"detail":"{\"a\":null,\"a\":1} JSONObject=rejected LinkedHashMap=rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"rejects value then null + IgnoreNullPropertyValue",
+			"detail":"{\"a\":1,\"a\":null} JSONObject=rejected LinkedHashMap=rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"rejects $ref as the duplicate value",
+			"detail":"{\"a\":1,\"a\":{\"$ref\":\"$\"}} JSONObject=rejected LinkedHashMap=rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"rejects numeric and string forms of one key",
+			"detail":"{1:1,\"1\":2} JSONObject=rejected LinkedHashMap=rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"IgnoreNullPropertyValue still skips nulls under the feature",
+			"detail":"accepted {\"b\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DObj depth 2",
+			"detail":"{\"payload\":{\"x\":{\"z\":1,\"z\":2}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DObj depth 3",
+			"detail":"{\"payload\":{\"x\":{\"y\":{\"z\":1,\"z\":2}}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DMap depth 2",
+			"detail":"{\"payload\":{\"x\":{\"z\":1,\"z\":2}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DMap depth 3",
+			"detail":"{\"payload\":{\"x\":{\"y\":{\"z\":1,\"z\":2}}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DJo depth 2",
+			"detail":"{\"payload\":{\"x\":{\"z\":1,\"z\":2}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DJo depth 3",
+			"detail":"{\"payload\":{\"x\":{\"y\":{\"z\":1,\"z\":2}}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DMapMap depth 2",
+			"detail":"{\"payload\":{\"x\":{\"z\":1,\"z\":2}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, nested object: DMapMap depth 3",
+			"detail":"{\"payload\":{\"x\":{\"y\":{\"z\":1,\"z\":2}}}} -> rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, object inside array: DObj {x:[..]}",
+			"detail":"{\"payload\":{\"x\":[{\"z\":1,\"z\":2}]}} -> annotation rejected, per-call rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, object inside array: DMap {x:[..]}",
+			"detail":"{\"payload\":{\"x\":[{\"z\":1,\"z\":2}]}} -> annotation rejected, per-call rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, object inside array: DJo {x:[..]}",
+			"detail":"{\"payload\":{\"x\":[{\"z\":1,\"z\":2}]}} -> annotation rejected, per-call rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, object inside array: DObj [..]",
+			"detail":"{\"payload\":[{\"z\":1,\"z\":2}]} -> annotation rejected, per-call rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F4",
+			"id":"@JSONField strict, object inside array: DList [..]",
+			"detail":"{\"payload\":[{\"z\":1,\"z\":2}]} -> annotation rejected, per-call rejected"
+		},
+		{
+			"status":"PASS",
+			"section":"F5",
+			"id":"self-cycle via $ref",
+			"detail":"ok"
+		},
+		{
+			"status":"PASS",
+			"section":"F5",
+			"id":"nested cycle via $ref",
+			"detail":"ok"
+		},
+		{
+			"status":"PASS",
+			"section":"F5",
+			"id":"self-containing array",
+			"detail":"ok"
+		},
+		{
+			"status":"INFO",
+			"section":"F5",
+			"id":"one instance referenced twice",
+			"detail":"copy.l == copy.r: true, copy.l != source: true"
+		},
+		{
+			"status":"PASS",
+			"section":"F6",
+			"id":"from(obj, Sort) == toJSONString(obj, Sort)",
+			"detail":"toJSONString={\"inner\":{\"apple\":1,\"zebra\":3},\"items\":[{\"apple\":1,\"zebra\":3}],\"zulu\":9} from={\"inner\":{\"apple\":1,\"zebra\":3},\"items\":[{\"apple\":1,\"zebra\":3}],\"zulu\":9}"
+		},
+		{
+			"status":"PASS",
+			"section":"F6",
+			"id":"from(obj, WriteNulls) == toJSONString(obj, WriteNulls)",
+			"detail":"toJSONString={\"inner\":{\"a\":null,\"b\":2},\"list\":[{\"a\":null,\"b\":2}],\"top\":null} from={\"inner\":{\"a\":null,\"b\":2},\"list\":[{\"a\":null,\"b\":2}],\"top\":null}"
+		},
+		{
+			"status":"PASS",
+			"section":"F6",
+			"id":"from(@JSONType(WriteNulls) obj): type features stay on that type",
+			"detail":"toJSONString={\"list\":[{\"b\":2}],\"top\":null} from={\"list\":[{\"b\":2}],\"top\":null}"
+		},
+		{
+			"status":"PASS",
+			"section":"F7",
+			"id":"toJSONBytes(charset, Sort) == toJSONString(Sort)",
+			"detail":"{\"inner\":{\"apple\":1,\"zebra\":3},\"items\":[{\"apple\":1,\"zebra\":3}],\"zulu\":9}"
+		},
+		{
+			"status":"PASS",
+			"section":"F7",
+			"id":"toJSONBytes(charset, Context(Sort)) == toJSONString(Sort)",
+			"detail":"{\"inner\":{\"apple\":1,\"zebra\":3},\"items\":[{\"apple\":1,\"zebra\":3}],\"zulu\":9}"
+		},
+		{
+			"status":"PASS",
+			"section":"F7",
+			"id":"toJSONBytes(Sort) == toJSONString(Sort)",
+			"detail":"{\"inner\":{\"apple\":1,\"zebra\":3},\"items\":[{\"apple\":1,\"zebra\":3}],\"zulu\":9}"
+		},
+		{
+			"status":"INFO",
+			"section":"F7",
+			"id":"toJSONBytes(charset, FieldBased) (feature off)",
+			"detail":"toJSONString={\"x\":1} toJSONBytes(charset)={\"x\":1}"
+		},
+		{
+			"status":"INFO",
+			"section":"F8",
+			"id":"natural variant",
+			"detail":"a parent-loader holder pins the child loader on main too (pre-existing, not checked here)"
+		},
+		{
+			"status":"PASS",
+			"section":"F8",
+			"id":"asm: sorted + sorted/FieldBased holder",
+			"detail":"loader collected"
+		},
+		{
+			"status":"PASS",
+			"section":"F8",
+			"id":"reflect: sorted + sorted/FieldBased holder",
+			"detail":"loader collected"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter): natural",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter) WITH feature: toJSONString",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter) WITH feature: toJSONBytes",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter) WITH feature: nested field",
+			"detail":"{\"user\":{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}}"
+		},
+		{
+			"status":"INFO",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter): JSONB natural (pre-existing, filters not applied to JSONB)",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, ValueFilter): JSONB WITH feature same as natural",
+			"detail":"natural={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"} sorted={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"G1",
+			"id":"GA2 written sorted before the filter",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, PropertyFilter) after sorted warm-up: natural",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, PropertyFilter) after sorted warm-up: WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"JSON.register(Class, NameFilter): WITH feature renames like natural",
+			"detail":"natural={\"id\":7,\"name\":\"alice\",\"secret\":\"hunter2\"} sorted={\"id\":7,\"name\":\"alice\",\"secret\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"provider.getObjectWriter(T).setFilter: natural",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"provider.getObjectWriter(T).setFilter: WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"G1",
+			"id":"provider.getObjectWriter(T).setFilter: JSONB natural (pre-existing, filters not applied to JSONB)",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"provider.getObjectWriter(T).setFilter: JSONB WITH feature same as natural",
+			"detail":"natural={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"} sorted={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered adapter with filter: natural",
+			"detail":"{\"password\":\"***\",\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered adapter with filter: WITH feature",
+			"detail":"{\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registerIfAbsent adapter with filter: WITH feature",
+			"detail":"{\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"adapter filter set after register: natural",
+			"detail":"{\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"adapter filter set after register: WITH feature",
+			"detail":"{\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered reflect writer with @JSONType filter: natural",
+			"detail":"{\"id\":7,\"password\":\"***\",\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered reflect writer with @JSONType filter: WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered asm writer with @JSONType filter: natural",
+			"detail":"{\"id\":7,\"password\":\"***\",\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"registered asm writer with @JSONType filter: WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"control: @JSONType(serializeFilters) WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"G1",
+			"id":"control: per-call filter WITH feature",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"INFO",
+			"section":"G2",
+			"id":"from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, WriteLongAsString) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, WriteNonStringValueAsString) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, BrowserCompatible) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, WriteBigDecimalAsPlain) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, WriteEnumUsingToString) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, NotWriteDefaultValue) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(rec, WriteClassName) == from(rec)",
+			"detail":"{\"amount\":1E+2,\"amounts\":[100.0],\"color\":\"RED\",\"colors\":[\"RED\"],\"id\":9007199254740993,\"ids\":[1,9007199254740993],\"rows\":[{\"n\":5}],\"zero\":0,\"zeros\":[0]}"
+		},
+		{
+			"status":"PASS",
+			"section":"G2",
+			"id":"from(obj, Sort) sorts beans inside nested lists/maps",
+			"detail":"from={\"indexBy\":[{\"k\":{\"apple\":1,\"zebra\":3}}],\"rows\":[[{\"apple\":1,\"zebra\":3}]]} toJSONString={\"indexBy\":[{\"k\":{\"apple\":1,\"zebra\":3}}],\"rows\":[[{\"apple\":1,\"zebra\":3}]]}"
+		},
+		{
+			"status":"INFO",
+			"section":"G3",
+			"id":"tree helper",
+			"detail":"ObjectWriterAdapter.toJSON(Object, long) (package-private)"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(ArrayList, WriteLongAsString.mask) == toJSON(.., WriteLongAsString)",
+			"detail":"long=[{\"zebra\":3,\"apple\":1},\"9007199254740993\"] varargs=[{\"zebra\":3,\"apple\":1},\"9007199254740993\"]"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(LinkedHashMap, WriteLongAsString.mask) == toJSON(.., WriteLongAsString)",
+			"detail":"long={\"c\":{\"zebra\":3,\"apple\":1}} varargs={\"c\":{\"zebra\":3,\"apple\":1}}"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(ArrayList, WriteNulls.mask) == toJSON(.., WriteNulls)",
+			"detail":"long=[{\"zebra\":3,\"apple\":1},9007199254740993] varargs=[{\"zebra\":3,\"apple\":1},9007199254740993]"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(LinkedHashMap, WriteNulls.mask) == toJSON(.., WriteNulls)",
+			"detail":"long={\"c\":{\"zebra\":3,\"apple\":1}} varargs={\"c\":{\"zebra\":3,\"apple\":1}}"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(ArrayList, SortFieldNamesAlphabetically.mask) == toJSON(.., SortFieldNamesAlphabetically)",
+			"detail":"long=[{\"apple\":1,\"zebra\":3},9007199254740993] varargs=[{\"apple\":1,\"zebra\":3},9007199254740993]"
+		},
+		{
+			"status":"PASS",
+			"section":"G3",
+			"id":"toJSON(LinkedHashMap, SortFieldNamesAlphabetically.mask) == toJSON(.., SortFieldNamesAlphabetically)",
+			"detail":"long={\"c\":{\"apple\":1,\"zebra\":3}} varargs={\"c\":{\"apple\":1,\"zebra\":3}}"
+		},
+		{
+			"status":"INFO",
+			"section":"G4",
+			"id":"JSONReader.readObject(long) modifiers",
+			"detail":"public"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, ArrayList<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Set<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Collection<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Child[]",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Child",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Object=Child",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Optional<Child>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<List<Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<Object>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<Map<String,Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,List<Child>>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, @format List<Date>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, @contentAs List<Object>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, final FChild",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, List<final FChild>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, final FChild[]",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Map<String,final FChild>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered reflective writer, Set<final FChild>",
+			"detail":"natural and sorted match unregistered output in all sequences"
+		},
+		{
+			"status":"PASS",
+			"section":"H1",
+			"id":"registered ASM writers: output without the feature unaffected by earlier sorted writes (20 shapes)",
+			"detail":"ok"
+		},
+		{
+			"status":"INFO",
+			"section":"H1",
+			"id":"registered ASM writers under the feature",
+			"detail":"served as registered (field order not sorted), by design since round 2"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaArr: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]} got {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaList: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]} got {\"apple\":0,\"f\":[{\"zebra\":3,\"apple\":1}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaObj: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":{\"zebra\":3,\"apple\":1}} got {\"apple\":0,\"f\":{\"zebra\":3,\"apple\":1}}"
+		},
+		{
+			"status":"PASS",
+			"section":"H2",
+			"id":"AlphaMap: output without the feature after a sorted write",
+			"detail":"expected {\"apple\":0,\"f\":{\"k\":{\"zebra\":3,\"apple\":1}}} got {\"apple\":0,\"f\":{\"k\":{\"zebra\":3,\"apple\":1}}}"
+		},
+		{
+			"status":"INFO",
+			"section":"H3",
+			"id":"natural",
+			"detail":"{\"arr\":[[1001,2002,300]]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H3",
+			"id":"WITH feature, first write on the provider",
+			"detail":"{\"arr\":[[1001,2002,300]]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H3",
+			"id":"WITH feature, after a natural write",
+			"detail":"{\"arr\":[[1001,2002,300]]}"
+		},
+		{
+			"status":"INFO",
+			"section":"H3",
+			"id":"ASM creator, natural (field BeanToArray not applied to array items, as on main)",
+			"detail":"{\"arr\":[{\"to\":1001,\"from\":2002,\"amount\":300}]}"
+		},
+		{
+			"status":"PASS",
+			"section":"H4",
+			"id":"JSONObject.from(obj) under global WriteNulls == main",
+			"detail":"{\"maps\":[{\"k\":null}],\"rows\":[{\"note\":null,\"rank\":1}],\"title\":null}"
+		},
+		{
+			"status":"PASS",
+			"section":"H4",
+			"id":"helper on a two-node cycle under global ReferenceDetection",
+			"detail":"{\"name\":\"a\",\"peer\":{\"name\":\"b\",\"peer\":{\"name\":\"a\",\"peer\":{\"$ref\":\"peer\"}}}}"
+		},
+		{
+			"status":"PASS",
+			"section":"H5",
+			"id":"JSON.toJSON(Object, long) is not part of the public API",
+			"detail":"not declared on JSON"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"ValueFilter, after registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyFilter, after registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"NameFilter, after registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"pwd\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyPreFilter, after registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"ValueFilter, before registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyFilter, before registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"NameFilter, before registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"pwd\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyPreFilter, before registration",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"ValueFilter, set, then cleared",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyFilter, set, then cleared",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"NameFilter, set, then cleared",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I1",
+			"id":"PropertyPreFilter, set, then cleared",
+			"detail":"3 cells x json/utf8 = {\"name\":\"alice\",\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I2",
+			"id":"50x register/unregister: dead variants become collectible",
+			"detail":"before GC live=50 len=50; after 1 GC round(s) live=0"
+		},
+		{
+			"status":"PASS",
+			"section":"I2",
+			"id":"next link compacts cleared entries",
+			"detail":"live=1 len=1"
+		},
+		{
+			"status":"PASS",
+			"section":"I2",
+			"id":"registered variant still linked after GC pressure",
+			"detail":"{\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I2",
+			"id":"created variants (asm): filter set after GC reaches sorted writer",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I2",
+			"id":"created variants (reflect): filter set after GC reaches sorted writer",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"pre-installed filter: a write that hits the just-published sorted writer (asm)",
+			"detail":"C={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  B={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"pre-installed filter: a write that hits the just-published sorted writer (reflect)",
+			"detail":"C={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  B={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"concurrent creation: sorted write that starts after setFilter returned (asm)",
+			"detail":"C={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  B(started before setFilter)={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}  later={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  natural lookups by B=1"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"concurrent creation: converged afterwards (asm)",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"concurrent creation: sorted write that starts after setFilter returned (reflect)",
+			"detail":"C={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  B(started before setFilter)={\"id\":7,\"name\":\"alice\",\"password\":\"hunter2\"}  later={\"id\":7,\"name\":\"alice\",\"password\":\"***\"}  natural lookups by B=1"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"concurrent creation: converged afterwards (reflect)",
+			"detail":"{\"id\":7,\"name\":\"alice\",\"password\":\"***\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"pre-installed filter, 8 threads x 300 first sorted writes",
+			"detail":"0 unmasked of 2400"
+		},
+		{
+			"status":"PASS",
+			"section":"I3",
+			"id":"setters racing links on one writer, 1.5 s, 8 threads",
+			"detail":"98954 operations, no deadlock"
+		},
+		{
+			"status":"PASS",
+			"section":"I4",
+			"id":"all 49 features: helper == varargs JSON.toJSON",
+			"detail":"identical"
+		},
+		{
+			"status":"PASS",
+			"section":"J1",
+			"id":"creator's default-value constructor waits for a serializing initializer",
+			"detail":"both threads finished; first write = {\"id\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"J1",
+			"id":"creator's enum field writer waits for a serializing enum initializer",
+			"detail":"both threads finished; first write = {\"id\":1}"
+		},
+		{
+			"status":"PASS",
+			"section":"J2",
+			"id":"Date/LocalDate/LocalDateTime keys keep the context date format when a filter is set",
+			"detail":"with filter {\"byDate\":{\"1970/01/02\":\"a\"},\"byLocalDate\":{\"2026/10/06\":\"b\"},\"byLocalDateTime\":{\"2026/10/06\":\"c\"}}  without {\"byDate\":{\"1970/01/02\":\"a\"},\"byLocalDate\":{\"2026/10/06\":\"b\"},\"byLocalDateTime\":{\"2026/10/06\":\"c\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"J2",
+			"id":"context ValueFilter applies to a bean used as a map key",
+			"detail":"{\"m\":{\"{\\\"password\\\":\\\"***\\\",\\\"user\\\":\\\"u\\\"}\":\"v\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"K1",
+			"id":"ObjectWriterCreatorASM: key equals the key written with the sort feature on the context",
+			"detail":"field-level {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}  context {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K1",
+			"id":"ObjectWriterCreator: key equals the key written with the sort feature on the context",
+			"detail":"field-level {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}  context {\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"$ref\":\"$.first\"},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K2",
+			"id":"LocalDate key keeps the context date format (no filter: sort comes from the field)",
+			"detail":"{\"byDay\":{\"2026/10/06\":\"v\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"K2",
+			"id":"LocalDate key keeps the context date format (with a filter: sort is merged into the context)",
+			"detail":"{\"byDay\":{\"2026/10/06\":\"v\"}}"
+		},
+		{
+			"status":"PASS",
+			"section":"K2",
+			"id":"context ValueFilter masks a field-level sorted bean key",
+			"detail":"{\"first\":{\"a\":1},\"password\":\"***\",\"second\":{\"a\":1},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K3",
+			"id":"@JSONType(alphabetic=false) key is written in sorted order",
+			"detail":"{\"first\":{\"a\":1},\"password\":\"hunter2\",\"second\":{\"a\":1},\"zeta\":\"z\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"K3",
+			"id":"unsorted key on the filtering path equals JSON.toJSONString(key, context)",
+			"detail":"{\"zeta\":\"z\",\"first\":{\"a\":1},\"second\":{\"$ref\":\"$.first\"},\"password\":\"hunter2\"}"
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"ASM, no filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"ASM, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, no filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"PASS",
+			"section":"L1",
+			"id":"reflect, context filter: 8 key shapes",
+			"detail":""
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"ASM: 12 shapes, Object-typed field",
+			"detail":"keys []  values []"
+		},
+		{
+			"status":"INFO",
+			"section":"L2",
+			"id":"reflect: 12 shapes, Object-typed field",
+			"detail":"keys []  values []"
+		}
+	]
+}

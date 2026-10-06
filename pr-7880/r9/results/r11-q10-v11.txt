@@ -1,0 +1,10 @@
+D1/D2 field-level sorted map key == context-sorted map key: cells=3696 same=3696 differ=0
+
+D4 the same shapes as a field-level sorted VALUE: value == value written with the sort on the context
+  cells=42 same=42
+
+D3 nested bean inside a field-level sorted key vs as a field-level sorted value (no context features)
+  asm key  : {"m":{"{\"amount\":1.50,\"big\":9007199254740993,\"ch\":\"x\",\"color\":\"GREEN\",\"date\":\"2023-11-15 06:13:20\",\"first\":{\"a\":2,\"z\":1},\"flag\":false,\"ldt\":\"2026-10-06 09:38:09\",\"list\":[{\"a\":2,\"z\":1}],\"second\":{\"a\":2,\"z\":1},\"zero\":0,\"zeta\":\"z\"}":"v"}}
+  asm value: {"v":{"amount":1.50,"big":9007199254740993,"ch":"x","color":"GREEN","date":"2023-11-15 06:13:20","first":{"a":2,"z":1},"flag":false,"ldt":"2026-10-06 09:38:09","list":[{"a":2,"z":1}],"second":{"a":2,"z":1},"zero":0,"zeta":"z"}}
+  reflect key  : {"m":{"{\"amount\":1.50,\"big\":9007199254740993,\"ch\":\"x\",\"color\":\"GREEN\",\"date\":\"2023-11-15 06:13:20\",\"first\":{\"a\":2,\"z\":1},\"flag\":false,\"ldt\":\"2026-10-06 09:38:09\",\"list\":[{\"a\":2,\"z\":1}],\"second\":{\"a\":2,\"z\":1},\"zero\":0,\"zeta\":\"z\"}":"v"}}
+  reflect value: {"v":{"amount":1.50,"big":9007199254740993,"ch":"x","color":"GREEN","date":"2023-11-15 06:13:20","first":{"a":2,"z":1},"flag":false,"ldt":"2026-10-06 09:38:09","list":[{"a":2,"z":1}],"second":{"a":2,"z":1},"zero":0,"zeta":"z"}}

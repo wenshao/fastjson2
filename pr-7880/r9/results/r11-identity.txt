@@ -1,0 +1,21 @@
+# 833c666ee vs the round-8 patches (fix-r8.diff + fix-r8-u.diff applied to 61e081039 in wt-dbg10)
+$ git diff --stat 61e081039 833c666ee
+  .../fastjson2/writer/ObjectWriterArray.java        |  2 +-
+  .../writer/ObjectWriterImplAtomicReference.java    | 12 +++++++
+  .../fastjson2/writer/ObjectWriterImplList.java     |  4 +--
+  .../fastjson2/writer/ObjectWriterImplMap.java      |  4 ++-
+  .../fastjson2/writer/ObjectWriterImplOptional.java |  2 +-
+  .../features/SortFieldNamesAlphabeticallyTest.java | 42 ++++++++++++++++++++++
+  .../fastjson2/writer/MapKeyContextTest.java        | 21 +++++++++++
+  7 files changed, 82 insertions(+), 5 deletions(-)
+$ sha1sum <file in patched tree> <file at 833c666ee>
+  008b12238c79 008b12238c79 same  ObjectWriterArray.java
+  dffe07e5b1d9 dffe07e5b1d9 same  ObjectWriterImplAtomicReference.java
+  0136d582325c 0136d582325c same  ObjectWriterImplList.java
+  696c0b7a60f3 696c0b7a60f3 same  ObjectWriterImplMap.java
+  561e9e7779d3 561e9e7779d3 same  ObjectWriterImplOptional.java
+  d7ca0ceba649 d7ca0ceba649 same  SortFieldNamesAlphabeticallyTest.java
+  eeab8b4e97fa eeab8b4e97fa same  MapKeyContextTest.java
+$ git diff 833c666ee -- . (patched worktree): 0 files differ
+$ unzip both core jars; diff -r   # mvn -pl core package, same JDK 25 / Maven
+  entries: 777 (770 classes); differing: 0

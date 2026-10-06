@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderList.java b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderList.java
+index ef49aab41..e064e075e 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderList.java
+@@ -188,7 +188,7 @@ public class FieldReaderList<T, V>
+             jsonReader.next();
+             while (!jsonReader.nextIfArrayEnd()) {
+                 list.add(
+-                        itemObjectReader.readObject(jsonReader, fieldType, fieldName, 0)
++                        itemObjectReader.readObject(jsonReader, fieldType, fieldName, (features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask)
+                 );
+ 
+                 jsonReader.nextIfComma();

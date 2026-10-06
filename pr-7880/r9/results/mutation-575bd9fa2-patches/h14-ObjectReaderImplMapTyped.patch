@@ -1,0 +1,20 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapTyped.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapTyped.java
+index 1f43f121a..1d1e54890 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapTyped.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapTyped.java
+@@ -369,11 +369,10 @@ class ObjectReaderImplMapTyped
+                         name = TypeUtils.cast(name, keyType);
+                     }
+                 } else {
+-                    if (keyObjectReader != null) {
+-                        name = keyObjectReader.readObject(jsonReader, null, null, 0);
+-                    } else {
+-                        name = jsonReader.read(keyType);
+-                    }
++                    ObjectReader resolvedKeyReader = keyObjectReader != null
++                            ? keyObjectReader
++                            : jsonReader.getObjectReader(keyType);
++                    name = resolvedKeyReader.readObject(jsonReader, null, null, valueFeatures);
+                     if (name == null && Enum.class.isAssignableFrom((Class) keyType)) {
+                         name = jsonReader.getString();
+                         jsonReader.nextIfMatch(':');

@@ -1,0 +1,15 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index c63245e9e..3c273cce0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -737,7 +739,9 @@ public final class ObjectWriterImplMap
+                     } else {
+                         valueClass = value.getClass();
+                     }
+-                    ObjectWriter<?> valueWriter = jsonWriter.getObjectWriter(valueClass);
++                    // resolve with the merged word used by write(), so this map writer's own
++                    // feature word (e.g. a field-level Sort) also reaches filtered values
++                    ObjectWriter<?> valueWriter = jsonWriter.context.provider.getObjectWriter(valueClass, valueClass, features);
+                     valueWriter.write(jsonWriter, value, fieldName, fieldType, this.features);
+                 }
+             } finally {

@@ -1,0 +1,12 @@
+asm/plain MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort=EXC java.lang.EnumConstantNotPresentException: com.alibaba.fastjson2.JSONWriter$Feature.SortFieldNamesAlphabetically
+asm/plain HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+asm/sort MyMap  : Map=n/a MyMap=n/a Object=n/a Map+fieldSort=n/a
+asm/sort HashMap: Map=n/a HashMap=n/a Object=n/a
+asm/filter MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort=EXC java.lang.EnumConstantNotPresentException: com.alibaba.fastjson2.JSONWriter$Feature.SortFieldNamesAlphabetically
+asm/filter HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+reflect/plain MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort=EXC java.lang.EnumConstantNotPresentException: com.alibaba.fastjson2.JSONWriter$Feature.SortFieldNamesAlphabetically
+reflect/plain HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+reflect/sort MyMap  : Map=n/a MyMap=n/a Object=n/a Map+fieldSort=n/a
+reflect/sort HashMap: Map=n/a HashMap=n/a Object=n/a
+reflect/filter MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort=EXC java.lang.EnumConstantNotPresentException: com.alibaba.fastjson2.JSONWriter$Feature.SortFieldNamesAlphabetically
+reflect/filter HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}

@@ -1,0 +1,12 @@
+asm any-setter nested map     DUP
+asm any-setter map in list    DUP
+asm read-only map, nested map DUP
+asm read-only typed map       DUP
+asm read-only map, top dup    DUP
+asm unwrapped read-only map   DUP
+reflect any-setter nested map     DUP
+reflect any-setter map in list    DUP
+reflect read-only map, nested map DUP
+reflect read-only typed map       DUP
+reflect read-only map, top dup    DUP
+reflect unwrapped read-only map   DUP

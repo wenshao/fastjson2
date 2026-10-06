@@ -1,0 +1,2 @@
+575bd9fa2 forward strictness and field features through generated and container readers, and harden variant publication paths
+833c666ee carry the sort bit into container map keys and nested container values

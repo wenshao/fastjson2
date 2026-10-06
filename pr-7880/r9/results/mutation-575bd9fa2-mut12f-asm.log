@@ -1,0 +1,72 @@
+=== mutation: h03-JSONReaderJSONB   (mvn rc=0)
+  tests=128 failed=0
+=== mutation: h04-FieldReaderAnySetter   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h05-FieldReaderList   (mvn rc=1)
+  tests=128 failed=2
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== mutation: h06-FieldReaderList   (mvn rc=0)
+  tests=128 failed=0
+=== mutation: h07-FieldReaderList   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h08-FieldReaderMapReadOnly   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h11-ObjectReaderImplGenericArray   (mvn rc=1)
+  tests=128 failed=2
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+=== mutation: h12-ObjectReaderImplList   (mvn rc=0)
+  tests=128 failed=0
+=== mutation: h13-ObjectReaderImplList   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h14-ObjectReaderImplMapTyped   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h15-ObjectReaderImplObject   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h19-ObjectReaderImplOptional   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h22-ObjectWriterImplMap   (mvn rc=1)
+  tests=128 failed=1
+   FAIL MapKeyContextTest.sortedBeanKeyValuesAreNotReferencedThroughTheKeyText
+=== mutation: h24-ObjectWriterProvider   (mvn rc=1)
+  tests=128 failed=1
+   FAIL SortFieldNamesRegistryTest.generatedAndModuleWritersGetSortedVariants
+=== mutation: h27-ObjectWriterProvider   (mvn rc=1)
+  tests=128 failed=1
+   FAIL SortFieldNamesRegistryTest.generatedAndModuleWritersGetSortedVariants
+=== mutation: c:asmr-site   (mvn rc=1)
+  tests=128 failed=3
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== mutation: c:asmr-site-mapping   (mvn rc=0)
+  tests=128 failed=0
+=== mutation: c:readany-word   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: c:asmw-bail   (mvn rc=1)
+  tests=128 failed=1
+   FAIL SortFieldNamesRegistryTest.annotationSortedListItemsKeepPositionalOrderWarmOrCold
+=== mutation: c:fwo-mapnull   (mvn rc=1)
+  tests=128 failed=1
+   FAIL SortFieldNamesRegistryTest.mapFieldKeepsTypedWriterAfterTheRuntimeMapCellIsWarm
+=== mutation: c:V-guard   (mvn rc=1)
+  tests=128 failed=1
+   FAIL SortFieldNamesRegistryTest.registeredMapWriterHonoredForMapDeclaredFields
+=== mutation: c:W-unmask   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== mutation: c:X-arraykey   (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.arrayMapKeysGetTheStrictWord
+=== mutation: c:Y-fraction   (mvn rc=1)
+  tests=128 failed=1
+   FAIL TreeModelTest.integerTypesConvertable

@@ -1,0 +1,47 @@
+=== mutation: h04-FieldReaderAnySetter  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h05-FieldReaderList  [creator=reflect] (mvn rc=1)
+  tests=128 failed=3
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== mutation: h06-FieldReaderList  [creator=reflect] (mvn rc=0)
+  tests=128 failed=0
+=== mutation: h07-FieldReaderList  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h08-FieldReaderMapReadOnly  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h11-ObjectReaderImplGenericArray  [creator=reflect] (mvn rc=1)
+  tests=128 failed=2
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedContainerFieldsEnforceStrictness
+=== mutation: h12-ObjectReaderImplList  [creator=reflect] (mvn rc=0)
+  tests=128 failed=0
+=== mutation: h13-ObjectReaderImplList  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h14-ObjectReaderImplMapTyped  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h15-ObjectReaderImplObject  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: h19-ObjectReaderImplOptional  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: c:readany-word  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+=== mutation: c:asmr-site  [creator=reflect] (mvn rc=1)
+  tests=128 failed=2
+   FAIL ErrorOnDuplicateKeysTest.fieldLevelStrictBitReachesNestedMapsWithEitherCreator
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== mutation: c:asmr-site-mapping  [creator=reflect] (mvn rc=0)
+  tests=128 failed=0
+=== mutation: c:W-unmask  [creator=reflect] (mvn rc=1)
+  tests=128 failed=1
+   FAIL ErrorOnDuplicateKeysTest.typedListFieldsForwardOnlyTheStrictBitWithEitherCreator
+=== batch B done 01:22:46

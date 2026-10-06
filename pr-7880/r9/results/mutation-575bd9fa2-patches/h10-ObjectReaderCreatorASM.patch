@@ -1,0 +1,14 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+index 9a27e6ec9..f8efc792b 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderCreatorASM.java
+@@ -4068,7 +4072,9 @@ public class ObjectReaderCreatorASM
+             mw.aload(JSON_READER);
+             gwGetFieldType(classNameType, mw, i, fieldType);
+             mw.visitLdcInsn(fieldReader.fieldName);
++            mw.visitLdcInsn(fieldReader.features);
+             mw.lload(FEATURES);
++            mw.lor();
+             mw.invokeinterface(
+                     TYPE_OBJECT_READER,
+                     jsonb ? "readJSONBObject" : "readObject",

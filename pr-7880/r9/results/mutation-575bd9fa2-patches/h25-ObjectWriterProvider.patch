@@ -1,0 +1,26 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index dd39ba003..914f01a09 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -309,6 +309,21 @@ public class ObjectWriterProvider
+             ObjectWriter8.class, ObjectWriter9.class, ObjectWriter10.class, ObjectWriter11.class,
+             ObjectWriter12.class));
+ 
++    /**
++     * The anonymous creator's OWG_* adapters are plain bean adapters too: they share the standard
++     * fieldWriters list with no custom write logic beyond the creator's baseline, so a sorted copy is
++     * sound to rebuild for the sorted cell. ObjectWriterException-style adapter subclasses carrying
++     * their own write logic stay excluded.
++     */
++    static boolean isPlainAdapter(Class<?> clazz) {
++        if (PLAIN_ADAPTERS.contains(clazz)) {
++            return true;
++        }
++        String name = clazz.getName();
++        return name.startsWith("com.alibaba.fastjson2.writer.OWG_")
++                && !name.equals("com.alibaba.fastjson2.writer.ObjectWriterException");
++    }
++
+     /**
+      * Registers an ObjectWriter for the specified type using method-based writing
+      * if it is not already registered.

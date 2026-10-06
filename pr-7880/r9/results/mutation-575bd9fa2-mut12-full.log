@@ -1,0 +1,41 @@
+=== mutation: h03-JSONReaderJSONB [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h04-FieldReaderAnySetter [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h05-FieldReaderList [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h06-FieldReaderList [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h07-FieldReaderList [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h08-FieldReaderMapReadOnly [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h09-ObjectReaderCreatorASM [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h12-ObjectReaderImplList [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h13-ObjectReaderImplList [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h14-ObjectReaderImplMapTyped [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h15-ObjectReaderImplObject [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h19-ObjectReaderImplOptional [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h22-ObjectWriterImplMap [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h24-ObjectWriterProvider [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: h27-ObjectWriterProvider [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: c:readany-word [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: c:fwo-cache [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: c:asmw-bail [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: c:asmw-cache [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== mutation: c:fromcache-nosort [full]  (mvn rc=0)
+  tests=8119 failed=0
+=== batch A done 00:50:22
