@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+index 82fa3f2cd..360399ad9 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+@@ -75,7 +75,7 @@ class ObjectReaderImplOptional
+     public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+         Object value;
+         if (itemType == null) {
+-            value = jsonReader.readAny();
++            value = jsonReader.readAny((features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+         } else {
+             if (itemObjectReader == null) {
+                 ObjectReader formattedObjectReader = null;

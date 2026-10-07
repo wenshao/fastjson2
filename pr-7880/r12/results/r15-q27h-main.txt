@@ -1,0 +1,7 @@
+[H] default order, fields declared zeta, alpha (global alphabetic=default)
+  asm      GettersDecl0  method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  asm      GettersDecl   method-based {"zeta":1,"alpha":2}   FieldBased {"zeta":1,"alpha":2}
+  asm      FieldsDecl    method-based {"zeta":1,"alpha":2}   FieldBased {"zeta":1,"alpha":2}
+  reflect  GettersDecl0  method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  reflect  GettersDecl   method-based {"zeta":1,"alpha":2}   FieldBased {"alpha":2,"zeta":1}
+  reflect  FieldsDecl    method-based {"zeta":1,"alpha":2}   FieldBased {"alpha":2,"zeta":1}

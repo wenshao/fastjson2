@@ -1,0 +1,21 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 49e8cf965..79811049d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -34,6 +36,16 @@ public class FieldWriterObject<T>
+             Class.class,
+             "initValueClass"
+     );
++    static final AtomicReferenceFieldUpdater<FieldWriterObject, ObjectWriter> sortedObjectWriterUpdater = AtomicReferenceFieldUpdater.newUpdater(
++            FieldWriterObject.class,
++            ObjectWriter.class,
++            "sortedObjectWriter"
++    );
++    static final AtomicReferenceFieldUpdater<FieldWriterObject, Class> sortedValueClassUpdater = AtomicReferenceFieldUpdater.newUpdater(
++            FieldWriterObject.class,
++            Class.class,
++            "sortedValueClass"
++    );
+ 
+     public FieldWriterObject(
+             String name,

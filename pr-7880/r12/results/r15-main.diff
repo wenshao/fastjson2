@@ -1,0 +1,698 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 2999b2cfb..1831bc851 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -160,15 +160,19 @@ public class JSONObject
+      * @throws JSONException if the key is absent, its value is null, or the value is not of the expected type
+      * @since 2.0.66
+      */
++    @SuppressWarnings({"unchecked", "rawtypes"})
+     public <T> T required(String key, Class<T> valueClass) {
+         Object value = get(key);
+         if (value == null) {
+             throw new JSONException(missingRequiredMessage(key));
+         }
+-        if (!valueClass.isInstance(value)) {
++        // Class.isInstance and Class.cast both reject a primitive class literal;
++        // the boxed type is meant
++        Class checkedClass = com.alibaba.fastjson2.util.TypeUtils.nonePrimitive(valueClass);
++        if (!checkedClass.isInstance(value)) {
+             throw new JSONException(typeMismatchMessage(valueClass, key));
+         }
+-        return valueClass.cast(value);
++        return (T) checkedClass.cast(value);
+     }
+ 
+     private static String missingRequiredMessage(String key) {
+@@ -214,10 +218,13 @@ public class JSONObject
+                     && decimal.compareTo(BigDecimal.valueOf(Integer.MAX_VALUE)) <= 0;
+         }
+         if (value instanceof Number) {
+-            // any other integral Number (AtomicInteger, AtomicLong, LongAdder, custom types):
+-            // answered from the same conversion getIntValue would use
+-            long v = ((Number) value).longValue();
+-            return v >= Integer.MIN_VALUE && v <= Integer.MAX_VALUE;
++            // any other Number (AtomicInteger, AtomicLong, LongAdder, DoubleAdder, custom types):
++            // answered from the same conversion getIntValue would use, with the same fractional
++            // tolerance the Double/BigDecimal branches have; NaN and out-of-range values false
++            Number number = (Number) value;
++            double d = number.doubleValue();
++            return Math.abs(number.longValue() - d) < 1
++                    && d >= -2147483648.0 && d <= 2147483647.0;
+         }
+         return false;
+     }
+@@ -244,8 +251,11 @@ public class JSONObject
+         }
+         if (value instanceof Double || value instanceof Float) {
+             double v = ((Number) value).doubleValue();
++            // the upper bound is exclusive: 9.223372036854776E18 is exactly 2^63, one greater
++            // than Long.MAX_VALUE, and would read back as Long.MAX_VALUE; the lower bound is
++            // inclusive because -2^63 is exactly (double) Long.MIN_VALUE
+             return !Double.isNaN(v) && !Double.isInfinite(v)
+-                    && v >= -9.223372036854776E18 && v <= 9.223372036854776E18;
++                    && v >= -9.223372036854776E18 && v < 9.223372036854776E18;
+         }
+         if (value instanceof BigDecimal) {
+             BigDecimal decimal = (BigDecimal) value;
+@@ -253,12 +263,18 @@ public class JSONObject
+                     && decimal.compareTo(BigDecimal.valueOf(Long.MAX_VALUE)) <= 0;
+         }
+         if (value instanceof Number) {
+-            // any other Number (AtomicInteger, AtomicLong, LongAdder, DoubleAdder, custom types):
+-            // answered from the same conversion getLongValue would use. It is convertible when
+-            // longValue() is the truncated value, so a fraction counts as for Double, while a
+-            // wrapped, out-of-range or NaN value answers false
++            // floating accumulators convert by truncation, as for Double/Float/BigDecimal, but
++            // an accumulator at exactly 2^63 has longValue() clamped to Long.MAX_VALUE while the
++            // truncation diff still reads 0, so the top of the domain is rejected explicitly.
++            // Integral accumulators and custom Number types answer true: longValue() is exactly
++            // what getLongValue reads back
+             Number number = (Number) value;
+-            return Math.abs(number.longValue() - number.doubleValue()) < 1;
++            if (number instanceof java.util.concurrent.atomic.DoubleAdder
++                    || number instanceof java.util.concurrent.atomic.DoubleAccumulator) {
++                double d = number.doubleValue();
++                return Math.abs(number.longValue() - d) < 1 && d < 9.223372036854776E18;
++            }
++            return true;
+         }
+         return false;
+     }
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+index 5f2382545..d65baef8a 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+@@ -4187,7 +4187,10 @@ public abstract class JSONReader
+                     break;
+                 case '{':
+                     if (context.autoTypeBeforeHandler != null || (context.features & Feature.SupportAutoType.mask) != 0) {
+-                        val = ObjectReaderImplObject.INSTANCE.readObject(this, null, null, features);
++                        // the ObjectReader contract takes a declared-features word, so forward the
++                        // strict bit only; every other bit keeps parsing as on the plain call
++                        val = ObjectReaderImplObject.INSTANCE.readObject(this, null, null,
++                                features & Feature.ErrorOnDuplicateKeys.mask);
+                     } else if (isReference()) {
+                         val = JSONPath.of(readReference());
+                     } else {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java b/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
+index 7322716f1..b99e14123 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
+@@ -4461,12 +4461,19 @@ public abstract class JSONWriter
+          * {@code SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS}.
+          *
+          * <p>Writers honoring this feature are cached separately from writers of
+-         * the same type created without it; writers explicitly registered via
+-         * {@link com.alibaba.fastjson2.writer.ObjectWriterProvider#register} are
+-         * not affected.
++         * the same type created without it. A writer explicitly
++         * {@link com.alibaba.fastjson2.writer.ObjectWriterProvider#register registered}
++         * with custom logic (its own {@code write}) is used as-is; a registered plain bean
++         * adapter is rebuilt in alphabetical order like a generated one. Ordering is fixed
++         * at writer construction from the declared field names: a
++         * {@link com.alibaba.fastjson2.filter.NameFilter} that renames fields applies its
++         * renaming afterwards, so renamed keys are not re-sorted.
+          *
+          * <p>By default, this feature is disabled, meaning that bean properties are
+-         * written in declaration order.
++         * written in library-default order: alphabetical for method-based discovery (the
++         * {@code fastjson2.writer.alphabetic} global switch is on by default), declaration
++         * order for field-based creation and for types annotated
++         * {@code @JSONType(alphabetic = false)}.
+          *
+          * @since 2.0.66
+          */
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+index a55b0f1b7..d6207956c 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+@@ -54,7 +54,8 @@ class FieldReaderAnySetter<T>
+         try {
+             method.invoke(object, name, value);
+         } catch (Exception e) {
+-            throw new JSONException("any set error");
++            // keep the any-setter's own exception reachable, as processExtra does on the text path
++            throw new JSONException("any set error", e);
+         }
+     }
+ 
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
+index 928ba60ab..2d87dff34 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
+@@ -130,6 +130,9 @@ public class ObjectReaderImplMapMultiValueType
+                 if (!jsonReader.nextIfMatch(':')) {
+                     throw new JSONException(jsonReader.info("illegal json"));
+                 }
++                if (seenKeys != null && !seenKeys.add(null)) {
++                    throw duplicateKeyError(jsonReader, null);
++                }
+                 name = null;
+             } else {
+                 name = jsonReader.readFieldName();
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+index ebe474b3f..c16243e78 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplObject.java
+@@ -106,16 +106,17 @@ public final class ObjectReaderImplObject
+             }
+ 
+             if (typeName != null) {
++                if (seenKeys != null) {
++                    // register the discriminator where it is consumed, whichever arm handles it;
++                    // the ImmutableCollections arms deliberately never store it in the map
++                    seenKeys.add("@type");
++                }
+                 switch (typeName) {
+                     case "java.util.ImmutableCollections$Map1":
+                     case "java.util.ImmutableCollections$MapN":
+                         break;
+                     default:
+                         object.put("@type", typeName);
+-                        if (seenKeys != null) {
+-                            // register the discriminator where it is consumed, without storing it twice
+-                            seenKeys.add("@type");
+-                        }
+                         break;
+                 }
+                 hash = 0;
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+index 82fa3f2cd..360399ad9 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOptional.java
+@@ -75,7 +75,7 @@ class ObjectReaderImplOptional
+     public Object readObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+         Object value;
+         if (itemType == null) {
+-            value = jsonReader.readAny();
++            value = jsonReader.readAny((features | jsonReader.getContext().getFeatures()) & JSONReader.Feature.ErrorOnDuplicateKeys.mask);
+         } else {
+             if (itemObjectReader == null) {
+                 ObjectReader formattedObjectReader = null;
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+index 7a88e45df..a89b482b0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+@@ -86,9 +86,7 @@ public class FieldWriterList<T>
+ 
+     @Override
+     public final ObjectWriter getItemWriter(JSONWriter jsonWriter, Type itemType) {
+-        boolean sortVariant = ((this.features | jsonWriter.getFeatures()) & (
+-                JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++        boolean sortVariant = ObjectWriterProvider.isFieldNamesSorted(this.features | jsonWriter.getFeatures());
+         long resolvedFeatures = this.features | jsonWriter.getFeatures();
+ 
+         if (contentAs != null) {
+@@ -145,9 +143,7 @@ public class FieldWriterList<T>
+         if (listWriter == null && valueClass == fieldClass) {
+             ObjectWriter resolved = jsonWriter.getContext().getProvider()
+                     .getObjectWriter(valueClass, valueClass, resolvedFeatures);
+-            if ((resolvedFeatures & (
+-                    JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                    != JSONWriter.Feature.SortFieldNamesAlphabetically.mask) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(resolvedFeatures)) {
+                 this.listWriter = resolved;
+             }
+             return resolved;
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 49e8cf965..79811049d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -24,6 +24,8 @@ import static com.alibaba.fastjson2.util.BeanUtils.SUPER;
+ public class FieldWriterObject<T>
+         extends FieldWriter<T> {
+     volatile Class initValueClass;
++    volatile ObjectWriter sortedObjectWriter;
++    volatile Class sortedValueClass;
+     final boolean unwrapped;
+     final boolean array;
+     final boolean number;
+@@ -34,6 +36,16 @@ public class FieldWriterObject<T>
+             Class.class,
+             "initValueClass"
+     );
++    static final AtomicReferenceFieldUpdater<FieldWriterObject, ObjectWriter> sortedObjectWriterUpdater = AtomicReferenceFieldUpdater.newUpdater(
++            FieldWriterObject.class,
++            ObjectWriter.class,
++            "sortedObjectWriter"
++    );
++    static final AtomicReferenceFieldUpdater<FieldWriterObject, Class> sortedValueClassUpdater = AtomicReferenceFieldUpdater.newUpdater(
++            FieldWriterObject.class,
++            Class.class,
++            "sortedValueClass"
++    );
+ 
+     public FieldWriterObject(
+             String name,
+@@ -79,18 +91,28 @@ public class FieldWriterObject<T>
+                 && format == null
+                 && !BeanUtils.SUPER.equals(fieldName)
+                 && !Map.class.isAssignableFrom(fieldClass)
+-                && ((this.features | jsonWriter.getFeatures()) & (
+-                        JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                        == JSONWriter.Feature.SortFieldNamesAlphabetically.mask) {
+-            // sorted writers must never be stored in initValueClass/initObjectWriter,
+-            // otherwise a writer resolved under one sort variant would be reused under the other;
++                && ObjectWriterProvider.isFieldNamesSorted(this.features | jsonWriter.getFeatures())) {
++            // sorted writers are memoized in their own slot instead of initValueClass/
++            // initObjectWriter, so neither variant's writer leaks into the other axis and a
++            // sorted write still resolves once per value class rather than once per write;
+             // explicitly configured writers (@JSONField(writeUsing)) are always honored instead,
+             // $super$ pseudo-fields always resolve via getObjectWriterVoid's dedicated branch,
+             // Map-valued fields keep the type-carrying resolution (the untyped provider writer
+             // would drop the declared key/value types and gain a spurious @type under WriteClassName),
+             // and resolution merges field features so positional output never sorts
+-            return jsonWriter.getContext().getProvider()
++            ObjectWriter sortedWriter = this.sortedObjectWriter;
++            if (sortedWriter != null && this.sortedValueClass == valueClass) {
++                return sortedWriter;
++            }
++            sortedWriter = jsonWriter.getContext().getProvider()
+                     .getObjectWriter(valueClass, valueClass, this.features | jsonWriter.getFeatures());
++            if (this.sortedValueClass == null) {
++                boolean success = sortedValueClassUpdater.compareAndSet(this, null, valueClass);
++                if (success) {
++                    sortedObjectWriterUpdater.compareAndSet(this, null, sortedWriter);
++                }
++            }
++            return sortedWriter;
+         }
+ 
+         final Class initValueClass = this.initValueClass;
+@@ -196,7 +218,7 @@ public class FieldWriterObject<T>
+ 
+         if (formattedWriter == null) {
+             formattedWriter = resolveObjectWriter(jsonWriter, valueClass);
+-            if (((features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(features | jsonWriter.getFeatures())) {
+                 boolean success = initValueClassUpdater.compareAndSet(this, null, valueClass);
+                 if (success) {
+                     initObjectWriterUpdater.compareAndSet(this, null, formattedWriter);
+@@ -204,7 +226,7 @@ public class FieldWriterObject<T>
+             }
+         } else {
+             if (initObjectWriter == null
+-                    && ((features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++                    && !ObjectWriterProvider.isFieldNamesSorted(features | jsonWriter.getFeatures())) {
+                 boolean success = initValueClassUpdater.compareAndSet(this, null, valueClass);
+                 if (success) {
+                     initObjectWriterUpdater.compareAndSet(this, null, formattedWriter);
+@@ -255,7 +277,7 @@ public class FieldWriterObject<T>
+         } else {
+             objectWriter = resolveObjectWriter(jsonWriter, valueClass);
+         }
+-        if (((features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++        if (!ObjectWriterProvider.isFieldNamesSorted(features | jsonWriter.getFeatures())) {
+             initObjectWriterUpdater.compareAndSet(this, null, objectWriter);
+         }
+         return objectWriter;
+@@ -286,7 +308,7 @@ public class FieldWriterObject<T>
+         ObjectWriter valueWriter;
+         if (initValueClass == null) {
+             valueWriter = jsonWriter.getObjectWriter(valueClass);
+-            if (((this.features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(this.features | jsonWriter.getFeatures())) {
+                 // the field write and the CAS are skipped as a pair on the sorted variant
+                 initValueClass = valueClass;
+                 initObjectWriterUpdater.compareAndSet(this, null, valueWriter);
+@@ -524,7 +546,7 @@ public class FieldWriterObject<T>
+         ObjectWriter valueWriter;
+         if (initValueClass == null) {
+             valueWriter = jsonWriter.getObjectWriter(valueClass);
+-            if (((this.features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(this.features | jsonWriter.getFeatures())) {
+                 // the field write and the CAS are skipped as a pair on the sorted variant
+                 initValueClass = valueClass;
+                 initObjectWriterUpdater.compareAndSet(this, null, valueWriter);
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
+index dd45a8e7b..981d519cb 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
+@@ -46,15 +46,25 @@ public class FieldWriterObjectFinal<T>
+         if (!writeUsing
+                 && format == null
+                 && !BeanUtils.SUPER.equals(fieldName)
+-                && ((features | jsonWriter.getFeatures()) & (
+-                        JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                        == JSONWriter.Feature.SortFieldNamesAlphabetically.mask) {
+-            // sorted writers must not be stored in objectWriter (see FieldWriterObject#getObjectWriter);
+-            // explicitly configured writers (@JSONField(writeUsing)) are always honored instead,
+-            // $super$ pseudo-fields always resolve via the parent's dedicated branch,
+-            // and resolution merges field features so positional output never sorts
+-            return jsonWriter.getContext().getProvider()
++                && ObjectWriterProvider.isFieldNamesSorted(features | jsonWriter.getFeatures())) {
++            // sorted writers are memoized in their own slot instead of objectWriter
++            // (see FieldWriterObject#getObjectWriter); explicitly configured writers
++            // (@JSONField(writeUsing)) are always honored instead, $super$ pseudo-fields
++            // resolve via the parent's dedicated branch, and resolution merges field
++            // features so positional output never sorts
++            ObjectWriter sortedWriter = this.sortedObjectWriter;
++            if (sortedWriter != null && this.sortedValueClass == valueClass) {
++                return sortedWriter;
++            }
++            sortedWriter = jsonWriter.getContext().getProvider()
+                     .getObjectWriter(valueClass, valueClass, features | jsonWriter.getFeatures());
++            if (this.sortedValueClass == null) {
++                boolean success = sortedValueClassUpdater.compareAndSet(this, null, valueClass);
++                if (success) {
++                    sortedObjectWriterUpdater.compareAndSet(this, null, sortedWriter);
++                }
++            }
++            return sortedWriter;
+         }
+ 
+         if (objectWriter != null) {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
+index 9a5d49910..a20200c31 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
+@@ -47,10 +47,11 @@ public class ObjectWriterAdapter<T>
+     /**
+      * Caller features forwarded to nested tree conversions in {@link #toJSONObject(Object, long)}: the ones that
+      * select the writer variant or that the conversion applies itself. Value-format features are not applied to
+-     * the tree at any depth.
++     * the tree at any depth. SortMapEntriesByKeys travels too — the SortFieldNamesAlphabetically javadoc pairs
++     * the two for canonical output, and JSON.toJSON must not drop it where toJSONString honors it.
+      */
+     static final long TREE_FEATURES = SortFieldNamesAlphabetically.mask | FieldBased.mask
+-            | WriteNulls.mask | WriteEnumsUsingName.mask;
++            | WriteNulls.mask | WriteEnumsUsingName.mask | SortMapEntriesByKeys.mask;
+ 
+     static final String TYPE = "@type";
+ 
+@@ -785,7 +786,13 @@ public class ObjectWriterAdapter<T>
+                 }
+             }
+             if (fieldWriter instanceof FieldWriterObject && fieldValue != null && !(fieldValue instanceof Map)) {
+-                ObjectWriter valueWriter = fieldWriter.getInitWriter();
++                // the init memo only ever holds a natural writer: trust it only when no variant
++                // bit can select a different variant, otherwise resolve with the full merged word
++                long variantBits = (this.features | features | fieldFeatures)
++                        & (JSONWriter.Feature.SortFieldNamesAlphabetically.mask
++                                | JSONWriter.Feature.BeanToArray.mask
++                                | JSONWriter.Feature.FieldBased.mask);
++                ObjectWriter valueWriter = variantBits == 0 ? fieldWriter.getInitWriter() : null;
+                 if (valueWriter == null) {
+                     valueWriter = JSONFactory.getObjectWriter(fieldWriter.fieldType,
+                             this.features | features | fieldFeatures);
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreator.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreator.java
+index f7a32861b..efea20757 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreator.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreator.java
+@@ -650,7 +650,7 @@ public class ObjectWriterCreator {
+         handleIgnores(beanInfo, fieldWriters);
+ 
+         if (beanInfo.alphabetic
+-                || ((features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0
++                || ((writerFeatures & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0
+                         && (writerFeatures & JSONWriter.Feature.BeanToArray.mask) == 0)) {
+             // BeanToArray output order is positional and must never be reordered
+             Collections.sort(fieldWriters);
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreatorASM.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreatorASM.java
+index 510286bd1..2eff884d7 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreatorASM.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterCreatorASM.java
+@@ -395,7 +395,7 @@ public class ObjectWriterCreatorASM
+ 
+         handleIgnores(beanInfo, fieldWriters);
+         if (beanInfo.alphabetic
+-                || ((features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0
++                || (((features | beanInfo.writerFeatures) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0
+                         && ((features | beanInfo.writerFeatures) & JSONWriter.Feature.BeanToArray.mask) == 0)) {
+             // BeanToArray output order is positional and must never be reordered
+             try {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -43,6 +43,7 @@ public final class ObjectWriterImplMap
+     final boolean valueTypeRefDetect;
+     volatile ObjectWriter keyWriter;
+     volatile ObjectWriter valueWriter;
++    volatile VariantValueWriter variantValueWriter;
+ 
+     final byte[] jsonbTypeInfo;
+     final long typeNameHash;
+@@ -216,12 +217,14 @@ public final class ObjectWriterImplMap
+ 
+         long contextFeatures = jsonWriter.getFeatures(features) | this.features;
+         boolean writeNulls = (contextFeatures & (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsDefaultValue.mask)) != 0;
+-        boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
+         ObjectWriterProvider provider = context.provider;
+ 
+         Class itemClass = null;
+         ObjectWriter itemWriter = null;
+         boolean contextRefDetect = (contextFeatures & JSONWriter.Feature.ReferenceDetection.mask) != 0;
++        // the mutating save/restore pairs below must restore the CONTEXT's own bit: the merged
++        // word alone would turn a field-level bit into a permanent change on the caller's context
++        boolean contextOnlyRefDetect = (context.getFeatures() & JSONWriter.Feature.ReferenceDetection.mask) != 0;
+ 
+         int i = 0;
+         for (Iterator<Map.Entry> it = map.entrySet().iterator(); it.hasNext(); ++i) {
+@@ -287,7 +290,7 @@ public final class ObjectWriterImplMap
+                 Class<?> entryKeyClass = entryKey.getClass();
+                 ObjectWriter keyWriter = provider.getObjectWriter(entryKeyClass, entryKeyClass, contextFeatures);
+                 keyWriter.writeJSONB(jsonWriter, entryKey, null, null, 0);
+-                if (contextRefDetect) {
++                if (contextOnlyRefDetect) {
+                     jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);
+                 }
+             }
+@@ -384,7 +387,9 @@ public final class ObjectWriterImplMap
+             valueWriter.writeJSONB(jsonWriter, value, entryKey, fieldValueType, contextFeatures);
+ 
+             if (valueRefDetecChanged) {
+-                jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);
++                if (contextOnlyRefDetect) {
++                    jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);
++                }
+             } else {
+                 if (valueRefDetect) {
+                     jsonWriter.popPath(value);
+@@ -427,9 +432,14 @@ public final class ObjectWriterImplMap
+             try (JSONWriter keyWriter = JSONWriter.of(context)) {
+                 // the key is the root of its own document, as in JSON.toJSONString(key, context)
+                 keyWriter.setRootObject(key);
+-                // the sort request also travels in the feature word, so the beans inside list, map and Optional keys
+-                // resolve their sorted variants as they do in field-level sorted values
+-                keyObjectWriter.write(keyWriter, key, null, null, JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
++                try {
++                    // the sort request also travels in the feature word, so the beans inside list, map and Optional keys
++                    // resolve their sorted variants as they do in field-level sorted values
++                    keyObjectWriter.write(keyWriter, key, null, null, JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
++                } catch (NullPointerException | NumberFormatException e) {
++                    // the same diagnostic the un-sorted render gets from JSON.toJSONString
++                    throw new JSONException(keySerializeErrorMessage(key), e);
++                }
+                 str = keyWriter.toString();
+             }
+         }
+@@ -445,6 +455,24 @@ public final class ObjectWriterImplMap
+         return str;
+     }
+ 
++    // bean keys currently being rendered as sorted blobs on this thread; a key that reaches back
++    // into the graph it keys renders again through a fresh writer, so the guard must span writers
++    private static final ThreadLocal<IdentityHashMap<Object, Object>> MAP_KEY_RENDERING = new ThreadLocal<>();
++
++    static final class VariantValueWriter {
++        final long variantFeatures;
++        final ObjectWriter writer;
++
++        VariantValueWriter(long variantFeatures, ObjectWriter writer) {
++            this.variantFeatures = variantFeatures;
++            this.writer = writer;
++        }
++    }
++
++    private static String keySerializeErrorMessage(Object key) {
++        return "JSON#toJSONString cannot serialize '" + key + "'";
++    }
++
+     String writeMapKey(Object key, JSONWriter jsonWriter, long features) {
+         String strKey = null;
+         if (key == null) {
+@@ -463,11 +491,43 @@ public final class ObjectWriterImplMap
+                         & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
+                     jsonWriter.writeNameAny(key);
+                 } else {
+-                    // bean keys under the sort feature resolve with the merged word, so a
+-                    // field-level sort request reaches the key's own fields. The rendered blob is
+-                    // not a name any reader resolves, so do NOT keep it in strKey: a $ref built
+-                    // from the blob loses its value on the round trip
+-                    jsonWriter.writeName(mapKeyToString(key, jsonWriter, features));
++                    // bean and container keys render as sorted blobs: their bean contents are
++                    // what the feature sorts. Scalar keys keep the natural spelling, so an
++                    // ordering feature changes no BigDecimal/Boolean/Date spellings, and a
++                    // registered writer's spelling is never replaced by a blob either
++                    Class<?> keyClass = key.getClass();
++                    ObjectWriter keyObjectWriter = jsonWriter.context.provider.getObjectWriter(keyClass, keyClass,
++                            (jsonWriter.getFeatures() | this.features | features));
++                    if (!(keyObjectWriter instanceof ObjectWriterAdapter)
++                            && !(keyObjectWriter instanceof ObjectWriterImplList)
++                            && !(keyObjectWriter instanceof ObjectWriterImplMap)) {
++                        jsonWriter.writeNameAny(key);
++                        return null;
++                    }
++                    IdentityHashMap<Object, Object> rendering = MAP_KEY_RENDERING.get();
++                    if (rendering != null && rendering.containsKey(key)) {
++                        // a key already being rendered reached back into the graph it keys; the
++                        // natural spelling terminates inside this document's reference state
++                        jsonWriter.writeNameAny(key);
++                        return null;
++                    }
++                    if (rendering == null) {
++                        rendering = new IdentityHashMap<>(4);
++                        MAP_KEY_RENDERING.set(rendering);
++                    }
++                    rendering.put(key, key);
++                    try {
++                        // bean keys under the sort feature resolve with the merged word, so a
++                        // field-level sort request reaches the key's own fields. The rendered blob
++                        // is not a name any reader resolves, so NOT kept in strKey: a $ref built
++                        // from the blob loses its value on the round trip
++                        jsonWriter.writeName(mapKeyToString(key, jsonWriter, features));
++                    } finally {
++                        rendering.remove(key);
++                        if (rendering.isEmpty()) {
++                            MAP_KEY_RENDERING.remove();
++                        }
++                    }
+                 }
+             }
+         }
+@@ -583,18 +643,20 @@ public final class ObjectWriterImplMap
+             boolean isPrimitiveOrEnum;
+             ObjectWriter<?> valueWriter;
+             if (valueClass == this.valueType) {
+-                if (this.valueWriter != null
+-                        && (features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
+-                    valueWriter = this.valueWriter;
+-                } else if ((features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0) {
+-                    // sorted variant must not be cached in valueWriter
++                // the memo is stamped with the variant features it was resolved under, so a writer
++                // resolved under one axis is never served under another, and the typed-value branch
++                // resolves with the merged word like its three sibling sites
++                long variantFeatures = features & (JSONWriter.Feature.FieldBased.mask
++                        | JSONWriter.Feature.SortFieldNamesAlphabetically.mask
++                        | JSONWriter.Feature.BeanToArray.mask);
++                VariantValueWriter memo = this.variantValueWriter;
++                if (memo != null && memo.variantFeatures == variantFeatures) {
++                    valueWriter = memo.writer;
++                } else {
+                     valueWriter = format != null
+-                            ? jsonWriter.getObjectWriter(valueClass, format)
++                            ? provider.getObjectWriter(valueClass, valueClass, format, features)
+                             : provider.getObjectWriter(valueClass, valueClass, features);
+-                } else {
+-                    valueWriter = this.valueWriter = format != null
+-                            ? jsonWriter.getObjectWriter(valueClass, format)
+-                            : jsonWriter.getObjectWriter(valueClass);
++                    this.variantValueWriter = new VariantValueWriter(variantFeatures, valueWriter);
+                 }
+                 isPrimitiveOrEnum = ObjectWriterProvider.isPrimitiveOrEnum(value.getClass());
+             } else {
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 63b2c796c..3c9116796 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -621,9 +621,7 @@ public class ObjectWriterProvider
+      */
+     ObjectWriter getObjectWriterFromCache(Type objectType, Class objectClass, long contextFeatures) {
+         boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
+-        boolean fieldNamesSorted = (contextFeatures & (
+-                JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++        boolean fieldNamesSorted = isFieldNamesSorted(contextFeatures);
+         return cacheOf(fieldBased, fieldNamesSorted).get(objectType);
+     }
+ 
+@@ -695,9 +693,7 @@ public class ObjectWriterProvider
+     public ObjectWriter getObjectWriter(Type objectType, Class objectClass, long contextFeatures) {
+         boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
+         // BeanToArray output is positional, so it never takes the sorted writer variant
+-        boolean fieldNamesSorted = (contextFeatures
+-                & (JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++        boolean fieldNamesSorted = isFieldNamesSorted(contextFeatures);
+         ConcurrentMap<Type, ObjectWriter> cache = cacheOf(fieldBased, fieldNamesSorted);
+         ObjectWriter objectWriter = cache.get(objectType);
+         return objectWriter != null
+@@ -776,9 +772,9 @@ public class ObjectWriterProvider
+                 if (objectWriter == null) {
+                     objectWriter = cacheOf(false, fieldNamesSorted).get(objectType);
+                 }
+-                if (objectWriter == null && !fieldNamesSorted) {
+-                    // only the natural variant degrades; a sorted request lets the creator build
+-                    // the field-based sorted writer for the proxy target, like the non-proxy path
++                if (objectWriter == null) {
++                    // proxies degrade to method-based discovery on both axes, so the natural and
++                    // sorted cells never hold writers with different property sets for one target
+                     fieldBased = false;
+                 }
+             } else {
+@@ -806,10 +802,20 @@ public class ObjectWriterProvider
+                         // module-provided bean writers must not leave the sorted cell natural either
+                         objectWriter = sortedVariantOf(objectWriter);
+                     }
+-                    ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-
+-                    if (previous != null) {
+-                        objectWriter = previous;
++                    synchronized (createLock) {
++                        // the same lookup+link+publish discipline as the creator path: a module that
++                        // builds a fresh instance per call must still link to a cached counterpart,
++                        // so filter installation on one variant reaches the other
++                        ObjectWriter existing = cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++                        if (existing != null) {
++                            objectWriter = existing;
++                        } else {
++                            linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
++                            ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
++                            if (previous != null) {
++                                objectWriter = previous;
++                            }
++                        }
+                     }
+                     return objectWriter;
+                 }
+@@ -851,9 +857,17 @@ public class ObjectWriterProvider
+             if (fieldNamesSorted) {
+                 objectWriter = sortedVariantOf(objectWriter);
+             }
+-            ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-            if (previous != null) {
+-                objectWriter = previous;
++            synchronized (createLock) {
++                ObjectWriter existing = cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++                if (existing != null) {
++                    objectWriter = existing;
++                } else {
++                    linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
++                    ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
++                    if (previous != null) {
++                        objectWriter = previous;
++                    }
++                }
+             }
+             return objectWriter;
+         }
+@@ -907,6 +921,16 @@ public class ObjectWriterProvider
+         }
+     }
+ 
++    /**
++     * The variant axis every sorted-cell decision shares: a word selects the sorted variant only
++     * when SortFieldNamesAlphabetically is set and BeanToArray is not — positional output never sorts.
++     */
++    static boolean isFieldNamesSorted(long contextFeatures) {
++        return (contextFeatures & (
++                JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
++                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++    }
++
+     static final int ENUM = 0x00004000;
+     static final int[] PRIMITIVE_HASH_CODES;
+     static final int[] NOT_REFERENCES_TYPE_HASH_CODES;

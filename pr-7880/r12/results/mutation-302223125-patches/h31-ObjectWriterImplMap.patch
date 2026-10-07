@@ -1,0 +1,29 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -445,6 +455,24 @@ public final class ObjectWriterImplMap
+         return str;
+     }
+ 
++    // bean keys currently being rendered as sorted blobs on this thread; a key that reaches back
++    // into the graph it keys renders again through a fresh writer, so the guard must span writers
++    private static final ThreadLocal<IdentityHashMap<Object, Object>> MAP_KEY_RENDERING = new ThreadLocal<>();
++
++    static final class VariantValueWriter {
++        final long variantFeatures;
++        final ObjectWriter writer;
++
++        VariantValueWriter(long variantFeatures, ObjectWriter writer) {
++            this.variantFeatures = variantFeatures;
++            this.writer = writer;
++        }
++    }
++
++    private static String keySerializeErrorMessage(Object key) {
++        return "JSON#toJSONString cannot serialize '" + key + "'";
++    }
++
+     String writeMapKey(Object key, JSONWriter jsonWriter, long features) {
+         String strKey = null;
+         if (key == null) {

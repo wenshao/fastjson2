@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -287,7 +290,7 @@ public final class ObjectWriterImplMap
+                 Class<?> entryKeyClass = entryKey.getClass();
+                 ObjectWriter keyWriter = provider.getObjectWriter(entryKeyClass, entryKeyClass, contextFeatures);
+                 keyWriter.writeJSONB(jsonWriter, entryKey, null, null, 0);
+-                if (contextRefDetect) {
++                if (contextOnlyRefDetect) {
+                     jsonWriter.config(JSONWriter.Feature.ReferenceDetection, true);
+                 }
+             }

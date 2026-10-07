@@ -1,0 +1,778 @@
+D1/D2 field-level sorted map key == context-sorted map key: cells=3696 same=3496 differ=200
+asm     -      -          null                         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          null                         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          null                         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          null                         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          null                         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          ReferenceDetection           Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          ReferenceDetection           bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          ReferenceDetection           Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          ReferenceDetection           Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          ReferenceDetection           AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteNulls                   Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteNulls                   bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteNulls                   Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteNulls                   Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteNulls                   AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          PrettyFormat                 Optional   
+   field-level: {
+	"m":{
+		{
+			"z":1,
+			"a":2
+		}:"v"
+	}
+}
+   context    : {
+	"m":{
+		{
+			"a":2,
+			"z":1
+		}:"v"
+	}
+}
+asm     -      -          PrettyFormat                 bean[]     
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			}
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			}
+		]:"v"
+	}
+}
+asm     -      -          PrettyFormat                 Object[]   
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			},
+			1
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			},
+			1
+		]:"v"
+	}
+}
+asm     -      -          PrettyFormat                 Set<bean>  
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			}
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			}
+		]:"v"
+	}
+}
+asm     -      -          PrettyFormat                 AtomicReference
+   field-level: {
+	"m":{
+		{
+			"z":1,
+			"a":2
+		}:"v"
+	}
+}
+   context    : {
+	"m":{
+		{
+			"a":2,
+			"z":1
+		}:"v"
+	}
+}
+asm     -      -          UseSingleQuotes              Optional   
+   field-level: {'m':{{'z':1,'a':2}:'v'}}
+   context    : {'m':{{'a':2,'z':1}:'v'}}
+asm     -      -          UseSingleQuotes              bean[]     
+   field-level: {'m':{[{'z':1,'a':2}]:'v'}}
+   context    : {'m':{[{'a':2,'z':1}]:'v'}}
+asm     -      -          UseSingleQuotes              Object[]   
+   field-level: {'m':{[{'z':1,'a':2},1]:'v'}}
+   context    : {'m':{[{'a':2,'z':1},1]:'v'}}
+asm     -      -          UseSingleQuotes              Set<bean>  
+   field-level: {'m':{[{'z':1,'a':2}]:'v'}}
+   context    : {'m':{[{'a':2,'z':1}]:'v'}}
+asm     -      -          UseSingleQuotes              AtomicReference
+   field-level: {'m':{{'z':1,'a':2}:'v'}}
+   context    : {'m':{{'a':2,'z':1}:'v'}}
+asm     -      -          WriteClassName               Optional   
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","z":1,"a":2}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","a":2,"z":1}:"v"}}
+asm     -      -          WriteClassName               bean[]     
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[p10.Q10$Inner2","@value":[{"z":1,"a":2}]}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[p10.Q10$Inner2","@value":[{"a":2,"z":1}]}:"v"}}
+asm     -      -          WriteClassName               Object[]   
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[O","@value":[{"@type":"p10.Q10$Inner2","z":1,"a":2},1]}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[O","@value":[{"@type":"p10.Q10$Inner2","a":2,"z":1},1]}:"v"}}
+asm     -      -          WriteClassName               Set<bean>  
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",Set[{"@type":"p10.Q10$Inner2","z":1,"a":2}]:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",Set[{"@type":"p10.Q10$Inner2","a":2,"z":1}]:"v"}}
+asm     -      -          WriteClassName               AtomicReference
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","z":1,"a":2}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","a":2,"z":1}:"v"}}
+asm     -      -          WriteEnumUsingToString       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteEnumUsingToString       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteEnumUsingToString       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteEnumUsingToString       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteEnumUsingToString       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteEnumUsingOrdinal        Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteEnumUsingOrdinal        bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteEnumUsingOrdinal        Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteEnumUsingOrdinal        Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteEnumUsingOrdinal        AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          BrowserCompatible            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          BrowserCompatible            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          BrowserCompatible            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          BrowserCompatible            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          BrowserCompatible            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteNonStringValueAsString  Optional   
+   field-level: {"m":{{"z":"1","a":"2"}:"v"}}
+   context    : {"m":{{"a":"2","z":"1"}:"v"}}
+asm     -      -          WriteNonStringValueAsString  bean[]     
+   field-level: {"m":{[{"z":"1","a":"2"}]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"}]:"v"}}
+asm     -      -          WriteNonStringValueAsString  Object[]   
+   field-level: {"m":{[{"z":"1","a":"2"},"1"]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"},"1"]:"v"}}
+asm     -      -          WriteNonStringValueAsString  Set<bean>  
+   field-level: {"m":{[{"z":"1","a":"2"}]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"}]:"v"}}
+asm     -      -          WriteNonStringValueAsString  AtomicReference
+   field-level: {"m":{{"z":"1","a":"2"}:"v"}}
+   context    : {"m":{{"a":"2","z":"1"}:"v"}}
+asm     -      -          WriteBigDecimalAsPlain       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteBigDecimalAsPlain       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteBigDecimalAsPlain       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteBigDecimalAsPlain       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteBigDecimalAsPlain       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteLongAsString            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteLongAsString            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteLongAsString            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteLongAsString            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteLongAsString            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          NotWriteDefaultValue         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          NotWriteDefaultValue         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          NotWriteDefaultValue         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          NotWriteDefaultValue         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          NotWriteDefaultValue         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          FieldBased                   Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          FieldBased                   bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          FieldBased                   Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          FieldBased                   Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          FieldBased                   AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteBooleanAsNumber         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteBooleanAsNumber         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteBooleanAsNumber         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteBooleanAsNumber         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteBooleanAsNumber         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteNullStringAsEmpty       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteNullStringAsEmpty       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteNullStringAsEmpty       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteNullStringAsEmpty       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteNullStringAsEmpty       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          NotWriteNumberClassName      Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          NotWriteNumberClassName      bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          NotWriteNumberClassName      Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          NotWriteNumberClassName      Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          NotWriteNumberClassName      AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteByteArrayAsBase64       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteByteArrayAsBase64       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteByteArrayAsBase64       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteByteArrayAsBase64       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteByteArrayAsBase64       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          EscapeNoneAscii              Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          EscapeNoneAscii              bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          EscapeNoneAscii              Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          EscapeNoneAscii              Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          EscapeNoneAscii              AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteMapNullValue            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      -          WriteMapNullValue            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteMapNullValue            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      -          WriteMapNullValue            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      -          WriteMapNullValue            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat null                         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat null                         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat null                         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat null                         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat null                         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat ReferenceDetection           Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat ReferenceDetection           bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat ReferenceDetection           Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat ReferenceDetection           Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat ReferenceDetection           AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteNulls                   Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteNulls                   bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteNulls                   Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteNulls                   Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteNulls                   AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat PrettyFormat                 Optional   
+   field-level: {
+	"m":{
+		{
+			"z":1,
+			"a":2
+		}:"v"
+	}
+}
+   context    : {
+	"m":{
+		{
+			"a":2,
+			"z":1
+		}:"v"
+	}
+}
+asm     -      dateFormat PrettyFormat                 bean[]     
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			}
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			}
+		]:"v"
+	}
+}
+asm     -      dateFormat PrettyFormat                 Object[]   
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			},
+			1
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			},
+			1
+		]:"v"
+	}
+}
+asm     -      dateFormat PrettyFormat                 Set<bean>  
+   field-level: {
+	"m":{
+		[
+			{
+				"z":1,
+				"a":2
+			}
+		]:"v"
+	}
+}
+   context    : {
+	"m":{
+		[
+			{
+				"a":2,
+				"z":1
+			}
+		]:"v"
+	}
+}
+asm     -      dateFormat PrettyFormat                 AtomicReference
+   field-level: {
+	"m":{
+		{
+			"z":1,
+			"a":2
+		}:"v"
+	}
+}
+   context    : {
+	"m":{
+		{
+			"a":2,
+			"z":1
+		}:"v"
+	}
+}
+asm     -      dateFormat UseSingleQuotes              Optional   
+   field-level: {'m':{{'z':1,'a':2}:'v'}}
+   context    : {'m':{{'a':2,'z':1}:'v'}}
+asm     -      dateFormat UseSingleQuotes              bean[]     
+   field-level: {'m':{[{'z':1,'a':2}]:'v'}}
+   context    : {'m':{[{'a':2,'z':1}]:'v'}}
+asm     -      dateFormat UseSingleQuotes              Object[]   
+   field-level: {'m':{[{'z':1,'a':2},1]:'v'}}
+   context    : {'m':{[{'a':2,'z':1},1]:'v'}}
+asm     -      dateFormat UseSingleQuotes              Set<bean>  
+   field-level: {'m':{[{'z':1,'a':2}]:'v'}}
+   context    : {'m':{[{'a':2,'z':1}]:'v'}}
+asm     -      dateFormat UseSingleQuotes              AtomicReference
+   field-level: {'m':{{'z':1,'a':2}:'v'}}
+   context    : {'m':{{'a':2,'z':1}:'v'}}
+asm     -      dateFormat WriteClassName               Optional   
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","z":1,"a":2}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteClassName               bean[]     
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[p10.Q10$Inner2","@value":[{"z":1,"a":2}]}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[p10.Q10$Inner2","@value":[{"a":2,"z":1}]}:"v"}}
+asm     -      dateFormat WriteClassName               Object[]   
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[O","@value":[{"@type":"p10.Q10$Inner2","z":1,"a":2},1]}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"[O","@value":[{"@type":"p10.Q10$Inner2","a":2,"z":1},1]}:"v"}}
+asm     -      dateFormat WriteClassName               Set<bean>  
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",Set[{"@type":"p10.Q10$Inner2","z":1,"a":2}]:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",Set[{"@type":"p10.Q10$Inner2","a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteClassName               AtomicReference
+   field-level: {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","z":1,"a":2}:"v"}}
+   context    : {"@type":"HOLDER","m":{"@type":"java.util.LinkedHashMap",{"@type":"p10.Q10$Inner2","a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteEnumUsingToString       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteEnumUsingToString       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteEnumUsingToString       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteEnumUsingToString       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteEnumUsingToString       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteEnumUsingOrdinal        Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteEnumUsingOrdinal        bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteEnumUsingOrdinal        Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteEnumUsingOrdinal        Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteEnumUsingOrdinal        AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat BrowserCompatible            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat BrowserCompatible            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat BrowserCompatible            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat BrowserCompatible            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat BrowserCompatible            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteNonStringValueAsString  Optional   
+   field-level: {"m":{{"z":"1","a":"2"}:"v"}}
+   context    : {"m":{{"a":"2","z":"1"}:"v"}}
+asm     -      dateFormat WriteNonStringValueAsString  bean[]     
+   field-level: {"m":{[{"z":"1","a":"2"}]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"}]:"v"}}
+asm     -      dateFormat WriteNonStringValueAsString  Object[]   
+   field-level: {"m":{[{"z":"1","a":"2"},"1"]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"},"1"]:"v"}}
+asm     -      dateFormat WriteNonStringValueAsString  Set<bean>  
+   field-level: {"m":{[{"z":"1","a":"2"}]:"v"}}
+   context    : {"m":{[{"a":"2","z":"1"}]:"v"}}
+asm     -      dateFormat WriteNonStringValueAsString  AtomicReference
+   field-level: {"m":{{"z":"1","a":"2"}:"v"}}
+   context    : {"m":{{"a":"2","z":"1"}:"v"}}
+asm     -      dateFormat WriteBigDecimalAsPlain       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteBigDecimalAsPlain       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteBigDecimalAsPlain       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteBigDecimalAsPlain       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteBigDecimalAsPlain       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteLongAsString            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteLongAsString            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteLongAsString            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteLongAsString            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteLongAsString            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat NotWriteDefaultValue         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat NotWriteDefaultValue         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat NotWriteDefaultValue         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat NotWriteDefaultValue         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat NotWriteDefaultValue         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat FieldBased                   Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat FieldBased                   bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat FieldBased                   Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat FieldBased                   Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat FieldBased                   AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteBooleanAsNumber         Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteBooleanAsNumber         bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteBooleanAsNumber         Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteBooleanAsNumber         Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteBooleanAsNumber         AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteNullStringAsEmpty       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteNullStringAsEmpty       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteNullStringAsEmpty       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteNullStringAsEmpty       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteNullStringAsEmpty       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat NotWriteNumberClassName      Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat NotWriteNumberClassName      bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat NotWriteNumberClassName      Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat NotWriteNumberClassName      Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat NotWriteNumberClassName      AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteByteArrayAsBase64       Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteByteArrayAsBase64       bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteByteArrayAsBase64       Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteByteArrayAsBase64       Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteByteArrayAsBase64       AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat EscapeNoneAscii              Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat EscapeNoneAscii              bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat EscapeNoneAscii              Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat EscapeNoneAscii              Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat EscapeNoneAscii              AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteMapNullValue            Optional   
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+asm     -      dateFormat WriteMapNullValue            bean[]     
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteMapNullValue            Object[]   
+   field-level: {"m":{[{"z":1,"a":2},1]:"v"}}
+   context    : {"m":{[{"a":2,"z":1},1]:"v"}}
+asm     -      dateFormat WriteMapNullValue            Set<bean>  
+   field-level: {"m":{[{"z":1,"a":2}]:"v"}}
+   context    : {"m":{[{"a":2,"z":1}]:"v"}}
+asm     -      dateFormat WriteMapNullValue            AtomicReference
+   field-level: {"m":{{"z":1,"a":2}:"v"}}
+   context    : {"m":{{"a":2,"z":1}:"v"}}
+
+D4 the same shapes as a field-level sorted VALUE: value == value written with the sort on the context
+  cells=42 same=42
+
+D3 nested bean inside a field-level sorted key vs as a field-level sorted value (no context features)
+  asm key  : {"m":{"{\"amount\":1.50,\"big\":9007199254740993,\"ch\":\"x\",\"color\":\"GREEN\",\"date\":\"2023-11-15 06:13:20\",\"first\":{\"a\":2,\"z\":1},\"flag\":false,\"ldt\":\"2026-10-06 09:38:09\",\"list\":[{\"a\":2,\"z\":1}],\"second\":{\"a\":2,\"z\":1},\"zero\":0,\"zeta\":\"z\"}":"v"}}
+  asm value: {"v":{"amount":1.50,"big":9007199254740993,"ch":"x","color":"GREEN","date":"2023-11-15 06:13:20","first":{"a":2,"z":1},"flag":false,"ldt":"2026-10-06 09:38:09","list":[{"a":2,"z":1}],"second":{"a":2,"z":1},"zero":0,"zeta":"z"}}
+  reflect key  : {"m":{"{\"amount\":1.50,\"big\":9007199254740993,\"ch\":\"x\",\"color\":\"GREEN\",\"date\":\"2023-11-15 06:13:20\",\"first\":{\"a\":2,\"z\":1},\"flag\":false,\"ldt\":\"2026-10-06 09:38:09\",\"list\":[{\"a\":2,\"z\":1}],\"second\":{\"a\":2,\"z\":1},\"zero\":0,\"zeta\":\"z\"}":"v"}}
+  reflect value: {"v":{"amount":1.50,"big":9007199254740993,"ch":"x","color":"GREEN","date":"2023-11-15 06:13:20","first":{"a":2,"z":1},"flag":false,"ldt":"2026-10-06 09:38:09","list":[{"a":2,"z":1}],"second":{"a":2,"z":1},"zero":0,"zeta":"z"}}

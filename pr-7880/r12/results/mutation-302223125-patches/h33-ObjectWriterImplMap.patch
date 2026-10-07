@@ -1,0 +1,35 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -583,18 +643,20 @@ public final class ObjectWriterImplMap
+             boolean isPrimitiveOrEnum;
+             ObjectWriter<?> valueWriter;
+             if (valueClass == this.valueType) {
+-                if (this.valueWriter != null
+-                        && (features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
+-                    valueWriter = this.valueWriter;
+-                } else if ((features & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) != 0) {
+-                    // sorted variant must not be cached in valueWriter
++                // the memo is stamped with the variant features it was resolved under, so a writer
++                // resolved under one axis is never served under another, and the typed-value branch
++                // resolves with the merged word like its three sibling sites
++                long variantFeatures = features & (JSONWriter.Feature.FieldBased.mask
++                        | JSONWriter.Feature.SortFieldNamesAlphabetically.mask
++                        | JSONWriter.Feature.BeanToArray.mask);
++                VariantValueWriter memo = this.variantValueWriter;
++                if (memo != null && memo.variantFeatures == variantFeatures) {
++                    valueWriter = memo.writer;
++                } else {
+                     valueWriter = format != null
+-                            ? jsonWriter.getObjectWriter(valueClass, format)
++                            ? provider.getObjectWriter(valueClass, valueClass, format, features)
+                             : provider.getObjectWriter(valueClass, valueClass, features);
+-                } else {
+-                    valueWriter = this.valueWriter = format != null
+-                            ? jsonWriter.getObjectWriter(valueClass, format)
+-                            : jsonWriter.getObjectWriter(valueClass);
++                    this.variantValueWriter = new VariantValueWriter(variantFeatures, valueWriter);
+                 }
+                 isPrimitiveOrEnum = ObjectWriterProvider.isPrimitiveOrEnum(value.getClass());
+             } else {

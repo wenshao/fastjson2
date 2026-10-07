@@ -1,0 +1,188 @@
+diff --git a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+index b18b7efbd..ac9f13035 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+@@ -376,9 +376,75 @@ public class TreeModelTest {
+         maxLongEdge.add(9223372036854775807.0);
+         wrapped.put("maxLongEdgeAcc", maxLongEdge);
+         assertFalse(wrapped.canConvertToLong("maxLongEdgeAcc"));
++
++        // Number types outside the JDK set keep the range check: a saturating longValue()
++        // (as in commons-lang3 MutableDouble) or a wrapping one (as in a BigInteger wrapper)
++        // is not convertible, and neither is a NaN or an infinite value
++        wrapped.put("saturating", new SaturatingNumber(1e30));
++        wrapped.put("saturatingNaN", new SaturatingNumber(Double.NaN));
++        wrapped.put("saturatingInf", new SaturatingNumber(Double.POSITIVE_INFINITY));
++        wrapped.put("saturatingFraction", new SaturatingNumber(3.5));
++        wrapped.put("wrapping", new WrappingNumber(java.math.BigInteger.ONE.shiftLeft(64).subtract(java.math.BigInteger.ONE)));
++        wrapped.put("wrappingMax", new WrappingNumber(java.math.BigInteger.valueOf(Long.MAX_VALUE)));
++        assertFalse(wrapped.canConvertToLong("saturating"));
++        assertFalse(wrapped.canConvertToLong("saturatingNaN"));
++        assertFalse(wrapped.canConvertToLong("saturatingInf"));
++        assertTrue(wrapped.canConvertToLong("saturatingFraction"));
++        assertFalse(wrapped.canConvertToLong("wrapping"));
++        assertTrue(wrapped.canConvertToLong("wrappingMax"));
+         assertTrue(wrapped.canConvertToInt("fraction"));
+     }
+ 
++    static final class SaturatingNumber
++            extends Number {
++        final double value;
++
++        SaturatingNumber(double value) {
++            this.value = value;
++        }
++
++        public int intValue() {
++            return (int) value;
++        }
++
++        public long longValue() {
++            return (long) value;
++        }
++
++        public float floatValue() {
++            return (float) value;
++        }
++
++        public double doubleValue() {
++            return value;
++        }
++    }
++
++    static final class WrappingNumber
++            extends Number {
++        final java.math.BigInteger value;
++
++        WrappingNumber(java.math.BigInteger value) {
++            this.value = value;
++        }
++
++        public int intValue() {
++            return value.intValue();
++        }
++
++        public long longValue() {
++            return value.longValue();
++        }
++
++        public float floatValue() {
++            return value.floatValue();
++        }
++
++        public double doubleValue() {
++            return value.doubleValue();
++        }
++    }
++
+     @com.alibaba.fastjson2.annotation.JSONType(alphabetic = false)
+     public static class SortChild {
+         public int zebra = 3;
+diff --git a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+index 4c43d4f42..aa169c763 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+@@ -891,8 +891,9 @@ public class SortFieldNamesRegistryTest {
+     }
+ 
+     @Test
+-    public void sortedWritesMemoizeTheItemWriterPerVariant() {
+-        // the per-variant memo keeps repeated sorted writes free of provider resolution
++    public void sortedWritesResolveTheItemWriterThroughTheProvider() {
++        // the sorted variant is resolved through the provider on every write: nothing is stored on
++        // the field writer, so cleanup(ClassLoader) and provider-level eviction always take effect
+         CountingProvider provider = new CountingProvider();
+         String expected = "{\"position\":{\"alpha\":1,\"zulu\":7}}";
+         assertEquals(expected, JSON.toJSONString(new MemoOuter(),
+@@ -900,7 +901,39 @@ public class SortFieldNamesRegistryTest {
+         int afterFirst = provider.calls.get();
+         assertEquals(expected, JSON.toJSONString(new MemoOuter(),
+                 new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically)));
+-        assertEquals(afterFirst, provider.calls.get());
++        assertTrue(provider.calls.get() > afterFirst);
++    }
++
++    public static class ObjectHolder {
++        public Object value;
++    }
++
++    @Test
++    public void cleanupClassLoaderReleasesLoaderHeldThroughAParentLoaderField() throws Exception {
++        // a parent-loader holder survives cleanup(childLoader); its field writer must not keep the
++        // child class's sorted writer reachable
++        ObjectWriterProvider provider = new ObjectWriterProvider();
++        WeakReference<ClassLoader> weakLoader = writeThroughParentHolder(provider);
++        long deadline = System.currentTimeMillis() + 5000;
++        while (weakLoader.get() != null && System.currentTimeMillis() < deadline) {
++            System.gc();
++            Thread.sleep(20);
++        }
++        assertNull(weakLoader.get());
++    }
++
++    static WeakReference<ClassLoader> writeThroughParentHolder(ObjectWriterProvider provider) throws Exception {
++        IsolatedLoader childLoader = new IsolatedLoader(SortFieldNamesRegistryTest.class.getClassLoader());
++        Class<?> loadedClass = childLoader.loadClass(LeakBean.class.getName());
++        ObjectHolder holder = new ObjectHolder();
++        holder.value = loadedClass.getConstructor().newInstance();
++        assertEquals("{\"value\":{\"a\":1,\"z\":2}}", JSON.toJSONString(holder,
++                new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically)));
++        JSON.toJSONString(holder, new JSONWriter.Context(provider,
++                JSONWriter.Feature.SortFieldNamesAlphabetically, JSONWriter.Feature.FieldBased));
++        holder.value = null;
++        provider.cleanup(childLoader);
++        return new WeakReference<>(childLoader);
+     }
+ 
+     @JSONType(alphabetic = false)
+diff --git a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+index d9296ad3f..961e3f074 100644
+--- a/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
++++ b/core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java
+@@ -220,6 +220,46 @@ public class MapKeyContextTest {
+         }
+     }
+ 
++    @JSONType(alphabetic = false)
++    public static class ZA {
++        public int z = 1;
++        public int a = 2;
++    }
++
++    public static class FieldSortedKeys {
++        @JSONField(serializeFeatures = JSONWriter.Feature.SortFieldNamesAlphabetically)
++        public Map<Object, String> m = new LinkedHashMap<>();
++    }
++
++    public static class PlainKeys {
++        public Map<Object, String> m = new LinkedHashMap<>();
++    }
++
++    @Test
++    public void fieldLevelSortReachesBeansInEveryContainerKeyWithEitherCreator() {
++        java.util.List<java.util.function.Supplier<Object>> keys = java.util.Arrays.asList(
++                () -> new java.util.LinkedHashSet<>(java.util.Collections.singletonList(new ZA())),
++                () -> new ZA[]{new ZA()},
++                () -> new Object[]{new ZA()},
++                () -> java.util.Optional.of(new ZA()),
++                () -> new java.util.concurrent.atomic.AtomicReference<>(new ZA()),
++                () -> new java.util.ArrayList<>(java.util.Collections.singletonList(new ZA())));
++        for (ObjectWriterCreator creator : new ObjectWriterCreator[]{ObjectWriterCreatorASM.INSTANCE, ObjectWriterCreator.INSTANCE}) {
++            for (java.util.function.Supplier<Object> key : keys) {
++                ObjectWriterProvider provider = new ObjectWriterProvider(creator);
++                FieldSortedKeys fieldLevel = new FieldSortedKeys();
++                fieldLevel.m.put(key.get(), "v");
++                PlainKeys contextLevel = new PlainKeys();
++                contextLevel.m.put(key.get(), "v");
++                String fieldJson = JSON.toJSONString(fieldLevel, new JSONWriter.Context(provider));
++                String contextJson = JSON.toJSONString(contextLevel,
++                        new JSONWriter.Context(provider, JSONWriter.Feature.SortFieldNamesAlphabetically));
++                assertEquals(contextJson, fieldJson, creator.getClass().getSimpleName());
++                org.junit.jupiter.api.Assertions.assertTrue(fieldJson.contains("{\\\"a\\\":2,\\\"z\\\":1}"), creator.getClass().getSimpleName() + " " + fieldJson);
++            }
++        }
++    }
++
+     @Test
+     public void sortedMapsKeepTheNaturalSpellingForNonBeanKeys() {
+         // an ordering feature must not change how non-bean keys are spelled: BigDecimal, Boolean,

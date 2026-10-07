@@ -1,0 +1,2 @@
+toJSONString   {"items":[{"alpha":2,"zeta":1}],"m":{"a":2,"b":1},"o":{"x":2,"y":1}}
+JSON.toJSON    {"items":[{"zeta":1,"alpha":2}],"m":{"b":1,"a":2},"o":{"y":1,"x":2}}  m is the field's own map: true  o is the field's own map: true

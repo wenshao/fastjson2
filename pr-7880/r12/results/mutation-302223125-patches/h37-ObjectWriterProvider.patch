@@ -1,0 +1,29 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 63b2c796c..3c9116796 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -806,10 +802,20 @@ public class ObjectWriterProvider
+                         // module-provided bean writers must not leave the sorted cell natural either
+                         objectWriter = sortedVariantOf(objectWriter);
+                     }
+-                    ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-
+-                    if (previous != null) {
+-                        objectWriter = previous;
++                    synchronized (createLock) {
++                        // the same lookup+link+publish discipline as the creator path: a module that
++                        // builds a fresh instance per call must still link to a cached counterpart,
++                        // so filter installation on one variant reaches the other
++                        ObjectWriter existing = cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++                        if (existing != null) {
++                            objectWriter = existing;
++                        } else {
++                            linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
++                            ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
++                            if (previous != null) {
++                                objectWriter = previous;
++                            }
++                        }
+                     }
+                     return objectWriter;
+                 }

@@ -1,0 +1,21 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 63b2c796c..3c9116796 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -907,6 +921,16 @@ public class ObjectWriterProvider
+         }
+     }
+ 
++    /**
++     * The variant axis every sorted-cell decision shares: a word selects the sorted variant only
++     * when SortFieldNamesAlphabetically is set and BeanToArray is not — positional output never sorts.
++     */
++    static boolean isFieldNamesSorted(long contextFeatures) {
++        return (contextFeatures & (
++                JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
++                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++    }
++
+     static final int ENUM = 0x00004000;
+     static final int[] PRIMITIVE_HASH_CODES;
+     static final int[] NOT_REFERENCES_TYPE_HASH_CODES;

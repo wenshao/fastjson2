@@ -1,0 +1,25 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 63b2c796c..3c9116796 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -851,9 +857,17 @@ public class ObjectWriterProvider
+             if (fieldNamesSorted) {
+                 objectWriter = sortedVariantOf(objectWriter);
+             }
+-            ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
+-            if (previous != null) {
+-                objectWriter = previous;
++            synchronized (createLock) {
++                ObjectWriter existing = cacheOf(fieldBased, fieldNamesSorted).get(objectType);
++                if (existing != null) {
++                    objectWriter = existing;
++                } else {
++                    linkSortedVariant(objectType, fieldBased, fieldNamesSorted, objectWriter);
++                    ObjectWriter previous = cacheOf(fieldBased, fieldNamesSorted).putIfAbsent(objectType, objectWriter);
++                    if (previous != null) {
++                        objectWriter = previous;
++                    }
++                }
+             }
+             return objectWriter;
+         }

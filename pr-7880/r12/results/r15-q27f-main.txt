@@ -1,0 +1,2 @@
+asm     Typed={"m":{"k":{"visible":1}}}  Untyped={"m":{"k":{"visible":1}}}  BeanField={"f":{"visible":1}}  ListField={"l":[{"visible":1}]}  
+reflect Typed={"m":{"k":{"hidden":7}}}  Untyped={"m":{"k":{"hidden":7}}}  BeanField={"f":{"hidden":7}}  ListField={"l":[{"visible":1}]}  

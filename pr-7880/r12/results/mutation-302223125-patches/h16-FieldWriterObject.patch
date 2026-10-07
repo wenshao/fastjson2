@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 49e8cf965..79811049d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -196,7 +218,7 @@ public class FieldWriterObject<T>
+ 
+         if (formattedWriter == null) {
+             formattedWriter = resolveObjectWriter(jsonWriter, valueClass);
+-            if (((features | jsonWriter.getFeatures()) & JSONWriter.Feature.SortFieldNamesAlphabetically.mask) == 0) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(features | jsonWriter.getFeatures())) {
+                 boolean success = initValueClassUpdater.compareAndSet(this, null, valueClass);
+                 if (success) {
+                     initObjectWriterUpdater.compareAndSet(this, null, formattedWriter);

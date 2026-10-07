@@ -1,0 +1,132 @@
+[A] bean inside a map key under the sort feature; 'sorted' = a before z inside the key
+  creator  key shape              none     context  field    field-level output
+  asm      B                      natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  asm      ArrayList<B>           natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      LinkedList<B>          natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      Arrays.asList(B)       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      singletonList(B)       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      unmodifiableList(B)    natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      LinkedHashSet<B>       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      B[]                    natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      Object[]{B}            natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  asm      Optional<B>            natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  asm      AtomicReference<B>     natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  asm      LinkedHashMap{k:B}     natural  sorted   sorted   {"m":{"{\"k\":{\"a\":2,\"z\":1}}":"v"}}
+  asm      JSONObject{k:B}        natural  sorted   sorted   {"m":{"{\"k\":{\"a\":2,\"z\":1}}":"v"}}
+  asm      JSONArray[B]           natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  B                      natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  reflect  ArrayList<B>           natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  LinkedList<B>          natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  Arrays.asList(B)       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  singletonList(B)       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  unmodifiableList(B)    natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  LinkedHashSet<B>       natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  B[]                    natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  Object[]{B}            natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+  reflect  Optional<B>            natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  reflect  AtomicReference<B>     natural  sorted   sorted   {"m":{"{\"a\":2,\"z\":1}":"v"}}
+  reflect  LinkedHashMap{k:B}     natural  sorted   sorted   {"m":{"{\"k\":{\"a\":2,\"z\":1}}":"v"}}
+  reflect  JSONObject{k:B}        natural  sorted   sorted   {"m":{"{\"k\":{\"a\":2,\"z\":1}}":"v"}}
+  reflect  JSONArray[B]           natural  sorted   sorted   {"m":{"[{\"a\":2,\"z\":1}]":"v"}}
+
+[B] scalar map keys: toJSONString(map) vs toJSONString(map, Sort)
+  BigDecimal 1.50  DIFF  {1.50:"v"}  vs sorted {"1.50":"v"}
+  BigInteger       DIFF  {123456789012345678901234567890:"v"}  vs sorted {"123456789012345678901234567890":"v"}
+  Boolean          DIFF  {true:"v"}  vs sorted {"true":"v"}
+  Double 2.5       DIFF  {2.5:"v"}  vs sorted {"2.5":"v"}
+  Float 3.5        DIFF  {3.5:"v"}  vs sorted {"3.5":"v"}
+  Integer          same  {7:"v"}
+  Long             same  {1099511627776:"v"}
+  Short            DIFF  {3:"v"}  vs sorted {"3":"v"}
+  Character        same  {"c":"v"}
+  Date             same  {"1970-01-01 08:00:00":"v"}
+  UUID             same  {"00000000-0000-0000-0000-000000000001":"v"}
+  LocalDate        same  {"2026-10-07":"v"}
+  enum             same  {"RED":"v"}
+  Class            same  {"java.lang.String":"v"}
+  Locale           same  {"zh_CN":"v"}
+  int[]            DIFF  {[1,2]:"v"}  vs sorted {"[1,2]":"v"}
+  String[]         DIFF  {["x"]:"v"}  vs sorted {"[\"x\"]":"v"}
+
+[D] canConvertToInt / canConvertToLong and the value getIntValue / getLongValue reads back
+  value                            canInt    canLong   getLongValue           getIntValue
+  Double 3.5                       true      true      3                      3
+  DoubleAdder 3.5                  true      true      3                      3
+  MyDouble 3.5                     true      true      3                      3
+  Double 1.0E30                    false     false     9223372036854775807    2147483647
+  DoubleAdder 1.0E30               false     false     9223372036854775807    2147483647
+  MyDouble 1.0E30                  false     false     9223372036854775807    2147483647
+  Double -1.0E30                   false     false     -9223372036854775808   -2147483648
+  DoubleAdder -1.0E30              false     false     -9223372036854775808   -2147483648
+  MyDouble -1.0E30                 false     false     -9223372036854775808   -2147483648
+  Double NaN                       false     false     0                      0
+  DoubleAdder NaN                  true      false     0                      0
+  MyDouble NaN                     true      false     0                      0
+  Double Infinity                  false     false     9223372036854775807    2147483647
+  DoubleAdder Infinity             false     false     9223372036854775807    2147483647
+  MyDouble Infinity                false     false     9223372036854775807    2147483647
+  Double 9.223372036854776E18      false     true      9223372036854775807    2147483647
+  DoubleAdder 9.223372036854776E18 false     true      9223372036854775807    2147483647
+  MyDouble 9.223372036854776E18    false     true      9223372036854775807    2147483647
+  Double -9.223372036854776E18     false     true      -9223372036854775808   -2147483648
+  DoubleAdder -9.223372036854776E18 false     true      -9223372036854775808   -2147483648
+  MyDouble -9.223372036854776E18   false     true      -9223372036854775808   -2147483648
+  Double 2.1474836475E9            false     true      2147483647             2147483647
+  DoubleAdder 2.1474836475E9       true      true      2147483647             2147483647
+  MyDouble 2.1474836475E9          true      true      2147483647             2147483647
+  MyBig 2^64-1                     true      false     -1                     -1
+  MyBig 2^63                       false     false     -9223372036854775808   0
+  MyBig 2^63-1                     false     true      9223372036854775807    -1
+  MyBig 2^70                       true      false     0                      0
+  BigInteger 2^64-1                false     false     -1                     -1
+
+[E] JSONObject.required with class literals
+  required("i",     int.class)         -> !JSONException: required value not of type int : i
+  required("i",     java.lang.Integer.class) -> 1
+  required("i",     long.class)        -> !JSONException: required value not of type long : i
+  required("l",     long.class)        -> !JSONException: required value not of type long : l
+  required("d",     double.class)      -> !JSONException: required value not of type double : d
+  required("d",     float.class)       -> !JSONException: required value not of type float : d
+  required("b",     boolean.class)     -> !JSONException: required value not of type boolean : b
+  required("c",     char.class)        -> !JSONException: required value not of type char : c
+  required("i",     void.class)        -> !JSONException: required value not of type void : i
+  required("i",     java.lang.Number.class) -> 1
+  required("missing", int.class)         -> !JSONException: required value missing : missing
+
+[F] SortMapEntriesByKeys: toJSONString vs JSON.toJSON / JSONObject.from
+  string keys                toJSONString  {"items":[{"alpha":2,"zeta":1}],"m":{"a":2,"b":1}}
+                             JSON.toJSON   {"items":[{"zeta":1,"alpha":2}],"m":{"b":1,"a":2}}
+                             JSONObject.from {"items":[{"zeta":1,"alpha":2}],"m":{"b":1,"a":2}}
+  root Map                   toJSONString  {"alpha":2,"zeta":1}
+                             JSON.toJSON   {"alpha":2,"zeta":1}
+
+[G] type-level @JSONType(serializeFeatures = SortFieldNamesAlphabetically)
+  asm      plain            {"zulu":9,"apple":1}
+  asm      FieldBased       {"zulu":9,"apple":1}
+  asm      BeanToArray ctx  [9,1]
+  asm      +BeanToArray type [9,1]
+  asm      holder           {"l":[{"zulu":9,"apple":1}],"t":{"zulu":9,"apple":1}}
+  asm      JSONB->JSON      {"zulu":9,"apple":1}
+  reflect  plain            {"zulu":9,"apple":1}
+  reflect  FieldBased       {"apple":1,"zulu":9}
+  reflect  BeanToArray ctx  [9,1]
+  reflect  +BeanToArray type [9,1]
+  reflect  holder           {"l":[{"zulu":9,"apple":1}],"t":{"zulu":9,"apple":1}}
+  reflect  JSONB->JSON      {"zulu":9,"apple":1}
+
+[H] default order (no sort feature); fields declared zeta, alpha
+  asm      Getters      method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  asm      PublicFields method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  asm      GettersDecl  method-based {"zeta":1,"alpha":2}   FieldBased {"zeta":1,"alpha":2}
+  reflect  Getters      method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  reflect  PublicFields method-based {"alpha":2,"zeta":1}   FieldBased {"alpha":2,"zeta":1}
+  reflect  GettersDecl  method-based {"zeta":1,"alpha":2}   FieldBased {"alpha":2,"zeta":1}
+
+[J] typed Map<String, B> value memo, one provider, alternating contexts vs a fresh provider
+  asm      14 writes, 0 differ from a fresh provider 
+  reflect  14 writes, 0 differ from a fresh provider 
+
+[K] Object-typed field, values of two classes alternating, sorted context, one provider
+  asm      6 writes, 0 differ from a fresh provider 
+  reflect  6 writes, 0 differ from a fresh provider 
+

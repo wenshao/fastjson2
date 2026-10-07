@@ -1,0 +1,28 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 2999b2cfb..1831bc851 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -253,12 +263,18 @@ public class JSONObject
+                     && decimal.compareTo(BigDecimal.valueOf(Long.MAX_VALUE)) <= 0;
+         }
+         if (value instanceof Number) {
+-            // any other Number (AtomicInteger, AtomicLong, LongAdder, DoubleAdder, custom types):
+-            // answered from the same conversion getLongValue would use. It is convertible when
+-            // longValue() is the truncated value, so a fraction counts as for Double, while a
+-            // wrapped, out-of-range or NaN value answers false
++            // floating accumulators convert by truncation, as for Double/Float/BigDecimal, but
++            // an accumulator at exactly 2^63 has longValue() clamped to Long.MAX_VALUE while the
++            // truncation diff still reads 0, so the top of the domain is rejected explicitly.
++            // Integral accumulators and custom Number types answer true: longValue() is exactly
++            // what getLongValue reads back
+             Number number = (Number) value;
+-            return Math.abs(number.longValue() - number.doubleValue()) < 1;
++            if (number instanceof java.util.concurrent.atomic.DoubleAdder
++                    || number instanceof java.util.concurrent.atomic.DoubleAccumulator) {
++                double d = number.doubleValue();
++                return Math.abs(number.longValue() - d) < 1 && d < 9.223372036854776E18;
++            }
++            return true;
+         }
+         return false;
+     }

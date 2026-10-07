@@ -1,0 +1,12 @@
+asm/plain MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+asm/plain HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+asm/sort MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+asm/sort HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+asm/filter MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+asm/filter HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+reflect/plain MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+reflect/plain HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+reflect/sort MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+reflect/sort HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}
+reflect/filter MyMap  : Map={"m":"CUSTOM"} MyMap={"m":"CUSTOM"} Object={"m":"CUSTOM"} Map+fieldSort={"m":"CUSTOM"}
+reflect/filter HashMap: Map={"m":"CUSTOM"} HashMap={"m":"CUSTOM"} Object={"m":"CUSTOM"}

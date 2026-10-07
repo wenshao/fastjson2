@@ -1,0 +1,14 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
+index 928ba60ab..2d87dff34 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplMapMultiValueType.java
+@@ -130,6 +130,9 @@ public class ObjectReaderImplMapMultiValueType
+                 if (!jsonReader.nextIfMatch(':')) {
+                     throw new JSONException(jsonReader.info("illegal json"));
+                 }
++                if (seenKeys != null && !seenKeys.add(null)) {
++                    throw duplicateKeyError(jsonReader, null);
++                }
+                 name = null;
+             } else {
+                 name = jsonReader.readFieldName();

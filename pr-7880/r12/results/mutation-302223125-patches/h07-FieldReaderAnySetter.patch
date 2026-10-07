@@ -1,0 +1,14 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+index a55b0f1b7..d6207956c 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
++++ b/core/src/main/java/com/alibaba/fastjson2/reader/FieldReaderAnySetter.java
+@@ -54,7 +54,8 @@ class FieldReaderAnySetter<T>
+         try {
+             method.invoke(object, name, value);
+         } catch (Exception e) {
+-            throw new JSONException("any set error");
++            // keep the any-setter's own exception reachable, as processExtra does on the text path
++            throw new JSONException("any set error", e);
+         }
+     }
+ 

@@ -1,0 +1,12 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -43,6 +43,7 @@ public final class ObjectWriterImplMap
+     final boolean valueTypeRefDetect;
+     volatile ObjectWriter keyWriter;
+     volatile ObjectWriter valueWriter;
++    volatile VariantValueWriter variantValueWriter;
+ 
+     final byte[] jsonbTypeInfo;
+     final long typeNameHash;

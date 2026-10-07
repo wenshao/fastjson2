@@ -1,0 +1,38 @@
+[INFO] fastjson2-parent ................................... SUCCESS [  0.897 s]
+[INFO] fastjson2 .......................................... SUCCESS [  0.317 s]
+[INFO] fastjson2-extension ................................ SUCCESS [  0.474 s]
+[INFO] fastjson2-benchmark ................................ SUCCESS [  0.083 s]
+[INFO] fastjson2-extension-solon .......................... SUCCESS [  0.084 s]
+[INFO] example-solon-test ................................. SUCCESS [  0.399 s]
+[INFO] fastjson2-extension-spring5 ........................ SUCCESS [  0.118 s]
+[INFO] example-spring-test ................................ SUCCESS [  0.348 s]
+[INFO] fastjson2-extension-jaxrs .......................... SUCCESS [  0.022 s]
+[INFO] fastjson2-extension-jaxrs-javax .................... SUCCESS [  0.025 s]
+[INFO] fastjson1-compatible ............................... SUCCESS [  0.095 s]
+[INFO] fastjson2-kotlin ................................... SUCCESS [  0.022 s]
+[INFO] safemode-test ...................................... SUCCESS [  0.018 s]
+[INFO] test-jdk25 ......................................... SUCCESS [  0.023 s]
+[INFO] fastjson2-benchmark_25 ............................. SUCCESS [  0.024 s]
+[INFO] fastjson2-extension-spring6 ........................ SUCCESS [  0.062 s]
+[INFO] example-spring6-test ............................... SUCCESS [  0.082 s]
+[INFO] BUILD SUCCESS
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] You have 0 Checkstyle violations.
+[INFO] BUILD SUCCESS
+[INFO] Total time:  3.410 s
+rc=0

@@ -1,0 +1,3 @@
+302223125 round-12 suggestions: failing-first witnesses and determinism hardening across tree, map-key, registry, concurrency, and duplicate-key tests
+01f410791 box primitive required types, mask reader-array forwarding, register null keys, add per-variant writer memos, link module publications, and correct feature javadocs
+fa7e339e3 fix tree number conversion bounds, register @type in every switch arm, degrade proxy variants identically, and close sorted map-key and tree-conversion holes

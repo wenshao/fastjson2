@@ -1,0 +1,15 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+index 7a88e45df..a89b482b0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterList.java
+@@ -145,9 +143,7 @@ public class FieldWriterList<T>
+         if (listWriter == null && valueClass == fieldClass) {
+             ObjectWriter resolved = jsonWriter.getContext().getProvider()
+                     .getObjectWriter(valueClass, valueClass, resolvedFeatures);
+-            if ((resolvedFeatures & (
+-                    JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                    != JSONWriter.Feature.SortFieldNamesAlphabetically.mask) {
++            if (!ObjectWriterProvider.isFieldNamesSorted(resolvedFeatures)) {
+                 this.listWriter = resolved;
+             }
+             return resolved;

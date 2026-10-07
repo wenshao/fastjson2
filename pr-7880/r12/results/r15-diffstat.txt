@@ -1,0 +1,27 @@
+ .../java/com/alibaba/fastjson2/JSONObject.java     |  40 ++--
+ .../java/com/alibaba/fastjson2/JSONReader.java     |   5 +-
+ .../java/com/alibaba/fastjson2/JSONWriter.java     |  15 +-
+ .../fastjson2/reader/FieldReaderAnySetter.java     |   3 +-
+ .../reader/ObjectReaderImplMapMultiValueType.java  |   3 +
+ .../fastjson2/reader/ObjectReaderImplObject.java   |   9 +-
+ .../fastjson2/reader/ObjectReaderImplOptional.java |   2 +-
+ .../alibaba/fastjson2/writer/FieldWriterList.java  |   8 +-
+ .../fastjson2/writer/FieldWriterObject.java        |  44 +++-
+ .../fastjson2/writer/FieldWriterObjectFinal.java   |  26 ++-
+ .../fastjson2/writer/ObjectWriterAdapter.java      |  13 +-
+ .../fastjson2/writer/ObjectWriterCreator.java      |   2 +-
+ .../fastjson2/writer/ObjectWriterCreatorASM.java   |   2 +-
+ .../fastjson2/writer/ObjectWriterImplMap.java      | 104 ++++++++--
+ .../fastjson2/writer/ObjectWriterProvider.java     |  56 ++++--
+ .../java/com/alibaba/fastjson2/TreeModelTest.java  |  91 ++++++++-
+ .../alibaba/fastjson2/features/AnySetterTest.java  |  31 ++-
+ .../features/ErrorOnDuplicateKeysTest.java         |  98 ++++++++-
+ .../features/SortFieldNamesAlphabeticallyTest.java |  52 +++--
+ .../features/SortFieldNamesRegistryTest.java       | 221 ++++++++++++++++++---
+ .../fastjson2/writer/MapFilteredSortTest.java      |  21 ++
+ .../fastjson2/writer/MapKeyContextTest.java        | 119 ++++++++++-
+ .../writer/ObjectWriterAdapterLinkTest.java        |  70 ++++++-
+ .../ObjectWriterProviderCreationLockTest.java      |   4 +
+ .../ObjectWriterProviderVariantRaceTest.java       |  37 ++--
+ .../writer/TreeConversionLongFeaturesTest.java     |  83 ++++++++
+ 26 files changed, 1003 insertions(+), 156 deletions(-)

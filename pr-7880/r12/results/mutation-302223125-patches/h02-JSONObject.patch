@@ -1,0 +1,22 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 2999b2cfb..1831bc851 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -214,10 +218,13 @@ public class JSONObject
+                     && decimal.compareTo(BigDecimal.valueOf(Integer.MAX_VALUE)) <= 0;
+         }
+         if (value instanceof Number) {
+-            // any other integral Number (AtomicInteger, AtomicLong, LongAdder, custom types):
+-            // answered from the same conversion getIntValue would use
+-            long v = ((Number) value).longValue();
+-            return v >= Integer.MIN_VALUE && v <= Integer.MAX_VALUE;
++            // any other Number (AtomicInteger, AtomicLong, LongAdder, DoubleAdder, custom types):
++            // answered from the same conversion getIntValue would use, with the same fractional
++            // tolerance the Double/BigDecimal branches have; NaN and out-of-range values false
++            Number number = (Number) value;
++            double d = number.doubleValue();
++            return Math.abs(number.longValue() - d) < 1
++                    && d >= -2147483648.0 && d <= 2147483647.0;
+         }
+         return false;
+     }

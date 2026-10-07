@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+index 49e8cf965..79811049d 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+@@ -24,6 +24,8 @@ import static com.alibaba.fastjson2.util.BeanUtils.SUPER;
+ public class FieldWriterObject<T>
+         extends FieldWriter<T> {
+     volatile Class initValueClass;
++    volatile ObjectWriter sortedObjectWriter;
++    volatile Class sortedValueClass;
+     final boolean unwrapped;
+     final boolean array;
+     final boolean number;

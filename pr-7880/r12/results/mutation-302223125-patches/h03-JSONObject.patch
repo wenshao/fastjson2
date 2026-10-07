@@ -1,0 +1,17 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+index 2999b2cfb..1831bc851 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
++++ b/core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+@@ -244,8 +251,11 @@ public class JSONObject
+         }
+         if (value instanceof Double || value instanceof Float) {
+             double v = ((Number) value).doubleValue();
++            // the upper bound is exclusive: 9.223372036854776E18 is exactly 2^63, one greater
++            // than Long.MAX_VALUE, and would read back as Long.MAX_VALUE; the lower bound is
++            // inclusive because -2^63 is exactly (double) Long.MIN_VALUE
+             return !Double.isNaN(v) && !Double.isInfinite(v)
+-                    && v >= -9.223372036854776E18 && v <= 9.223372036854776E18;
++                    && v >= -9.223372036854776E18 && v < 9.223372036854776E18;
+         }
+         if (value instanceof BigDecimal) {
+             BigDecimal decimal = (BigDecimal) value;

@@ -1,0 +1,87 @@
+=== mutation: h01-JSONObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.requiredPrimitiveClassBoxes
+=== mutation: h02-JSONObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: h03-JSONObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.canConvertBoundaryValues
+=== mutation: h04-JSONObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: h05-JSONReader [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.readArrayArmMasksThePerCallWord
+=== mutation: h07-FieldReaderAnySetter [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL AnySetterTest.anySetterExceptionCauseSurvivesOnTreeToBean
+=== mutation: h08-ObjectReaderImplMapMultiValueType [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.multiValueTypeRejectsDuplicatedKeysIncludingNullKeys
+=== mutation: h09-ObjectReaderImplObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.duplicatedTypeDiscriminatorRejectedThroughSwitchArms
+=== mutation: h10-ObjectReaderImplOptional [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.rawOptionalFieldRejectsDuplicatesInside
+=== mutation: h11-FieldWriterList [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h12-FieldWriterList [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h15-FieldWriterObject [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.sortedWritesMemoizeTheItemWriterPerVariant
+=== mutation: h16-FieldWriterObject [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h17-FieldWriterObject [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h18-FieldWriterObject [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h19-FieldWriterObject [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h20-FieldWriterObject [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h21-FieldWriterObjectFinal [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h22-ObjectWriterAdapter [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeConversionLongFeaturesTest.sortMapEntriesByKeysReachesNestedTreeMaps
+=== mutation: h23-ObjectWriterAdapter [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.sortedTreeConversionDoesNotReuseThePrimedNaturalFieldWriter
+=== mutation: h24-ObjectWriterCreator [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.typeLevelSortAnnotationOrdersOwnFields
+=== mutation: h25-ObjectWriterCreatorASM [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.typeLevelSortAnnotationOrdersOwnFields
+=== mutation: h28-ObjectWriterImplMap [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h29-ObjectWriterImplMap [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h30-ObjectWriterImplMap [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h32-ObjectWriterImplMap [creator=reflect] (mvn rc=1)
+  tests=163 failed=2
+   FAIL MapKeyContextTest.cyclicBeanKeyTerminatesUnderSort
+   FAIL MapKeyContextTest.sortedMapsKeepTheNaturalSpellingForNonBeanKeys
+=== mutation: h33-ObjectWriterImplMap [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h34-ObjectWriterProvider [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h35-ObjectWriterProvider [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h36-ObjectWriterProvider [creator=reflect] (mvn rc=1)
+  tests=163 failed=2
+   FAIL SortFieldNamesRegistryTest.fieldBasedSortedProxyKeepsFields
+   FAIL SortFieldNamesRegistryTest.fieldBasedSortedProxyWritesSortedFields
+=== mutation: h37-ObjectWriterProvider [creator=reflect] (mvn rc=1)
+  tests=163 failed=1
+   FAIL ObjectWriterAdapterLinkTest.moduleWritersLinkAcrossPublication
+=== mutation: h38-ObjectWriterProvider [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: c:none [creator=reflect] (mvn rc=0)
+  tests=163 failed=0
+=== mutation: c:canlong-custom-true [creator=reflect] (mvn rc=0)
+  tests=163 failed=0

@@ -1,0 +1,5 @@
+[ERROR] Tests run: 68, Failures: 4, Errors: 0, Skipped: 0
+[ERROR]   TreeModelTest.integerTypesConvertable:389 expected: <false> but was: <true>
+[ERROR]   SortFieldNamesRegistryTest.cleanupClassLoaderReleasesLoaderHeldThroughAParentLoaderField:922 expected: <null> but was: <com.alibaba.fastjson2.features.SortFieldNamesRegistryTest$IsolatedLoader@18230356>
+[ERROR]   SortFieldNamesRegistryTest.sortedWritesResolveTheItemWriterThroughTheProvider:904 expected: <true> but was: <false>
+[ERROR]   MapKeyContextTest.fieldLevelSortReachesBeansInEveryContainerKeyWithEitherCreator:257 ObjectWriterCreatorASM ==> expected: <{"m":{[{"a":2,"z":1}]:"v"}}> but was: <{"m":{[{"z":1,"a":2}]:"v"}}>

@@ -1,0 +1,20 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -216,12 +217,14 @@ public final class ObjectWriterImplMap
+ 
+         long contextFeatures = jsonWriter.getFeatures(features) | this.features;
+         boolean writeNulls = (contextFeatures & (JSONWriter.Feature.WriteNulls.mask | JSONWriter.Feature.NullAsDefaultValue.mask)) != 0;
+-        boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
+         ObjectWriterProvider provider = context.provider;
+ 
+         Class itemClass = null;
+         ObjectWriter itemWriter = null;
+         boolean contextRefDetect = (contextFeatures & JSONWriter.Feature.ReferenceDetection.mask) != 0;
++        // the mutating save/restore pairs below must restore the CONTEXT's own bit: the merged
++        // word alone would turn a field-level bit into a permanent change on the caller's context
++        boolean contextOnlyRefDetect = (context.getFeatures() & JSONWriter.Feature.ReferenceDetection.mask) != 0;
+ 
+         int i = 0;
+         for (Iterator<Map.Entry> it = map.entrySet().iterator(); it.hasNext(); ++i) {

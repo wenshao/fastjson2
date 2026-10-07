@@ -1,0 +1,22 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+index 3c273cce0..42fc9acb0 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+@@ -427,9 +432,14 @@ public final class ObjectWriterImplMap
+             try (JSONWriter keyWriter = JSONWriter.of(context)) {
+                 // the key is the root of its own document, as in JSON.toJSONString(key, context)
+                 keyWriter.setRootObject(key);
+-                // the sort request also travels in the feature word, so the beans inside list, map and Optional keys
+-                // resolve their sorted variants as they do in field-level sorted values
+-                keyObjectWriter.write(keyWriter, key, null, null, JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
++                try {
++                    // the sort request also travels in the feature word, so the beans inside list, map and Optional keys
++                    // resolve their sorted variants as they do in field-level sorted values
++                    keyObjectWriter.write(keyWriter, key, null, null, JSONWriter.Feature.SortFieldNamesAlphabetically.mask);
++                } catch (NullPointerException | NumberFormatException e) {
++                    // the same diagnostic the un-sorted render gets from JSON.toJSONString
++                    throw new JSONException(keySerializeErrorMessage(key), e);
++                }
+                 str = keyWriter.toString();
+             }
+         }

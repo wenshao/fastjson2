@@ -1,0 +1,15 @@
+diff --git a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+index 63b2c796c..3c9116796 100644
+--- a/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
++++ b/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterProvider.java
+@@ -695,9 +693,7 @@ public class ObjectWriterProvider
+     public ObjectWriter getObjectWriter(Type objectType, Class objectClass, long contextFeatures) {
+         boolean fieldBased = (contextFeatures & JSONWriter.Feature.FieldBased.mask) != 0;
+         // BeanToArray output is positional, so it never takes the sorted writer variant
+-        boolean fieldNamesSorted = (contextFeatures
+-                & (JSONWriter.Feature.SortFieldNamesAlphabetically.mask | JSONWriter.Feature.BeanToArray.mask))
+-                == JSONWriter.Feature.SortFieldNamesAlphabetically.mask;
++        boolean fieldNamesSorted = isFieldNamesSorted(contextFeatures);
+         ConcurrentMap<Type, ObjectWriter> cache = cacheOf(fieldBased, fieldNamesSorted);
+         ObjectWriter objectWriter = cache.get(objectType);
+         return objectWriter != null

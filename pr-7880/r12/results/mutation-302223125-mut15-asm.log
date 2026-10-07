@@ -1,0 +1,90 @@
+=== mutation: h01-JSONObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.requiredPrimitiveClassBoxes
+=== mutation: h02-JSONObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: h03-JSONObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.canConvertBoundaryValues
+=== mutation: h04-JSONObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeModelTest.integerTypesConvertable
+=== mutation: h05-JSONReader  (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.readArrayArmMasksThePerCallWord
+=== mutation: h07-FieldReaderAnySetter  (mvn rc=1)
+  tests=163 failed=1
+   FAIL AnySetterTest.anySetterExceptionCauseSurvivesOnTreeToBean
+=== mutation: h08-ObjectReaderImplMapMultiValueType  (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.multiValueTypeRejectsDuplicatedKeysIncludingNullKeys
+=== mutation: h09-ObjectReaderImplObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.duplicatedTypeDiscriminatorRejectedThroughSwitchArms
+=== mutation: h10-ObjectReaderImplOptional  (mvn rc=1)
+  tests=163 failed=1
+   FAIL ErrorOnDuplicateKeysTest.rawOptionalFieldRejectsDuplicatesInside
+=== mutation: h11-FieldWriterList  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h12-FieldWriterList  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h15-FieldWriterObject  (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.sortedWritesMemoizeTheItemWriterPerVariant
+=== mutation: h16-FieldWriterObject  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h17-FieldWriterObject  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h18-FieldWriterObject  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h19-FieldWriterObject  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h20-FieldWriterObject  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h21-FieldWriterObjectFinal  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h22-ObjectWriterAdapter  (mvn rc=1)
+  tests=163 failed=1
+   FAIL TreeConversionLongFeaturesTest.sortMapEntriesByKeysReachesNestedTreeMaps
+=== mutation: h23-ObjectWriterAdapter  (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.sortedTreeConversionDoesNotReuseThePrimedNaturalFieldWriter
+=== mutation: h24-ObjectWriterCreator  (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.typeLevelSortAnnotationOrdersOwnFields
+=== mutation: h25-ObjectWriterCreatorASM  (mvn rc=1)
+  tests=163 failed=1
+   FAIL SortFieldNamesRegistryTest.typeLevelSortAnnotationOrdersOwnFields
+=== mutation: h28-ObjectWriterImplMap  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h29-ObjectWriterImplMap  (mvn rc=1)
+  tests=163 failed=1
+   FAIL MapKeyContextTest.fieldLevelReferenceDetectionJsonBDoesNotLeakOntoTheContext
+=== mutation: h30-ObjectWriterImplMap  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h32-ObjectWriterImplMap  (mvn rc=1)
+  tests=163 failed=2
+   FAIL MapKeyContextTest.cyclicBeanKeyTerminatesUnderSort
+   FAIL MapKeyContextTest.sortedMapsKeepTheNaturalSpellingForNonBeanKeys
+=== mutation: h33-ObjectWriterImplMap  (mvn rc=1)
+  tests=163 failed=2
+   FAIL SortFieldNamesRegistryTest.mapFieldWithFormatKeepsTheFieldLevelSort
+   FAIL SortFieldNamesRegistryTest.mapTypedValueMemoResolvesWithTheMergedWord
+=== mutation: h34-ObjectWriterProvider  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h35-ObjectWriterProvider  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: h36-ObjectWriterProvider  (mvn rc=1)
+  tests=163 failed=2
+   FAIL SortFieldNamesRegistryTest.fieldBasedSortedProxyKeepsFields
+   FAIL SortFieldNamesRegistryTest.fieldBasedSortedProxyWritesSortedFields
+=== mutation: h37-ObjectWriterProvider  (mvn rc=1)
+  tests=163 failed=1
+   FAIL ObjectWriterAdapterLinkTest.moduleWritersLinkAcrossPublication
+=== mutation: h38-ObjectWriterProvider  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: c:none  (mvn rc=0)
+  tests=163 failed=0
+=== mutation: c:canlong-custom-true  (mvn rc=0)
+  tests=163 failed=0
