@@ -1,0 +1,5 @@
+[WARNING] Tests run: 8157, Failures: 0, Errors: 0, Skipped: 3
+[INFO] You have 0 Checkstyle violations.
+[INFO] BUILD SUCCESS
+[INFO] Total time:  54.506 s
+rc=0

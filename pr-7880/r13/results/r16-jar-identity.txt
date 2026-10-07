@@ -1,0 +1,6 @@
+core jar: 302223125 + fix-r12.diff (fix15) vs 0f9cd902f (v16)
+entries: 778 vs 778
+differing entries:
+Files com/alibaba/fastjson2/writer/ObjectWriterAdapter.class and com/alibaba/fastjson2/writer/ObjectWriterAdapter.class differ
+javap -c -p -constants ObjectWriterAdapter.class: identical
+javap -l line tables: line numbers after the TREE_FEATURES javadoc shift by one (the comment gained one line)

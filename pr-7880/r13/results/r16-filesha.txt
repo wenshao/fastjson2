@@ -1,0 +1,9 @@
+SAME 00a695dcf866ec2944f38d0934ad518404dd64b7 core/src/main/java/com/alibaba/fastjson2/JSONObject.java
+SAME 232a613a3d0e08f3e7fa9769764dcd4b1d075887 core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
+SAME c934a15ff0eabef92cf6bcbf7cc714689cb8ac74 core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObject.java
+SAME c88f2f887ac271f92374106e24479551d09ae50e core/src/main/java/com/alibaba/fastjson2/writer/FieldWriterObjectFinal.java
+DIFF d16d0d4cb989e85f4b51c8c9b7350e6290648ed5 core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterAdapter.java
+SAME eef7deee4ee67804d8820d6c3c4fabc75717855d core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplMap.java
+SAME c34e14358d45c2c20cdcb32d30b77425ee4003d4 core/src/test/java/com/alibaba/fastjson2/TreeModelTest.java
+SAME d1e2bd191464398041d487f7901ce556fa4e0bbb core/src/test/java/com/alibaba/fastjson2/features/SortFieldNamesRegistryTest.java
+SAME 186caf3446c76b3f31f02a19382b6f07c7d74089 core/src/test/java/com/alibaba/fastjson2/writer/MapKeyContextTest.java

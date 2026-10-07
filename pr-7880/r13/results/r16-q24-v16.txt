@@ -1,0 +1,14 @@
+asm	b field FieldBased map value	no filter={"m":{"k":{"x":1}}}	with filter={"m":{"k":{"x":1}}}
+asm	c registered ASM-generated writer	natural={"zeta":1,"alpha":2}	sorted={"alpha":2,"zeta":1}	sorted JSONB={"alpha":2,"zeta":1}	sorted list=[{"alpha":2,"zeta":1}]
+asm	c registered reflect-created writer	natural={"zeta":1,"alpha":2}	sorted={"alpha":2,"zeta":1}
+asm	e bean keys, ReferenceDetection	shared value={{"zk":1,"ak":1}:{"zv":1,"av":2},{"zk":2,"ak":2}:{"zv":1,"av":2}}	string keys={"a":{"zv":1,"av":2},"b":{"$ref":"$.a"}}
+asm	e bean keys, ReferenceDetection + sort	shared value={"{\"ak\":1,\"zk\":1}":{"av":2,"zv":1},"{\"ak\":2,\"zk\":2}":{"av":2,"zv":1}}	string keys={"a":{"av":2,"zv":1},"b":{"$ref":"$.a"}}
+asm	f @JSONType sort holder, List<C> (cold)	json={"items":[{"alpha":1,"zulu":7}]}	jsonb={"items":[{"alpha":1,"zulu":7}]}	jsonb BeanToArray=[[[7,1]]]
+asm	f @JSONType sort holder, List<C> (warm)	json={"items":[{"alpha":1,"zulu":7}]}	jsonb={"items":[{"alpha":1,"zulu":7}]}	jsonb BeanToArray=[[[7,1]]]
+reflect	b field FieldBased map value	no filter={"m":{"k":{"x":1}}}	with filter={"m":{"k":{"x":1}}}
+reflect	c registered ASM-generated writer	natural={"zeta":1,"alpha":2}	sorted={"alpha":2,"zeta":1}	sorted JSONB={"alpha":2,"zeta":1}	sorted list=[{"alpha":2,"zeta":1}]
+reflect	c registered reflect-created writer	natural={"zeta":1,"alpha":2}	sorted={"alpha":2,"zeta":1}
+reflect	e bean keys, ReferenceDetection	shared value={{"zk":1,"ak":1}:{"zv":1,"av":2},{"zk":2,"ak":2}:{"zv":1,"av":2}}	string keys={"a":{"zv":1,"av":2},"b":{"$ref":"$.a"}}
+reflect	e bean keys, ReferenceDetection + sort	shared value={"{\"ak\":1,\"zk\":1}":{"av":2,"zv":1},"{\"ak\":2,\"zk\":2}":{"av":2,"zv":1}}	string keys={"a":{"av":2,"zv":1},"b":{"$ref":"$.a"}}
+reflect	f @JSONType sort holder, List<C> (cold)	json={"items":[{"alpha":1,"zulu":7}]}	jsonb={"items":[{"alpha":1,"zulu":7}]}	jsonb BeanToArray=[[[7,1]]]
+reflect	f @JSONType sort holder, List<C> (warm)	json={"items":[{"alpha":1,"zulu":7}]}	jsonb={"items":[{"alpha":1,"zulu":7}]}	jsonb BeanToArray=[[[7,1]]]

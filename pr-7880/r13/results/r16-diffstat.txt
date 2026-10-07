@@ -1,0 +1,10 @@
+ .../java/com/alibaba/fastjson2/JSONObject.java     |  8 +--
+ .../java/com/alibaba/fastjson2/JSONWriter.java     |  9 +--
+ .../fastjson2/writer/FieldWriterObject.java        | 32 ++---------
+ .../fastjson2/writer/FieldWriterObjectFinal.java   | 17 +-----
+ .../fastjson2/writer/ObjectWriterAdapter.java      |  3 +-
+ .../fastjson2/writer/ObjectWriterImplMap.java      |  6 +-
+ .../java/com/alibaba/fastjson2/TreeModelTest.java  | 66 ++++++++++++++++++++++
+ .../features/SortFieldNamesRegistryTest.java       | 39 ++++++++++++-
+ .../fastjson2/writer/MapKeyContextTest.java        | 40 +++++++++++++
+ 9 files changed, 166 insertions(+), 54 deletions(-)

@@ -1,0 +1,192 @@
+obj-dup	JSON.parse	none	JSONObject{JSONObject{String:a=Integer:2,}=String:v,}
+obj-dup	JSON.parse	EODK	DUP
+obj-dup	JSON.parse	EODK+AutoType	DUP
+obj-dup	JSON.parse	EODK+UseNativeObject	DUP
+obj-dup	parseObject	none	EXC JSONException: not allow unquoted fieldName
+obj-dup	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+obj-dup	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+obj-dup	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+obj-dup	Map<Object,Object>	none	HashMap{JSONObject{String:a=Integer:2,}=String:v,}
+obj-dup	Map<Object,Object>	EODK	DUP
+obj-dup	Map<Object,Object>	EODK+AutoType	DUP
+obj-dup	Map<Object,Object>	EODK+UseNativeObject	DUP
+obj-dup	Map<Map,Object>	none	HashMap{HashMap{String:a=Integer:2,}=String:v,}
+obj-dup	Map<Map,Object>	EODK	DUP
+obj-dup	Map<Map,Object>	EODK+AutoType	DUP
+obj-dup	Map<Map,Object>	EODK+UseNativeObject	DUP
+obj-dup	HashMap<List,Object>	none	HashMap{ArrayList[JSONObject{String:a=Integer:2,},]=String:v,}
+obj-dup	HashMap<List,Object>	EODK	DUP
+obj-dup	HashMap<List,Object>	EODK+AutoType	DUP
+obj-dup	HashMap<List,Object>	EODK+UseNativeObject	DUP
+obj-dup	reader.readObject(word)	none	JSONObject{JSONObject{String:a=Integer:2,}=String:v,}
+obj-dup	reader.readObject(word)	EODK	DUP
+obj-dup	reader.readObject(word)	EODK+AutoType	DUP
+obj-dup	reader.readObject(word)	EODK+UseNativeObject	DUP
+arr-dup	JSON.parse	none	JSONObject{JSONArray[JSONObject{String:x=Integer:2,},]=Integer:1,}
+arr-dup	JSON.parse	EODK	DUP
+arr-dup	JSON.parse	EODK+AutoType	DUP
+arr-dup	JSON.parse	EODK+UseNativeObject	DUP
+arr-dup	parseObject	none	EXC JSONException: not allow unquoted fieldName
+arr-dup	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+arr-dup	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+arr-dup	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+arr-dup	Map<Object,Object>	none	HashMap{JSONArray[JSONObject{String:x=Integer:2,},]=Integer:1,}
+arr-dup	Map<Object,Object>	EODK	DUP
+arr-dup	Map<Object,Object>	EODK+AutoType	DUP
+arr-dup	Map<Object,Object>	EODK+UseNativeObject	DUP
+arr-dup	Map<Map,Object>	none	EXC JSONException: expect '{', but '['
+arr-dup	Map<Map,Object>	EODK	EXC JSONException: expect '{', but '['
+arr-dup	Map<Map,Object>	EODK+AutoType	EXC JSONException: expect '{', but '['
+arr-dup	Map<Map,Object>	EODK+UseNativeObject	EXC JSONException: expect '{', but '['
+arr-dup	HashMap<List,Object>	none	HashMap{ArrayList[JSONObject{String:x=Integer:2,},]=Integer:1,}
+arr-dup	HashMap<List,Object>	EODK	DUP
+arr-dup	HashMap<List,Object>	EODK+AutoType	DUP
+arr-dup	HashMap<List,Object>	EODK+UseNativeObject	DUP
+arr-dup	reader.readObject(word)	none	JSONObject{JSONArray[JSONObject{String:x=Integer:2,},]=Integer:1,}
+arr-dup	reader.readObject(word)	EODK	DUP
+arr-dup	reader.readObject(word)	EODK+AutoType	DUP
+arr-dup	reader.readObject(word)	EODK+UseNativeObject	DUP
+obj-nested-dup	JSON.parse	none	JSONObject{JSONObject{String:k=JSONObject{String:a=Integer:2,},}=Integer:1,}
+obj-nested-dup	JSON.parse	EODK	DUP
+obj-nested-dup	JSON.parse	EODK+AutoType	DUP
+obj-nested-dup	JSON.parse	EODK+UseNativeObject	DUP
+obj-nested-dup	parseObject	none	EXC JSONException: not allow unquoted fieldName
+obj-nested-dup	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+obj-nested-dup	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+obj-nested-dup	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+obj-nested-dup	Map<Object,Object>	none	HashMap{JSONObject{String:k=JSONObject{String:a=Integer:2,},}=Integer:1,}
+obj-nested-dup	Map<Object,Object>	EODK	DUP
+obj-nested-dup	Map<Object,Object>	EODK+AutoType	DUP
+obj-nested-dup	Map<Object,Object>	EODK+UseNativeObject	DUP
+obj-nested-dup	Map<Map,Object>	none	HashMap{HashMap{String:k=JSONObject{String:a=Integer:2,},}=Integer:1,}
+obj-nested-dup	Map<Map,Object>	EODK	DUP
+obj-nested-dup	Map<Map,Object>	EODK+AutoType	DUP
+obj-nested-dup	Map<Map,Object>	EODK+UseNativeObject	DUP
+obj-nested-dup	HashMap<List,Object>	none	HashMap{ArrayList[JSONObject{String:k=JSONObject{String:a=Integer:2,},},]=Integer:1,}
+obj-nested-dup	HashMap<List,Object>	EODK	DUP
+obj-nested-dup	HashMap<List,Object>	EODK+AutoType	DUP
+obj-nested-dup	HashMap<List,Object>	EODK+UseNativeObject	DUP
+obj-nested-dup	reader.readObject(word)	none	JSONObject{JSONObject{String:k=JSONObject{String:a=Integer:2,},}=Integer:1,}
+obj-nested-dup	reader.readObject(word)	EODK	DUP
+obj-nested-dup	reader.readObject(word)	EODK+AutoType	DUP
+obj-nested-dup	reader.readObject(word)	EODK+UseNativeObject	DUP
+arr-nested-dup	JSON.parse	none	JSONObject{JSONArray[JSONArray[JSONObject{String:a=Integer:2,},],]=Integer:1,}
+arr-nested-dup	JSON.parse	EODK	DUP
+arr-nested-dup	JSON.parse	EODK+AutoType	DUP
+arr-nested-dup	JSON.parse	EODK+UseNativeObject	DUP
+arr-nested-dup	parseObject	none	EXC JSONException: not allow unquoted fieldName
+arr-nested-dup	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+arr-nested-dup	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+arr-nested-dup	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+arr-nested-dup	Map<Object,Object>	none	HashMap{JSONArray[JSONArray[JSONObject{String:a=Integer:2,},],]=Integer:1,}
+arr-nested-dup	Map<Object,Object>	EODK	DUP
+arr-nested-dup	Map<Object,Object>	EODK+AutoType	DUP
+arr-nested-dup	Map<Object,Object>	EODK+UseNativeObject	DUP
+arr-nested-dup	Map<Map,Object>	none	EXC JSONException: expect '{', but '['
+arr-nested-dup	Map<Map,Object>	EODK	EXC JSONException: expect '{', but '['
+arr-nested-dup	Map<Map,Object>	EODK+AutoType	EXC JSONException: expect '{', but '['
+arr-nested-dup	Map<Map,Object>	EODK+UseNativeObject	EXC JSONException: expect '{', but '['
+arr-nested-dup	HashMap<List,Object>	none	HashMap{ArrayList[JSONArray[JSONObject{String:a=Integer:2,},],]=Integer:1,}
+arr-nested-dup	HashMap<List,Object>	EODK	DUP
+arr-nested-dup	HashMap<List,Object>	EODK+AutoType	DUP
+arr-nested-dup	HashMap<List,Object>	EODK+UseNativeObject	DUP
+arr-nested-dup	reader.readObject(word)	none	JSONObject{JSONArray[JSONArray[JSONObject{String:a=Integer:2,},],]=Integer:1,}
+arr-nested-dup	reader.readObject(word)	EODK	DUP
+arr-nested-dup	reader.readObject(word)	EODK+AutoType	DUP
+arr-nested-dup	reader.readObject(word)	EODK+UseNativeObject	DUP
+obj	JSON.parse	none	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	JSON.parse	EODK	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	JSON.parse	EODK+AutoType	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	JSON.parse	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	parseObject	none	EXC JSONException: not allow unquoted fieldName
+obj	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+obj	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+obj	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+obj	Map<Object,Object>	none	HashMap{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	Map<Object,Object>	EODK	HashMap{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	Map<Object,Object>	EODK+AutoType	HashMap{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	Map<Object,Object>	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	Map<Map,Object>	none	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	Map<Map,Object>	EODK	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	Map<Map,Object>	EODK+AutoType	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	Map<Map,Object>	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj	HashMap<List,Object>	none	HashMap{ArrayList[JSONObject{String:b=Integer:1,String:a=Integer:2,},]=String:v,}
+obj	HashMap<List,Object>	EODK	HashMap{ArrayList[JSONObject{String:b=Integer:1,String:a=Integer:2,},]=String:v,}
+obj	HashMap<List,Object>	EODK+AutoType	HashMap{ArrayList[JSONObject{String:b=Integer:1,String:a=Integer:2,},]=String:v,}
+obj	HashMap<List,Object>	EODK+UseNativeObject	HashMap{ArrayList[HashMap{String:a=Integer:2,String:b=Integer:1,},]=String:v,}
+obj	reader.readObject(word)	none	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	reader.readObject(word)	EODK	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	reader.readObject(word)	EODK+AutoType	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj	reader.readObject(word)	EODK+UseNativeObject	JSONObject{JSONObject{String:b=Integer:1,String:a=Integer:2,}=String:v,}
+arr	JSON.parse	none	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	JSON.parse	EODK	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	JSON.parse	EODK+AutoType	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	JSON.parse	EODK+UseNativeObject	HashMap{ArrayList[Integer:1,HashMap{String:a=Integer:2,},]=String:v,}
+arr	parseObject	none	EXC JSONException: not allow unquoted fieldName
+arr	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+arr	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+arr	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+arr	Map<Object,Object>	none	HashMap{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	Map<Object,Object>	EODK	HashMap{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	Map<Object,Object>	EODK+AutoType	HashMap{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	Map<Object,Object>	EODK+UseNativeObject	HashMap{ArrayList[Integer:1,HashMap{String:a=Integer:2,},]=String:v,}
+arr	Map<Map,Object>	none	EXC JSONException: expect '{', but '['
+arr	Map<Map,Object>	EODK	EXC JSONException: expect '{', but '['
+arr	Map<Map,Object>	EODK+AutoType	EXC JSONException: expect '{', but '['
+arr	Map<Map,Object>	EODK+UseNativeObject	EXC JSONException: expect '{', but '['
+arr	HashMap<List,Object>	none	HashMap{ArrayList[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	HashMap<List,Object>	EODK	HashMap{ArrayList[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	HashMap<List,Object>	EODK+AutoType	HashMap{ArrayList[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	HashMap<List,Object>	EODK+UseNativeObject	HashMap{ArrayList[Integer:1,HashMap{String:a=Integer:2,},]=String:v,}
+arr	reader.readObject(word)	none	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	reader.readObject(word)	EODK	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	reader.readObject(word)	EODK+AutoType	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+arr	reader.readObject(word)	EODK+UseNativeObject	JSONObject{JSONArray[Integer:1,JSONObject{String:a=Integer:2,},]=String:v,}
+obj-type	JSON.parse	none	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	JSON.parse	EODK	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	JSON.parse	EODK+AutoType	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	JSON.parse	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,}=String:v,}
+obj-type	parseObject	none	EXC JSONException: not allow unquoted fieldName
+obj-type	parseObject	EODK	EXC JSONException: not allow unquoted fieldName
+obj-type	parseObject	EODK+AutoType	EXC JSONException: not allow unquoted fieldName
+obj-type	parseObject	EODK+UseNativeObject	EXC JSONException: not allow unquoted fieldName
+obj-type	Map<Object,Object>	none	HashMap{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	Map<Object,Object>	EODK	HashMap{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	Map<Object,Object>	EODK+AutoType	HashMap{TreeMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj-type	Map<Object,Object>	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,}=String:v,}
+obj-type	Map<Map,Object>	none	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,}=String:v,}
+obj-type	Map<Map,Object>	EODK	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,}=String:v,}
+obj-type	Map<Map,Object>	EODK+AutoType	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,}=String:v,}
+obj-type	Map<Map,Object>	EODK+UseNativeObject	HashMap{HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,}=String:v,}
+obj-type	HashMap<List,Object>	none	HashMap{ArrayList[JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,},]=String:v,}
+obj-type	HashMap<List,Object>	EODK	HashMap{ArrayList[JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,},]=String:v,}
+obj-type	HashMap<List,Object>	EODK+AutoType	HashMap{ArrayList[TreeMap{String:a=Integer:2,String:b=Integer:1,},]=String:v,}
+obj-type	HashMap<List,Object>	EODK+UseNativeObject	HashMap{ArrayList[HashMap{String:a=Integer:2,String:b=Integer:1,String:@type=String:java.util.TreeMap,},]=String:v,}
+obj-type	reader.readObject(word)	none	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	reader.readObject(word)	EODK	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	reader.readObject(word)	EODK+AutoType	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+obj-type	reader.readObject(word)	EODK+UseNativeObject	JSONObject{JSONObject{String:@type=String:java.util.TreeMap,String:b=Integer:1,String:a=Integer:2,}=String:v,}
+outer-dup	JSON.parse	none	JSONObject{String:k=Integer:2,}
+outer-dup	JSON.parse	EODK	DUP
+outer-dup	JSON.parse	EODK+AutoType	DUP
+outer-dup	JSON.parse	EODK+UseNativeObject	DUP
+outer-dup	parseObject	none	JSONObject{String:k=Integer:2,}
+outer-dup	parseObject	EODK	DUP
+outer-dup	parseObject	EODK+AutoType	DUP
+outer-dup	parseObject	EODK+UseNativeObject	DUP
+outer-dup	Map<Object,Object>	none	HashMap{String:k=Integer:2,}
+outer-dup	Map<Object,Object>	EODK	DUP
+outer-dup	Map<Object,Object>	EODK+AutoType	DUP
+outer-dup	Map<Object,Object>	EODK+UseNativeObject	DUP
+outer-dup	Map<Map,Object>	none	EXC JSONException: expect '{', but '"'
+outer-dup	Map<Map,Object>	EODK	EXC JSONException: expect '{', but '"'
+outer-dup	Map<Map,Object>	EODK+AutoType	EXC JSONException: expect '{', but '"'
+outer-dup	Map<Map,Object>	EODK+UseNativeObject	EXC JSONException: expect '{', but '"'
+outer-dup	HashMap<List,Object>	none	EXC JSONException: offset 5, character :, line 1, column 5, fastjson-version 2.
+outer-dup	HashMap<List,Object>	EODK	EXC JSONException: offset 5, character :, line 1, column 5, fastjson-version 2.
+outer-dup	HashMap<List,Object>	EODK+AutoType	EXC JSONException: offset 3, character , line 1, column 3, fastjson-version 2.
+outer-dup	HashMap<List,Object>	EODK+UseNativeObject	EXC JSONException: offset 5, character :, line 1, column 5, fastjson-version 2.
+outer-dup	reader.readObject(word)	none	JSONObject{String:k=Integer:2,}
+outer-dup	reader.readObject(word)	EODK	DUP
+outer-dup	reader.readObject(word)	EODK+AutoType	DUP
+outer-dup	reader.readObject(word)	EODK+UseNativeObject	DUP

@@ -1,0 +1,6 @@
+[G2] positional round trip (writer BeanToArray, reader SupportArrayToBean); written zulu=9, apple=1
+  asm      JSON [1,9]   -> zulu=9,apple=1     JSONB -> zulu=9,apple=1
+  reflect  JSON [1,9]   -> zulu=9,apple=1     JSONB -> zulu=9,apple=1
+[G3] first write decides: fresh provider, write A then B
+  asm      plain then BTA: {"apple":1,"zulu":9} [1,9]   BTA then plain: [1,9] {"apple":1,"zulu":9}
+  reflect  plain then BTA: {"apple":1,"zulu":9} [1,9]   BTA then plain: [1,9] {"apple":1,"zulu":9}
